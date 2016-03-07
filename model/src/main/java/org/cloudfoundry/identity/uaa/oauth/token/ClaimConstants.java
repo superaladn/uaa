@@ -52,4 +52,5 @@ public class ClaimConstants {
     public static final String EXTERNAL_ATTR = "ext_attr";
     public static final String AMR = "amr";
     public static final String ACR = "acr";
+    public static final String TENANT_ID = "tenant_id";
 }
