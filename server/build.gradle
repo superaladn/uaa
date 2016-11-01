@@ -94,8 +94,8 @@ def nonProxyHosts = 'localhost|*.localhost'
 
 test {
   systemProperty "http.proxyHost", proxyHost
-  systemProperty "http.proxyPort", proxyPort 
-  systemProperty "https.proxyHost", proxyHost 
+  systemProperty "http.proxyPort", proxyPort
+  systemProperty "https.proxyHost", proxyHost
   systemProperty "https.proxyPort", proxyPort
   systemProperty "http.nonProxyHosts", nonProxyHosts
 }
