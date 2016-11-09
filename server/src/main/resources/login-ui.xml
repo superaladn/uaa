@@ -30,15 +30,19 @@
 
     <authentication-manager xmlns="http://www.springframework.org/schema/security" />
 
-    <oauth:resource id="uaa" access-token-uri="${uaa.token.url:http://localhost:8080/uaa/oauth/token}"
-                    client-id="login" client-secret="${LOGIN_SECRET:loginsecret}" type="client_credentials" />
+    <oauth:resource id="notificationUaa" access-token-uri="${notifications.uaa_url:http://localhost:8080/uaa}/oauth/token"
+                    client-id="${notifications.client_id:}" client-secret="${NOTIFICATION_SECRET:loginsecret}" type="client_credentials" />
 
-    <bean id="notificationsTemplate" class="org.cloudfoundry.identity.uaa.message.LocalUaaRestTemplate">
-        <constructor-arg ref="uaa"/>
-        <property name="clientId" value="login"/>
+ <!--    <bean id="notificationsTemplate" class="org.cloudfoundry.identity.uaa.message.LocalUaaRestTemplate">
+        <constructor-arg ref="notificationUaa"/>
+        <property name="clientId" value="${notifications.client_id}"/>
         <property name="tokenServices" ref="tokenServices"/>
         <property name="clientDetailsService" ref="jdbcClientDetailsService"/>
         <property name="verifySsl" value="${notifications.verify_ssl:false}"/>
+    </bean> -->
+    
+    <bean id="notificationsTemplate" class="org.springframework.security.oauth2.client.OAuth2RestTemplate">
+        <constructor-arg ref="notificationUaa"/>
     </bean>
 
     <!--<oauth:rest-template id="notificationsTemplate" resource="uaa" />-->
