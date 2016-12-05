@@ -149,6 +149,10 @@ public class ResetPasswordIT {
 
         webDriver.findElement(By.name("email")).sendKeys(userEmail);
         webDriver.findElement(By.xpath("//input[@value='Send reset password link']")).click();
+        
+        System.out.println("Got to: " + webDriver.getCurrentUrl() + "; Source: " + webDriver.getPageSource());
+
+        
         Assert.assertEquals("Instructions Sent", webDriver.findElement(By.tagName("h1")).getText());
 
         assertEquals(receivedEmailSize + 1, simpleSmtpServer.getReceivedEmailSize());
@@ -169,6 +173,8 @@ public class ResetPasswordIT {
         webDriver.findElement(By.name("password")).sendKeys("new_password");
         webDriver.findElement(By.name("password_confirmation")).sendKeys("new_password");
         webDriver.findElement(By.xpath("//input[@value='Create new password']")).click();
+        
+
 
         assertEquals("http://example.redirect.com/", webDriver.getCurrentUrl());
     }
