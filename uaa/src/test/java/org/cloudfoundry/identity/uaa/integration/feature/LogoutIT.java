@@ -1,7 +1,7 @@
 package org.cloudfoundry.identity.uaa.integration.feature;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assume.assumeTrue;
+import static org.junit.Assert.assertTrue;
 
 import java.net.Inet4Address;
 import java.net.URLEncoder;
@@ -93,7 +93,7 @@ public class LogoutIT {
     
     @Test
     public void testLogoutWithRedirect() throws Exception {
-        assumeTrue("Expected testzone1.localhost to resolve to 127.0.0.1", doesSupportZoneDNS());
+        assertTrue("Expected testzone1.localhost to resolve to 127.0.0.1", doesSupportZoneDNS());
         String zoneId = "testzone1";
         String zoneUrl = baseUrl.replace("localhost",zoneId+".localhost");
 
