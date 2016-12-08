@@ -19,6 +19,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.cloudfoundry.identity.uaa.authentication.manager.LoginPolicy;
 import org.cloudfoundry.identity.uaa.authentication.manager.LoginPolicy.Result;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -36,6 +38,7 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 public class ClientBasicAuthenticationFilter extends BasicAuthenticationFilter {
 
     protected LoginPolicy loginPolicy;
+    private final Log logger = LogFactory.getLog(getClass());
 
     public ClientBasicAuthenticationFilter(AuthenticationManager authenticationManager,
             AuthenticationEntryPoint authenticationEntryPoint) {
@@ -58,8 +61,10 @@ public class ClientBasicAuthenticationFilter extends BasicAuthenticationFilter {
             String clientId = decodedHeader[0];
             Result policyResult = loginPolicy.isAllowed(clientId);
             if(!policyResult.isAllowed()){
-                throw new ClientLockoutException("Client " + clientId + " has "
-                        + policyResult.getFailureCount() + " failed authentications within the last checking period.");
+                String lockedOutMessage = "Client " + clientId + " has "
+                        + policyResult.getFailureCount() + " failed authentications within the last checking period.";
+                logger.info(lockedOutMessage);
+                throw new ClientLockoutException(lockedOutMessage);
             }
         } catch(BadCredentialsException e) {
             super.getAuthenticationEntryPoint().commence(request, response, e);
