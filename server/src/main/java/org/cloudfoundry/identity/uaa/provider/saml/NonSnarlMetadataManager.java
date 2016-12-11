@@ -151,7 +151,9 @@ public class NonSnarlMetadataManager extends MetadataManager implements Extended
         if (localSp!=null) {
             result.add((ExtendedMetadataDelegate)localSp);
         }
-        for (SamlIdentityProviderDefinition definition : configurator.getIdentityProviderDefinitions()) {
+        List<SamlIdentityProviderDefinition> samlIdpDefinitions = configurator.getIdentityProviderDefinitions();
+        log.debug("getAvailableProviders() found {} IdentityProviderDefinitions", samlIdpDefinitions.size());
+        for (SamlIdentityProviderDefinition definition : samlIdpDefinitions) {
             log.info("Adding SAML IDP zone[" + zone.getId() + "] alias[" + definition.getIdpEntityAlias() + "]");
             try {
                 ExtendedMetadataDelegate delegate = configurator.getExtendedMetadataDelegate(definition);
