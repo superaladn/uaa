@@ -52,8 +52,9 @@ public class CloudDataSourceConfig extends AbstractCloudConfig {
         DataSource ds = (DataSource) connectionFactory().dataSource(this.uaaDb, dataSourceConfig());
         LOGGER.info("************ DataSource info: " + ds.getClass().getCanonicalName());
         ds.setLogAbandoned(true);
-        //ds.setRemoveAbandoned(true);
-        //ds.setRemoveAbandonedTimeout(60);
+        ds.setValidationQueryTimeout(15);
+        ds.setRemoveAbandoned(true);
+        ds.setRemoveAbandonedTimeout(15);
         return ds;
     }
 
