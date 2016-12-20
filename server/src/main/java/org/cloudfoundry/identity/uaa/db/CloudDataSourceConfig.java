@@ -50,7 +50,11 @@ public class CloudDataSourceConfig extends AbstractCloudConfig {
         LOGGER.info("Starting UAA with the database that is bound to it:" + this.uaaDb);
         DataSource ds = connectionFactory().dataSource(this.uaaDb, dataSourceConfig());
         LOGGER.info("************ DataSource info: " + ds.getClass().getCanonicalName());
-        return ds;
+        org.apache.tomcat.jdbc.pool.DataSource data = (org.apache.tomcat.jdbc.pool.DataSource)ds;
+        data.setLogAbandoned(true);
+        //data.setRemoveAbandoned(true);
+        //data.setRemoveAbandonedTimeout(60);
+        return data;
     }
 
 
