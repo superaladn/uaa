@@ -52,6 +52,7 @@ dependencies {
   compile group: 'org.hsqldb', name: 'hsqldb', version: parent.hsqldbVersion
   compile group: 'org.springframework.cloud', name: 'spring-cloud-spring-service-connector', version:'1.2.1.RELEASE'
   compile group: 'org.springframework.cloud', name: 'spring-cloud-cloudfoundry-connector', version:'1.2.1.RELEASE'
+  compile group: 'org.apache.tomcat', name: 'tomcat-jdbc', version: '8.0.39'
 
   compile group: 'org.yaml', name: 'snakeyaml', version: parent.snakeYamlVersion
 

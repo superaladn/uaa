@@ -2,7 +2,7 @@
 package org.cloudfoundry.identity.uaa.db;
 
 
-import javax.sql.DataSource;
+//import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.apache.tomcat.jdbc.pool.DataSource;
 
 import java.util.Arrays;
 import java.util.List;
@@ -48,13 +49,12 @@ public class CloudDataSourceConfig extends AbstractCloudConfig {
     @Bean
     public DataSource dataSource() {
         LOGGER.info("Starting UAA with the database that is bound to it:" + this.uaaDb);
-        DataSource ds = connectionFactory().dataSource(this.uaaDb, dataSourceConfig());
+        DataSource ds = (DataSource) connectionFactory().dataSource(this.uaaDb, dataSourceConfig());
         LOGGER.info("************ DataSource info: " + ds.getClass().getCanonicalName());
-        org.apache.tomcat.jdbc.pool.DataSource data = (org.apache.tomcat.jdbc.pool.DataSource)ds;
-        data.setLogAbandoned(true);
-        //data.setRemoveAbandoned(true);
-        //data.setRemoveAbandonedTimeout(60);
-        return data;
+        ds.setLogAbandoned(true);
+        //ds.setRemoveAbandoned(true);
+        //ds.setRemoveAbandonedTimeout(60);
+        return ds;
     }
 
 
