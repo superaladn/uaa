@@ -34,7 +34,7 @@ public class CloudDataSourceConfig extends AbstractCloudConfig {
     private int minActive;
     @Value("${MAX_ACTIVE:100}")
     private int maxActive;
-    @Value("${MAX_WAIT_TIME:30000}")
+    @Value("${MAX_WAIT_TIME:5}")
     private int maxWaitTime;
 
 
@@ -52,9 +52,6 @@ public class CloudDataSourceConfig extends AbstractCloudConfig {
         DataSource ds = (DataSource) connectionFactory().dataSource(this.uaaDb, dataSourceConfig());
         LOGGER.info("************ DataSource info: " + ds.getClass().getCanonicalName());
         ds.setLogAbandoned(true);
-        ds.setValidationQueryTimeout(15);
-        ds.setRemoveAbandoned(true);
-        ds.setRemoveAbandonedTimeout(15);
         return ds;
     }
 
