@@ -52,8 +52,8 @@ public class CloudDataSourceConfig extends AbstractCloudConfig {
         DataSource ds = (DataSource) connectionFactory().dataSource(this.uaaDb, dataSourceConfig());
         LOGGER.info("************ DataSource info: " + ds.getClass().getCanonicalName());
         ds.setLogAbandoned(true);
-        ds.setValidationQuery("SELECT count(*) FROM identity-zone");
-        ds.setValidationQueryTimeout(60);
+        //ds.setValidationQuery("SELECT count(*) FROM identity-zone");
+        //ds.setValidationQueryTimeout(60);
         return ds;
     }
 
