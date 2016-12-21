@@ -2,6 +2,11 @@
 package org.cloudfoundry.identity.uaa.db;
 
 
+import java.util.Arrays;
+import java.util.List;
+
+import org.apache.tomcat.jdbc.pool.DataSource;
+
 //import javax.sql.DataSource;
 
 import org.slf4j.Logger;
@@ -14,11 +19,6 @@ import org.springframework.cloud.service.relational.DataSourceConfig.ConnectionC
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.apache.tomcat.jdbc.pool.DataSource;
-
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * DataSourceConfig used for all cloud profiles.
@@ -52,6 +52,8 @@ public class CloudDataSourceConfig extends AbstractCloudConfig {
         DataSource ds = (DataSource) connectionFactory().dataSource(this.uaaDb, dataSourceConfig());
         LOGGER.info("************ DataSource info: " + ds.getClass().getCanonicalName());
         ds.setLogAbandoned(true);
+        ds.setValidationQueryTimeout(60);
+        ds.setTestOnReturn(true);
         return ds;
     }
 
