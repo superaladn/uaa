@@ -35,8 +35,10 @@ import org.cloudfoundry.identity.uaa.user.UaaUserPrototype;
 import org.cloudfoundry.identity.uaa.zone.IdentityZone;
 import org.cloudfoundry.identity.uaa.zone.IdentityZoneHolder;
 import org.joda.time.DateTime;
+import org.opensaml.common.SAMLException;
 import org.opensaml.saml2.core.Attribute;
 import org.opensaml.saml2.core.AuthnStatement;
+import org.opensaml.saml2.core.Response;
 import org.opensaml.xml.XMLObject;
 import org.opensaml.xml.schema.XSAny;
 import org.opensaml.xml.schema.XSBase64Binary;
@@ -47,6 +49,7 @@ import org.opensaml.xml.schema.XSInteger;
 import org.opensaml.xml.schema.XSQName;
 import org.opensaml.xml.schema.XSString;
 import org.opensaml.xml.schema.XSURI;
+import org.opensaml.xml.signature.impl.ExplicitKeySignatureTrustEngine;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
@@ -142,6 +145,11 @@ public class LoginSamlAuthenticationProvider extends SAMLAuthenticationProvider 
         } catch (EmptyResultDataAccessException x) {
             throw new ProviderNotFoundException("No SAML identity provider found in zone for alias:"+alias);
         }
+
+        logger.debug("SAMLMessageContext context.getPeerExtendedMetadata().getTrustedKeys() :" + context.getPeerExtendedMetadata().getTrustedKeys());
+        logger.debug(" SAMLMessageContext context.getLocalExtendedMetadata().getTrustedKeys() :" + context.getLocalExtendedMetadata().getTrustedKeys());
+        logger.debug(" SAMLMessageContext context.getLocalSigningCredential().getKeyNames()" + context.getLocalSigningCredential().getKeyNames());
+        
         ExpiringUsernameAuthenticationToken result = getExpiringUsernameAuthenticationToken(authentication);
         UaaPrincipal samlPrincipal = new UaaPrincipal(OriginKeys.NotANumber, result.getName(), result.getName(), alias, result.getName(), zone.getId());
         Collection<? extends GrantedAuthority> samlAuthorities = retrieveSamlAuthorities(samlConfig, (SAMLCredential) result.getCredentials());

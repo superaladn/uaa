@@ -34,6 +34,9 @@ public final class SamlKeyManagerFactory {
     private SamlKeyManagerFactory() {}
 
     public static KeyManager getKeyManager(SamlConfig config) {
+        logger.debug("SamlConfig config.getPrivateKey() :" + config.getPrivateKey());
+        logger.debug("SamlConfig config.getPrivateKeyPassword() :" + config.getPrivateKeyPassword());
+        logger.debug("SamlConfig config.getCertificate() :" + config.getCertificate());
         return getKeyManager(config.getPrivateKey(), config.getPrivateKeyPassword(), config.getCertificate());
     }
 

@@ -182,6 +182,8 @@ public class SamlIdentityProviderConfigurator implements InitializingBean {
         extendedMetadata.setLocal(false);
         extendedMetadata.setAlias(def.getIdpEntityAlias());
         ExtendedMetadataDelegate delegate = new ExtendedMetadataDelegate(configMetadataProvider, extendedMetadata);
+        logger.debug("ExtendedMetadataDelegate delegate.getMetadataTrustedKeys() for zone Id: " + def.getZoneId()
+                + " keys are: " + delegate.getMetadataTrustedKeys());
         delegate.setMetadataTrustCheck(def.isMetadataTrustCheck());
 
         return delegate;
