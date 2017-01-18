@@ -66,6 +66,7 @@ import org.springframework.security.saml.SAMLAuthenticationProvider;
 import org.springframework.security.saml.SAMLAuthenticationToken;
 import org.springframework.security.saml.SAMLCredential;
 import org.springframework.security.saml.context.SAMLMessageContext;
+import org.springframework.security.saml.key.KeyManager;
 import org.springframework.security.saml.userdetails.SAMLUserDetailsService;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -146,10 +147,13 @@ public class LoginSamlAuthenticationProvider extends SAMLAuthenticationProvider 
             throw new ProviderNotFoundException("No SAML identity provider found in zone for alias:"+alias);
         }
 
-        logger.debug("SAMLMessageContext context.getPeerExtendedMetadata().getTrustedKeys() :" + context.getPeerExtendedMetadata().getTrustedKeys());
-        logger.debug(" SAMLMessageContext context.getLocalExtendedMetadata().getTrustedKeys() :" + context.getLocalExtendedMetadata().getTrustedKeys());
-        logger.debug(" SAMLMessageContext context.getLocalSigningCredential().getKeyNames()" + context.getLocalSigningCredential().getKeyNames());
-        
+        try {
+            ExplicitKeySignatureTrustEngine explicitKeySignatureTrustEngine = (ExplicitKeySignatureTrustEngine) context.getLocalTrustEngine();
+            KeyManager keyManager = (KeyManager) explicitKeySignatureTrustEngine.getCredentialResolver();
+            logger.debug("SamlMessageContext keyManager.getAvailableCredentials()" + keyManager.getAvailableCredentials());
+        } catch(Exception e) {
+            logger.debug("SamlMessageContext hit exception" + e.getMessage());
+        }
         ExpiringUsernameAuthenticationToken result = getExpiringUsernameAuthenticationToken(authentication);
         UaaPrincipal samlPrincipal = new UaaPrincipal(OriginKeys.NotANumber, result.getName(), result.getName(), alias, result.getName(), zone.getId());
         Collection<? extends GrantedAuthority> samlAuthorities = retrieveSamlAuthorities(samlConfig, (SAMLCredential) result.getCredentials());
