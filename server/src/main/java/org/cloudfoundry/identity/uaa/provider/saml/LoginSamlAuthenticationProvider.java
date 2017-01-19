@@ -67,6 +67,7 @@ import org.springframework.security.saml.SAMLAuthenticationToken;
 import org.springframework.security.saml.SAMLCredential;
 import org.springframework.security.saml.context.SAMLMessageContext;
 import org.springframework.security.saml.key.KeyManager;
+import org.springframework.security.saml.trust.MetadataCredentialResolver;
 import org.springframework.security.saml.userdetails.SAMLUserDetailsService;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -149,8 +150,8 @@ public class LoginSamlAuthenticationProvider extends SAMLAuthenticationProvider 
 
         try {
             ExplicitKeySignatureTrustEngine explicitKeySignatureTrustEngine = (ExplicitKeySignatureTrustEngine) context.getLocalTrustEngine();
-            KeyManager keyManager = (KeyManager) explicitKeySignatureTrustEngine.getCredentialResolver();
-            logger.debug("SamlMessageContext keyManager.getAvailableCredentials()" + keyManager.getAvailableCredentials());
+            MetadataCredentialResolver metadataCredentialResolver = (MetadataCredentialResolver) explicitKeySignatureTrustEngine.getCredentialResolver();
+            logger.debug("SamlMessageContext metadataCredentialResolver.getMetadataProvider().getMetadata()" + metadataCredentialResolver.getMetadataProvider().getMetadata());
         } catch(Exception e) {
             logger.debug("SamlMessageContext hit exception" + e.getMessage());
         }
