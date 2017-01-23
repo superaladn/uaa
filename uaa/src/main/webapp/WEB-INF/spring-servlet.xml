@@ -475,6 +475,7 @@
         <property name="userDatabase" ref="userDatabase"/>
     </bean>
 
-    <import resource="classpath:META-INF/spring/tasks.xml"/>
+    <!--   Comment for on-premise deployments...as dmz isolation is enforced...
+    <import resource="classpath:META-INF/spring/tasks.xml"/>-->
 
 </beans>
