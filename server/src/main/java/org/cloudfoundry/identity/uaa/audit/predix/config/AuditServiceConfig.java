@@ -8,6 +8,7 @@ import com.ge.predix.audit.sdk.FailReport;
 
 import com.ge.predix.audit.sdk.config.AuditConfiguration;
 import com.ge.predix.audit.sdk.config.vcap.VcapLoaderService;
+import com.ge.predix.audit.sdk.config.vcap.VcapLoaderServiceImpl;
 import com.ge.predix.audit.sdk.exception.VcapLoadException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +35,12 @@ public class AuditServiceConfig {
 
     @Bean
     public AuditConfiguration auditConfiguration() throws VcapLoadException {
+        ((VcapLoaderServiceImpl) vcapLoaderService).setAuditServiceName("predix-audit");
         AuditConfiguration config = vcapLoaderService.getConfigFromVcap();
+        config.setUaaUrl("https://predix-uaa.run.asv-pr.ice.predix.io");
+        config.setUaaClientId("audit-service-test");
+        config.setUaaClientSecret("secret");
+
         return config;
     }
 
