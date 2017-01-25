@@ -22,7 +22,10 @@
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
 
- <import resource="spring/spring-metering-filter.xml"/>
+    <context:annotation-config />
+    <bean class="org.cloudfoundry.identity.uaa.audit.predix.config.AuditServiceConfig" />
+
+    <import resource="spring/spring-metering-filter.xml"/>
 
     <bean id="uaaConfig" class="org.cloudfoundry.identity.uaa.impl.config.YamlConfigurationValidator">
         <constructor-arg>
@@ -421,7 +424,6 @@
 
     <bean id="healthzEndpoint" class="org.cloudfoundry.identity.uaa.health.HealthzEndpoint" />
 
-    <context:annotation-config />
 
     <bean id="idpBootstrap" class="org.cloudfoundry.identity.uaa.impl.config.IdentityProviderBootstrap">
         <constructor-arg ref="identityProviderProvisioning"/>
@@ -484,5 +486,6 @@
     </bean>
 
     <import resource="classpath:META-INF/spring/tasks.xml"/>
+    <context:component-scan base-package="com.ge.predix.audit.sdk"/>
 
 </beans>

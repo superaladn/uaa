@@ -1,9 +1,11 @@
 package org.cloudfoundry.identity.uaa.audit.predix.config;
 
+
 import com.ge.predix.audit.common.message.AuditEvent;
 import com.ge.predix.audit.common.validator.ValidatorReport;
 import com.ge.predix.audit.sdk.AuditCallback;
 import com.ge.predix.audit.sdk.FailReport;
+
 import com.ge.predix.audit.sdk.config.AuditConfiguration;
 import com.ge.predix.audit.sdk.config.vcap.VcapLoaderService;
 import com.ge.predix.audit.sdk.exception.VcapLoadException;
@@ -21,10 +23,10 @@ import java.util.Arrays;
 import java.util.List;
 
 @Configuration
-//@Profile({ "cloud" })
-@ComponentScan("com.ge.predix.audit.sdk")
+@Profile({ "cloud" })
 public class AuditServiceConfig {
     private static final Logger LOGGER = LoggerFactory.getLogger(AuditServiceConfig.class);
+
 
     @Autowired
     private VcapLoaderService vcapLoaderService;

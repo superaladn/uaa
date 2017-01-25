@@ -3,7 +3,9 @@ package org.cloudfoundry.identity.uaa.audit.predix.filter;
 import com.ge.predix.audit.common.message.AuditEnums;
 import com.ge.predix.audit.common.message.AuditEvent;
 import com.ge.predix.audit.common.message.AuditEventV2;
+import com.ge.predix.audit.sdk.AuditCallback;
 import com.ge.predix.audit.sdk.AuditClient;
+import org.cloudfoundry.identity.uaa.audit.predix.config.LogEachBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,7 @@ public class PredixAuditServiceFilter extends OncePerRequestFilter {
 //        if ( (200 > response.getStatus()) || (400 <= response.getStatus())) {
 //            return;
 //        } else {
+
             AuditEvent eventV2 = AuditEventV2.builder()
                     .payload(request.getMethod()+":"+ request.getPathInfo()+": Status:"+ response.getStatus())
                     .classifier(AuditEnums.Classifier.SUCCESS)
@@ -46,6 +49,7 @@ public class PredixAuditServiceFilter extends OncePerRequestFilter {
 
 
             auditClient.audit(eventV2);
+
 //        }
 
 
