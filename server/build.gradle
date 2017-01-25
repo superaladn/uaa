@@ -68,8 +68,9 @@ dependencies {
   compile(group: 'com.ge.predix.audit', name: 'audit-sdk', version: '0.0.2-SNAPSHOT') {
     exclude(module: 'bcprov-jdk15on')
     exclude(module: 'bcpkix-jdk15on')
+    exclude(module: 'logback-classic')
   }
-
+  compile group: 'com.google.code.gson', name: 'gson', version: '2.3.1'
 
   testCompile group: 'org.springframework', name: 'spring-test', version: parent.springVersion
   testCompile (group: 'junit', name: 'junit', version: parent.junitVersion) {

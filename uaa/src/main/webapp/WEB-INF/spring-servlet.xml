@@ -25,6 +25,7 @@
     <context:annotation-config />
     <bean class="org.cloudfoundry.identity.uaa.audit.predix.config.AuditServiceConfig" />
 
+    <bean class="com.google.gson.Gson"/>
     <import resource="spring/spring-metering-filter.xml"/>
 
     <bean id="uaaConfig" class="org.cloudfoundry.identity.uaa.impl.config.YamlConfigurationValidator">
