@@ -1,0 +1,1944 @@
+:cloudfoundry-identity-server:dependencies
+
+------------------------------------------------------------
+Project :cloudfoundry-identity-server - CloudFoundry Identity Server JAR
+------------------------------------------------------------
+
+archives - Configuration for archive artifacts.
+No dependencies
+
+compile - Dependencies for source set 'main'.
++--- project :cloudfoundry-identity-model
+|    +--- javax.validation:validation-api:1.0.0.GA
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.8.3
+|    |    +--- com.fasterxml.jackson.core:jackson-annotations:2.8.0
+|    |    \--- com.fasterxml.jackson.core:jackson-core:2.8.3
+|    +--- org.springframework:spring-web:4.3.1.RELEASE
+|    |    +--- org.springframework:spring-aop:4.3.1.RELEASE
+|    |    |    +--- org.springframework:spring-beans:4.3.1.RELEASE
+|    |    |    |    \--- org.springframework:spring-core:4.3.1.RELEASE
+|    |    |    |         \--- commons-logging:commons-logging:1.2
+|    |    |    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.3.1.RELEASE
+|    |    |    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    |    \--- org.springframework:spring-expression:4.3.1.RELEASE
+|    |    |         \--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-webmvc:4.3.1.RELEASE
+|    |    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-expression:4.3.1.RELEASE (*)
+|    |    \--- org.springframework:spring-web:4.3.1.RELEASE (*)
+|    +--- org.springframework.security:spring-security-config:4.1.2.RELEASE
+|    |    +--- aopalliance:aopalliance:1.0
+|    |    +--- org.springframework.security:spring-security-core:4.1.2.RELEASE
+|    |    |    +--- aopalliance:aopalliance:1.0
+|    |    |    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    |    \--- org.springframework:spring-expression:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    |    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    +--- org.springframework.security.oauth:spring-security-oauth:2.0.10.RELEASE
+|    |    +--- org.springframework:spring-beans:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-web:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-aop:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-core:3.2.8.RELEASE -> 4.1.2.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-web:3.2.8.RELEASE -> 4.1.2.RELEASE
+|    |    |    +--- aopalliance:aopalliance:1.0
+|    |    |    +--- org.springframework.security:spring-security-core:4.1.2.RELEASE (*)
+|    |    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-expression:4.3.1.RELEASE (*)
+|    |    |    \--- org.springframework:spring-web:4.3.1.RELEASE (*)
+|    |    +--- commons-codec:commons-codec:1.9
+|    |    \--- org.apache.httpcomponents:httpclient:4.3.3
+|    |         +--- org.apache.httpcomponents:httpcore:4.3.2
+|    |         +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|    |         \--- commons-codec:commons-codec:1.6 -> 1.9
+|    +--- org.springframework.security.oauth:spring-security-oauth2:2.0.10.RELEASE
+|    |    +--- org.springframework:spring-beans:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-webmvc:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-core:3.2.8.RELEASE -> 4.1.2.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-config:3.2.8.RELEASE -> 4.1.2.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-web:3.2.8.RELEASE -> 4.1.2.RELEASE (*)
+|    |    \--- commons-codec:commons-codec:1.9
+|    +--- org.slf4j:slf4j-log4j12:1.7.7
+|    |    +--- org.slf4j:slf4j-api:1.7.7 -> 1.7.16
+|    |    \--- log4j:log4j:1.2.17
+|    \--- org.slf4j:slf4j-api:1.7.7 -> 1.7.16
++--- javax.mail:mail:1.4.7
+|    \--- javax.activation:activation:1.1
++--- commons-logging:commons-logging:1.2
++--- com.jayway.jsonpath:json-path:2.2.0
+|    +--- net.minidev:json-smart:2.2.1
+|    |    \--- net.minidev:accessors-smart:1.1
+|    |         \--- org.ow2.asm:asm:5.0.3
+|    \--- org.slf4j:slf4j-api:1.7.16
++--- org.springframework:spring-beans:4.3.1.RELEASE (*)
++--- org.springframework:spring-context:4.3.1.RELEASE (*)
++--- org.springframework:spring-tx:4.3.1.RELEASE
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
++--- org.springframework:spring-jdbc:4.3.1.RELEASE
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    \--- org.springframework:spring-tx:4.3.1.RELEASE (*)
++--- org.springframework:spring-web:4.3.1.RELEASE (*)
++--- org.springframework:spring-context-support:4.3.1.RELEASE
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
++--- org.springframework.security:spring-security-core:4.1.2.RELEASE (*)
++--- org.springframework.security:spring-security-jwt:1.0.4.RELEASE
+|    \--- org.bouncycastle:bcpkix-jdk15on:1.47
+|         \--- org.bouncycastle:bcprov-jdk15on:1.47 -> 1.50
++--- org.springframework.security:spring-security-openid:4.1.2.RELEASE
+|    +--- com.google.inject:guice:2.0
+|    |    \--- aopalliance:aopalliance:1.0
+|    +--- org.openid4java:openid4java-nodeps:0.9.6
+|    |    +--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    \--- net.jcip:jcip-annotations:1.0
+|    +--- org.springframework.security:spring-security-core:4.1.2.RELEASE (*)
+|    +--- org.springframework.security:spring-security-web:4.1.2.RELEASE (*)
+|    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-web:4.3.1.RELEASE (*)
+|    +--- net.sourceforge.nekohtml:nekohtml:1.9.20
+|    |    \--- xerces:xercesImpl:2.10.0
+|    |         \--- xml-apis:xml-apis:1.4.01
+|    \--- org.apache.httpcomponents:httpclient:4.2.3 -> 4.3.3 (*)
++--- org.springframework.security.extensions:spring-security-saml2-core:1.0.2.RELEASE
+|    +--- org.slf4j:slf4j-api:1.6.3 -> 1.7.16
+|    +--- org.springframework.security:spring-security-config:3.1.2.RELEASE -> 4.1.2.RELEASE (*)
+|    +--- org.springframework.security:spring-security-core:3.1.2.RELEASE -> 4.1.2.RELEASE (*)
+|    +--- org.springframework.security:spring-security-web:3.1.2.RELEASE -> 4.1.2.RELEASE (*)
+|    \--- xml-apis:xml-apis:1.4.01
++--- org.opensaml:opensaml:2.6.4
+|    +--- org.opensaml:openws:1.5.4
+|    |    +--- org.opensaml:xmltooling:1.4.4
+|    |    |    +--- commons-codec:commons-codec:1.7 -> 1.9
+|    |    |    +--- joda-time:joda-time:2.2
+|    |    |    +--- ca.juliusdavies:not-yet-commons-ssl:0.3.9
+|    |    |    |    \--- commons-httpclient:commons-httpclient:3.0 -> 3.1
+|    |    |    |         \--- commons-codec:commons-codec:1.2 -> 1.9
+|    |    |    \--- org.apache.santuario:xmlsec:1.5.7
+|    |    |         \--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    +--- commons-codec:commons-codec:1.7 -> 1.9
+|    |    +--- commons-httpclient:commons-httpclient:3.1 (*)
+|    |    +--- joda-time:joda-time:2.2
+|    |    \--- org.apache.santuario:xmlsec:1.5.7 (*)
+|    +--- commons-codec:commons-codec:1.7 -> 1.9
+|    +--- commons-collections:commons-collections:3.2.1
+|    +--- commons-lang:commons-lang:2.6
+|    +--- org.apache.velocity:velocity:1.7
+|    |    +--- commons-collections:commons-collections:3.2.1
+|    |    \--- commons-lang:commons-lang:2.4 -> 2.6
+|    +--- org.owasp.esapi:esapi:2.0.1
+|    +--- joda-time:joda-time:2.2
+|    \--- org.apache.santuario:xmlsec:1.5.7 (*)
++--- org.springframework.security.oauth:spring-security-oauth2:2.0.10.RELEASE (*)
++--- com.google.guava:guava:19.0
++--- org.aspectj:aspectjrt:1.6.9
++--- org.thymeleaf:thymeleaf-spring4:2.1.2.RELEASE
+|    +--- org.thymeleaf:thymeleaf:2.1.2.RELEASE
+|    |    +--- ognl:ognl:3.0.6
+|    |    +--- org.javassist:javassist:3.16.1-GA
+|    |    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.16
+|    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.16
++--- nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:1.2.3
+|    \--- org.thymeleaf:thymeleaf:2.1.2.RELEASE (*)
++--- org.thymeleaf.extras:thymeleaf-extras-springsecurity3:2.1.1.RELEASE
+|    +--- org.thymeleaf:thymeleaf:2.1.2.RELEASE (*)
+|    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.16
++--- com.unboundid.product.scim:scim-sdk:1.6.0
+|    \--- com.unboundid.components:json:1.0.0
++--- org.hibernate:hibernate-validator:4.3.1.Final
+|    +--- javax.validation:validation-api:1.0.0.GA
+|    \--- org.jboss.logging:jboss-logging:3.1.0.CR2
++--- org.flywaydb:flyway-core:4.0
++--- org.hsqldb:hsqldb:2.3.1
++--- org.springframework.cloud:spring-cloud-spring-service-connector:1.2.1.RELEASE
+|    +--- org.springframework.cloud:spring-cloud-core:1.2.1.RELEASE
+|    \--- org.springframework:spring-context:3.1.4.RELEASE -> 4.3.1.RELEASE (*)
++--- org.springframework.cloud:spring-cloud-cloudfoundry-connector:1.2.1.RELEASE
+|    \--- org.springframework.cloud:spring-cloud-core:1.2.1.RELEASE
++--- org.yaml:snakeyaml:1.12
++--- org.springframework.security:spring-security-ldap:4.1.2.RELEASE
+|    +--- org.springframework.ldap:spring-ldap-core:2.0.2.RELEASE -> 2.1.0.RELEASE
+|    |    +--- org.slf4j:slf4j-api:1.7.12 -> 1.7.16
+|    |    +--- org.springframework:spring-beans:4.2.5.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.2.5.RELEASE -> 4.3.1.RELEASE (*)
+|    |    \--- org.springframework:spring-tx:4.2.5.RELEASE -> 4.3.1.RELEASE (*)
+|    +--- org.springframework.security:spring-security-core:4.1.2.RELEASE (*)
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    \--- org.springframework:spring-tx:4.3.1.RELEASE (*)
++--- org.springframework.ldap:spring-ldap-core:2.1.0.RELEASE (*)
++--- org.springframework.ldap:spring-ldap-core-tiger:2.1.0.RELEASE
+|    +--- org.springframework.ldap:spring-ldap-core:2.1.0.RELEASE (*)
+|    \--- org.springframework:spring-tx:4.2.5.RELEASE -> 4.3.1.RELEASE (*)
++--- org.apache.directory.api:api-ldap-model:1.0.0-M22
+|    +--- org.apache.directory.api:api-util:1.0.0-M22
+|    |    \--- org.apache.directory.api:api-i18n:1.0.0-M22
+|    +--- org.apache.directory.api:api-asn1-api:1.0.0-M22
+|    |    \--- org.apache.directory.api:api-i18n:1.0.0-M22
+|    +--- org.apache.directory.api:api-asn1-ber:1.0.0-M22
+|    |    +--- org.apache.directory.api:api-i18n:1.0.0-M22
+|    |    +--- org.apache.directory.api:api-asn1-api:1.0.0-M22 (*)
+|    |    \--- org.apache.directory.api:api-util:1.0.0-M22 (*)
+|    +--- org.apache.directory.api:api-i18n:1.0.0-M22
+|    +--- org.apache.mina:mina-core:2.0.7
+|    +--- antlr:antlr:2.7.7
+|    +--- commons-lang:commons-lang:2.6
+|    \--- commons-collections:commons-collections:3.2.1
++--- org.passay:passay:1.0
+|    \--- org.cryptacular:cryptacular:1.0
+|         \--- org.bouncycastle:bcprov-jdk15on:1.50
+\--- javax.servlet:javax.servlet-api:3.1.0
+
+compileClasspath - Compile classpath for source set 'main'.
++--- project :cloudfoundry-identity-model
+|    +--- javax.validation:validation-api:1.0.0.GA
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.8.3
+|    |    +--- com.fasterxml.jackson.core:jackson-annotations:2.8.0
+|    |    \--- com.fasterxml.jackson.core:jackson-core:2.8.3
+|    +--- org.springframework:spring-web:4.3.1.RELEASE
+|    |    +--- org.springframework:spring-aop:4.3.1.RELEASE
+|    |    |    +--- org.springframework:spring-beans:4.3.1.RELEASE
+|    |    |    |    \--- org.springframework:spring-core:4.3.1.RELEASE
+|    |    |    |         \--- commons-logging:commons-logging:1.2
+|    |    |    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.3.1.RELEASE
+|    |    |    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    |    \--- org.springframework:spring-expression:4.3.1.RELEASE
+|    |    |         \--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-webmvc:4.3.1.RELEASE
+|    |    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-expression:4.3.1.RELEASE (*)
+|    |    \--- org.springframework:spring-web:4.3.1.RELEASE (*)
+|    +--- org.springframework.security:spring-security-config:4.1.2.RELEASE
+|    |    +--- aopalliance:aopalliance:1.0
+|    |    +--- org.springframework.security:spring-security-core:4.1.2.RELEASE
+|    |    |    +--- aopalliance:aopalliance:1.0
+|    |    |    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    |    \--- org.springframework:spring-expression:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    |    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    +--- org.springframework.security.oauth:spring-security-oauth:2.0.10.RELEASE
+|    |    +--- org.springframework:spring-beans:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-web:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-aop:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-core:3.2.8.RELEASE -> 4.1.2.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-web:3.2.8.RELEASE -> 4.1.2.RELEASE
+|    |    |    +--- aopalliance:aopalliance:1.0
+|    |    |    +--- org.springframework.security:spring-security-core:4.1.2.RELEASE (*)
+|    |    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-expression:4.3.1.RELEASE (*)
+|    |    |    \--- org.springframework:spring-web:4.3.1.RELEASE (*)
+|    |    +--- commons-codec:commons-codec:1.9
+|    |    \--- org.apache.httpcomponents:httpclient:4.3.3
+|    |         +--- org.apache.httpcomponents:httpcore:4.3.2
+|    |         +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|    |         \--- commons-codec:commons-codec:1.6 -> 1.9
+|    +--- org.springframework.security.oauth:spring-security-oauth2:2.0.10.RELEASE
+|    |    +--- org.springframework:spring-beans:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-webmvc:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-core:3.2.8.RELEASE -> 4.1.2.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-config:3.2.8.RELEASE -> 4.1.2.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-web:3.2.8.RELEASE -> 4.1.2.RELEASE (*)
+|    |    \--- commons-codec:commons-codec:1.9
+|    +--- org.slf4j:slf4j-log4j12:1.7.7
+|    |    +--- org.slf4j:slf4j-api:1.7.7 -> 1.7.16
+|    |    \--- log4j:log4j:1.2.17
+|    \--- org.slf4j:slf4j-api:1.7.7 -> 1.7.16
++--- javax.mail:mail:1.4.7
+|    \--- javax.activation:activation:1.1
++--- commons-logging:commons-logging:1.2
++--- com.jayway.jsonpath:json-path:2.2.0
+|    +--- net.minidev:json-smart:2.2.1
+|    |    \--- net.minidev:accessors-smart:1.1
+|    |         \--- org.ow2.asm:asm:5.0.3
+|    \--- org.slf4j:slf4j-api:1.7.16
++--- org.springframework:spring-beans:4.3.1.RELEASE (*)
++--- org.springframework:spring-context:4.3.1.RELEASE (*)
++--- org.springframework:spring-tx:4.3.1.RELEASE
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
++--- org.springframework:spring-jdbc:4.3.1.RELEASE
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    \--- org.springframework:spring-tx:4.3.1.RELEASE (*)
++--- org.springframework:spring-web:4.3.1.RELEASE (*)
++--- org.springframework:spring-context-support:4.3.1.RELEASE
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
++--- org.springframework.security:spring-security-core:4.1.2.RELEASE (*)
++--- org.springframework.security:spring-security-jwt:1.0.4.RELEASE
+|    \--- org.bouncycastle:bcpkix-jdk15on:1.47
+|         \--- org.bouncycastle:bcprov-jdk15on:1.47 -> 1.50
++--- org.springframework.security:spring-security-openid:4.1.2.RELEASE
+|    +--- com.google.inject:guice:2.0
+|    |    \--- aopalliance:aopalliance:1.0
+|    +--- org.openid4java:openid4java-nodeps:0.9.6
+|    |    +--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    \--- net.jcip:jcip-annotations:1.0
+|    +--- org.springframework.security:spring-security-core:4.1.2.RELEASE (*)
+|    +--- org.springframework.security:spring-security-web:4.1.2.RELEASE (*)
+|    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-web:4.3.1.RELEASE (*)
+|    +--- net.sourceforge.nekohtml:nekohtml:1.9.20
+|    |    \--- xerces:xercesImpl:2.10.0
+|    |         \--- xml-apis:xml-apis:1.4.01
+|    \--- org.apache.httpcomponents:httpclient:4.2.3 -> 4.3.3 (*)
++--- org.springframework.security.extensions:spring-security-saml2-core:1.0.2.RELEASE
+|    +--- org.slf4j:slf4j-api:1.6.3 -> 1.7.16
+|    +--- org.springframework.security:spring-security-config:3.1.2.RELEASE -> 4.1.2.RELEASE (*)
+|    +--- org.springframework.security:spring-security-core:3.1.2.RELEASE -> 4.1.2.RELEASE (*)
+|    +--- org.springframework.security:spring-security-web:3.1.2.RELEASE -> 4.1.2.RELEASE (*)
+|    \--- xml-apis:xml-apis:1.4.01
++--- org.opensaml:opensaml:2.6.4
+|    +--- org.opensaml:openws:1.5.4
+|    |    +--- org.opensaml:xmltooling:1.4.4
+|    |    |    +--- commons-codec:commons-codec:1.7 -> 1.9
+|    |    |    +--- joda-time:joda-time:2.2
+|    |    |    +--- ca.juliusdavies:not-yet-commons-ssl:0.3.9
+|    |    |    |    \--- commons-httpclient:commons-httpclient:3.0 -> 3.1
+|    |    |    |         \--- commons-codec:commons-codec:1.2 -> 1.9
+|    |    |    \--- org.apache.santuario:xmlsec:1.5.7
+|    |    |         \--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    +--- commons-codec:commons-codec:1.7 -> 1.9
+|    |    +--- commons-httpclient:commons-httpclient:3.1 (*)
+|    |    +--- joda-time:joda-time:2.2
+|    |    \--- org.apache.santuario:xmlsec:1.5.7 (*)
+|    +--- commons-codec:commons-codec:1.7 -> 1.9
+|    +--- commons-collections:commons-collections:3.2.1
+|    +--- commons-lang:commons-lang:2.6
+|    +--- org.apache.velocity:velocity:1.7
+|    |    +--- commons-collections:commons-collections:3.2.1
+|    |    \--- commons-lang:commons-lang:2.4 -> 2.6
+|    +--- org.owasp.esapi:esapi:2.0.1
+|    +--- joda-time:joda-time:2.2
+|    \--- org.apache.santuario:xmlsec:1.5.7 (*)
++--- org.springframework.security.oauth:spring-security-oauth2:2.0.10.RELEASE (*)
++--- com.google.guava:guava:19.0
++--- org.aspectj:aspectjrt:1.6.9
++--- org.thymeleaf:thymeleaf-spring4:2.1.2.RELEASE
+|    +--- org.thymeleaf:thymeleaf:2.1.2.RELEASE
+|    |    +--- ognl:ognl:3.0.6
+|    |    +--- org.javassist:javassist:3.16.1-GA
+|    |    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.16
+|    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.16
++--- nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:1.2.3
+|    \--- org.thymeleaf:thymeleaf:2.1.2.RELEASE (*)
++--- org.thymeleaf.extras:thymeleaf-extras-springsecurity3:2.1.1.RELEASE
+|    +--- org.thymeleaf:thymeleaf:2.1.2.RELEASE (*)
+|    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.16
++--- com.unboundid.product.scim:scim-sdk:1.6.0
+|    \--- com.unboundid.components:json:1.0.0
++--- org.hibernate:hibernate-validator:4.3.1.Final
+|    +--- javax.validation:validation-api:1.0.0.GA
+|    \--- org.jboss.logging:jboss-logging:3.1.0.CR2
++--- org.flywaydb:flyway-core:4.0
++--- org.hsqldb:hsqldb:2.3.1
++--- org.springframework.cloud:spring-cloud-spring-service-connector:1.2.1.RELEASE
+|    +--- org.springframework.cloud:spring-cloud-core:1.2.1.RELEASE
+|    \--- org.springframework:spring-context:3.1.4.RELEASE -> 4.3.1.RELEASE (*)
++--- org.springframework.cloud:spring-cloud-cloudfoundry-connector:1.2.1.RELEASE
+|    \--- org.springframework.cloud:spring-cloud-core:1.2.1.RELEASE
++--- org.yaml:snakeyaml:1.12
++--- org.springframework.security:spring-security-ldap:4.1.2.RELEASE
+|    +--- org.springframework.ldap:spring-ldap-core:2.0.2.RELEASE -> 2.1.0.RELEASE
+|    |    +--- org.slf4j:slf4j-api:1.7.12 -> 1.7.16
+|    |    +--- org.springframework:spring-beans:4.2.5.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.2.5.RELEASE -> 4.3.1.RELEASE (*)
+|    |    \--- org.springframework:spring-tx:4.2.5.RELEASE -> 4.3.1.RELEASE (*)
+|    +--- org.springframework.security:spring-security-core:4.1.2.RELEASE (*)
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    \--- org.springframework:spring-tx:4.3.1.RELEASE (*)
++--- org.springframework.ldap:spring-ldap-core:2.1.0.RELEASE (*)
++--- org.springframework.ldap:spring-ldap-core-tiger:2.1.0.RELEASE
+|    +--- org.springframework.ldap:spring-ldap-core:2.1.0.RELEASE (*)
+|    \--- org.springframework:spring-tx:4.2.5.RELEASE -> 4.3.1.RELEASE (*)
++--- org.apache.directory.api:api-ldap-model:1.0.0-M22
+|    +--- org.apache.directory.api:api-util:1.0.0-M22
+|    |    \--- org.apache.directory.api:api-i18n:1.0.0-M22
+|    +--- org.apache.directory.api:api-asn1-api:1.0.0-M22
+|    |    \--- org.apache.directory.api:api-i18n:1.0.0-M22
+|    +--- org.apache.directory.api:api-asn1-ber:1.0.0-M22
+|    |    +--- org.apache.directory.api:api-i18n:1.0.0-M22
+|    |    +--- org.apache.directory.api:api-asn1-api:1.0.0-M22 (*)
+|    |    \--- org.apache.directory.api:api-util:1.0.0-M22 (*)
+|    +--- org.apache.directory.api:api-i18n:1.0.0-M22
+|    +--- org.apache.mina:mina-core:2.0.7
+|    +--- antlr:antlr:2.7.7
+|    +--- commons-lang:commons-lang:2.6
+|    \--- commons-collections:commons-collections:3.2.1
++--- org.passay:passay:1.0
+|    \--- org.cryptacular:cryptacular:1.0
+|         \--- org.bouncycastle:bcprov-jdk15on:1.50
+\--- javax.servlet:javax.servlet-api:3.1.0
+
+compileOnly - Compile dependencies for source set 'main'.
++--- project :cloudfoundry-identity-model
+|    +--- javax.validation:validation-api:1.0.0.GA
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.8.3
+|    |    +--- com.fasterxml.jackson.core:jackson-annotations:2.8.0
+|    |    \--- com.fasterxml.jackson.core:jackson-core:2.8.3
+|    +--- org.springframework:spring-web:4.3.1.RELEASE
+|    |    +--- org.springframework:spring-aop:4.3.1.RELEASE
+|    |    |    +--- org.springframework:spring-beans:4.3.1.RELEASE
+|    |    |    |    \--- org.springframework:spring-core:4.3.1.RELEASE
+|    |    |    |         \--- commons-logging:commons-logging:1.2
+|    |    |    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.3.1.RELEASE
+|    |    |    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    |    \--- org.springframework:spring-expression:4.3.1.RELEASE
+|    |    |         \--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-webmvc:4.3.1.RELEASE
+|    |    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-expression:4.3.1.RELEASE (*)
+|    |    \--- org.springframework:spring-web:4.3.1.RELEASE (*)
+|    +--- org.springframework.security:spring-security-config:4.1.2.RELEASE
+|    |    +--- aopalliance:aopalliance:1.0
+|    |    +--- org.springframework.security:spring-security-core:4.1.2.RELEASE
+|    |    |    +--- aopalliance:aopalliance:1.0
+|    |    |    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    |    \--- org.springframework:spring-expression:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    |    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    +--- org.springframework.security.oauth:spring-security-oauth:2.0.10.RELEASE
+|    |    +--- org.springframework:spring-beans:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-web:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-aop:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-core:3.2.8.RELEASE -> 4.1.2.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-web:3.2.8.RELEASE -> 4.1.2.RELEASE
+|    |    |    +--- aopalliance:aopalliance:1.0
+|    |    |    +--- org.springframework.security:spring-security-core:4.1.2.RELEASE (*)
+|    |    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-expression:4.3.1.RELEASE (*)
+|    |    |    \--- org.springframework:spring-web:4.3.1.RELEASE (*)
+|    |    +--- commons-codec:commons-codec:1.9
+|    |    \--- org.apache.httpcomponents:httpclient:4.3.3
+|    |         +--- org.apache.httpcomponents:httpcore:4.3.2
+|    |         +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|    |         \--- commons-codec:commons-codec:1.6 -> 1.9
+|    +--- org.springframework.security.oauth:spring-security-oauth2:2.0.10.RELEASE
+|    |    +--- org.springframework:spring-beans:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-webmvc:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-core:3.2.8.RELEASE -> 4.1.2.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-config:3.2.8.RELEASE -> 4.1.2.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-web:3.2.8.RELEASE -> 4.1.2.RELEASE (*)
+|    |    \--- commons-codec:commons-codec:1.9
+|    +--- org.slf4j:slf4j-log4j12:1.7.7
+|    |    +--- org.slf4j:slf4j-api:1.7.7 -> 1.7.16
+|    |    \--- log4j:log4j:1.2.17
+|    \--- org.slf4j:slf4j-api:1.7.7 -> 1.7.16
++--- javax.mail:mail:1.4.7
+|    \--- javax.activation:activation:1.1
++--- commons-logging:commons-logging:1.2
++--- com.jayway.jsonpath:json-path:2.2.0
+|    +--- net.minidev:json-smart:2.2.1
+|    |    \--- net.minidev:accessors-smart:1.1
+|    |         \--- org.ow2.asm:asm:5.0.3
+|    \--- org.slf4j:slf4j-api:1.7.16
++--- org.springframework:spring-beans:4.3.1.RELEASE (*)
++--- org.springframework:spring-context:4.3.1.RELEASE (*)
++--- org.springframework:spring-tx:4.3.1.RELEASE
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
++--- org.springframework:spring-jdbc:4.3.1.RELEASE
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    \--- org.springframework:spring-tx:4.3.1.RELEASE (*)
++--- org.springframework:spring-web:4.3.1.RELEASE (*)
++--- org.springframework:spring-context-support:4.3.1.RELEASE
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
++--- org.springframework.security:spring-security-core:4.1.2.RELEASE (*)
++--- org.springframework.security:spring-security-jwt:1.0.4.RELEASE
+|    \--- org.bouncycastle:bcpkix-jdk15on:1.47
+|         \--- org.bouncycastle:bcprov-jdk15on:1.47 -> 1.50
++--- org.springframework.security:spring-security-openid:4.1.2.RELEASE
+|    +--- com.google.inject:guice:2.0
+|    |    \--- aopalliance:aopalliance:1.0
+|    +--- org.openid4java:openid4java-nodeps:0.9.6
+|    |    +--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    \--- net.jcip:jcip-annotations:1.0
+|    +--- org.springframework.security:spring-security-core:4.1.2.RELEASE (*)
+|    +--- org.springframework.security:spring-security-web:4.1.2.RELEASE (*)
+|    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-web:4.3.1.RELEASE (*)
+|    +--- net.sourceforge.nekohtml:nekohtml:1.9.20
+|    |    \--- xerces:xercesImpl:2.10.0
+|    |         \--- xml-apis:xml-apis:1.4.01
+|    \--- org.apache.httpcomponents:httpclient:4.2.3 -> 4.3.3 (*)
++--- org.springframework.security.extensions:spring-security-saml2-core:1.0.2.RELEASE
+|    +--- org.slf4j:slf4j-api:1.6.3 -> 1.7.16
+|    +--- org.springframework.security:spring-security-config:3.1.2.RELEASE -> 4.1.2.RELEASE (*)
+|    +--- org.springframework.security:spring-security-core:3.1.2.RELEASE -> 4.1.2.RELEASE (*)
+|    +--- org.springframework.security:spring-security-web:3.1.2.RELEASE -> 4.1.2.RELEASE (*)
+|    \--- xml-apis:xml-apis:1.4.01
++--- org.opensaml:opensaml:2.6.4
+|    +--- org.opensaml:openws:1.5.4
+|    |    +--- org.opensaml:xmltooling:1.4.4
+|    |    |    +--- commons-codec:commons-codec:1.7 -> 1.9
+|    |    |    +--- joda-time:joda-time:2.2
+|    |    |    +--- ca.juliusdavies:not-yet-commons-ssl:0.3.9
+|    |    |    |    \--- commons-httpclient:commons-httpclient:3.0 -> 3.1
+|    |    |    |         \--- commons-codec:commons-codec:1.2 -> 1.9
+|    |    |    \--- org.apache.santuario:xmlsec:1.5.7
+|    |    |         \--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    +--- commons-codec:commons-codec:1.7 -> 1.9
+|    |    +--- commons-httpclient:commons-httpclient:3.1 (*)
+|    |    +--- joda-time:joda-time:2.2
+|    |    \--- org.apache.santuario:xmlsec:1.5.7 (*)
+|    +--- commons-codec:commons-codec:1.7 -> 1.9
+|    +--- commons-collections:commons-collections:3.2.1
+|    +--- commons-lang:commons-lang:2.6
+|    +--- org.apache.velocity:velocity:1.7
+|    |    +--- commons-collections:commons-collections:3.2.1
+|    |    \--- commons-lang:commons-lang:2.4 -> 2.6
+|    +--- org.owasp.esapi:esapi:2.0.1
+|    +--- joda-time:joda-time:2.2
+|    \--- org.apache.santuario:xmlsec:1.5.7 (*)
++--- org.springframework.security.oauth:spring-security-oauth2:2.0.10.RELEASE (*)
++--- com.google.guava:guava:19.0
++--- org.aspectj:aspectjrt:1.6.9
++--- org.thymeleaf:thymeleaf-spring4:2.1.2.RELEASE
+|    +--- org.thymeleaf:thymeleaf:2.1.2.RELEASE
+|    |    +--- ognl:ognl:3.0.6
+|    |    +--- org.javassist:javassist:3.16.1-GA
+|    |    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.16
+|    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.16
++--- nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:1.2.3
+|    \--- org.thymeleaf:thymeleaf:2.1.2.RELEASE (*)
++--- org.thymeleaf.extras:thymeleaf-extras-springsecurity3:2.1.1.RELEASE
+|    +--- org.thymeleaf:thymeleaf:2.1.2.RELEASE (*)
+|    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.16
++--- com.unboundid.product.scim:scim-sdk:1.6.0
+|    \--- com.unboundid.components:json:1.0.0
++--- org.hibernate:hibernate-validator:4.3.1.Final
+|    +--- javax.validation:validation-api:1.0.0.GA
+|    \--- org.jboss.logging:jboss-logging:3.1.0.CR2
++--- org.flywaydb:flyway-core:4.0
++--- org.hsqldb:hsqldb:2.3.1
++--- org.springframework.cloud:spring-cloud-spring-service-connector:1.2.1.RELEASE
+|    +--- org.springframework.cloud:spring-cloud-core:1.2.1.RELEASE
+|    \--- org.springframework:spring-context:3.1.4.RELEASE -> 4.3.1.RELEASE (*)
++--- org.springframework.cloud:spring-cloud-cloudfoundry-connector:1.2.1.RELEASE
+|    \--- org.springframework.cloud:spring-cloud-core:1.2.1.RELEASE
++--- org.yaml:snakeyaml:1.12
++--- org.springframework.security:spring-security-ldap:4.1.2.RELEASE
+|    +--- org.springframework.ldap:spring-ldap-core:2.0.2.RELEASE -> 2.1.0.RELEASE
+|    |    +--- org.slf4j:slf4j-api:1.7.12 -> 1.7.16
+|    |    +--- org.springframework:spring-beans:4.2.5.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.2.5.RELEASE -> 4.3.1.RELEASE (*)
+|    |    \--- org.springframework:spring-tx:4.2.5.RELEASE -> 4.3.1.RELEASE (*)
+|    +--- org.springframework.security:spring-security-core:4.1.2.RELEASE (*)
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    \--- org.springframework:spring-tx:4.3.1.RELEASE (*)
++--- org.springframework.ldap:spring-ldap-core:2.1.0.RELEASE (*)
++--- org.springframework.ldap:spring-ldap-core-tiger:2.1.0.RELEASE
+|    +--- org.springframework.ldap:spring-ldap-core:2.1.0.RELEASE (*)
+|    \--- org.springframework:spring-tx:4.2.5.RELEASE -> 4.3.1.RELEASE (*)
++--- org.apache.directory.api:api-ldap-model:1.0.0-M22
+|    +--- org.apache.directory.api:api-util:1.0.0-M22
+|    |    \--- org.apache.directory.api:api-i18n:1.0.0-M22
+|    +--- org.apache.directory.api:api-asn1-api:1.0.0-M22
+|    |    \--- org.apache.directory.api:api-i18n:1.0.0-M22
+|    +--- org.apache.directory.api:api-asn1-ber:1.0.0-M22
+|    |    +--- org.apache.directory.api:api-i18n:1.0.0-M22
+|    |    +--- org.apache.directory.api:api-asn1-api:1.0.0-M22 (*)
+|    |    \--- org.apache.directory.api:api-util:1.0.0-M22 (*)
+|    +--- org.apache.directory.api:api-i18n:1.0.0-M22
+|    +--- org.apache.mina:mina-core:2.0.7
+|    +--- antlr:antlr:2.7.7
+|    +--- commons-lang:commons-lang:2.6
+|    \--- commons-collections:commons-collections:3.2.1
++--- org.passay:passay:1.0
+|    \--- org.cryptacular:cryptacular:1.0
+|         \--- org.bouncycastle:bcprov-jdk15on:1.50
+\--- javax.servlet:javax.servlet-api:3.1.0
+
+default - Configuration for default artifacts.
++--- project :cloudfoundry-identity-model
+|    +--- javax.validation:validation-api:1.0.0.GA
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.8.3
+|    |    +--- com.fasterxml.jackson.core:jackson-annotations:2.8.0
+|    |    \--- com.fasterxml.jackson.core:jackson-core:2.8.3
+|    +--- org.springframework:spring-web:4.3.1.RELEASE
+|    |    +--- org.springframework:spring-aop:4.3.1.RELEASE
+|    |    |    +--- org.springframework:spring-beans:4.3.1.RELEASE
+|    |    |    |    \--- org.springframework:spring-core:4.3.1.RELEASE
+|    |    |    |         \--- commons-logging:commons-logging:1.2
+|    |    |    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.3.1.RELEASE
+|    |    |    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    |    \--- org.springframework:spring-expression:4.3.1.RELEASE
+|    |    |         \--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-webmvc:4.3.1.RELEASE
+|    |    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-expression:4.3.1.RELEASE (*)
+|    |    \--- org.springframework:spring-web:4.3.1.RELEASE (*)
+|    +--- org.springframework.security:spring-security-config:4.1.2.RELEASE
+|    |    +--- aopalliance:aopalliance:1.0
+|    |    +--- org.springframework.security:spring-security-core:4.1.2.RELEASE
+|    |    |    +--- aopalliance:aopalliance:1.0
+|    |    |    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    |    \--- org.springframework:spring-expression:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    |    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    +--- org.springframework.security.oauth:spring-security-oauth:2.0.10.RELEASE
+|    |    +--- org.springframework:spring-beans:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-web:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-aop:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-core:3.2.8.RELEASE -> 4.1.2.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-web:3.2.8.RELEASE -> 4.1.2.RELEASE
+|    |    |    +--- aopalliance:aopalliance:1.0
+|    |    |    +--- org.springframework.security:spring-security-core:4.1.2.RELEASE (*)
+|    |    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-expression:4.3.1.RELEASE (*)
+|    |    |    \--- org.springframework:spring-web:4.3.1.RELEASE (*)
+|    |    +--- commons-codec:commons-codec:1.9
+|    |    \--- org.apache.httpcomponents:httpclient:4.3.3
+|    |         +--- org.apache.httpcomponents:httpcore:4.3.2
+|    |         +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|    |         \--- commons-codec:commons-codec:1.6 -> 1.9
+|    +--- org.springframework.security.oauth:spring-security-oauth2:2.0.10.RELEASE
+|    |    +--- org.springframework:spring-beans:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-webmvc:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-core:3.2.8.RELEASE -> 4.1.2.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-config:3.2.8.RELEASE -> 4.1.2.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-web:3.2.8.RELEASE -> 4.1.2.RELEASE (*)
+|    |    \--- commons-codec:commons-codec:1.9
+|    +--- org.slf4j:slf4j-log4j12:1.7.7
+|    |    +--- org.slf4j:slf4j-api:1.7.7 -> 1.7.16
+|    |    \--- log4j:log4j:1.2.17
+|    \--- org.slf4j:slf4j-api:1.7.7 -> 1.7.16
++--- javax.mail:mail:1.4.7
+|    \--- javax.activation:activation:1.1
++--- commons-logging:commons-logging:1.2
++--- com.jayway.jsonpath:json-path:2.2.0
+|    +--- net.minidev:json-smart:2.2.1
+|    |    \--- net.minidev:accessors-smart:1.1
+|    |         \--- org.ow2.asm:asm:5.0.3
+|    \--- org.slf4j:slf4j-api:1.7.16
++--- org.springframework:spring-beans:4.3.1.RELEASE (*)
++--- org.springframework:spring-context:4.3.1.RELEASE (*)
++--- org.springframework:spring-tx:4.3.1.RELEASE
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
++--- org.springframework:spring-jdbc:4.3.1.RELEASE
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    \--- org.springframework:spring-tx:4.3.1.RELEASE (*)
++--- org.springframework:spring-web:4.3.1.RELEASE (*)
++--- org.springframework:spring-context-support:4.3.1.RELEASE
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
++--- org.springframework.security:spring-security-core:4.1.2.RELEASE (*)
++--- org.springframework.security:spring-security-jwt:1.0.4.RELEASE
+|    \--- org.bouncycastle:bcpkix-jdk15on:1.47
+|         \--- org.bouncycastle:bcprov-jdk15on:1.47 -> 1.50
++--- org.springframework.security:spring-security-openid:4.1.2.RELEASE
+|    +--- com.google.inject:guice:2.0
+|    |    \--- aopalliance:aopalliance:1.0
+|    +--- org.openid4java:openid4java-nodeps:0.9.6
+|    |    +--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    \--- net.jcip:jcip-annotations:1.0
+|    +--- org.springframework.security:spring-security-core:4.1.2.RELEASE (*)
+|    +--- org.springframework.security:spring-security-web:4.1.2.RELEASE (*)
+|    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-web:4.3.1.RELEASE (*)
+|    +--- net.sourceforge.nekohtml:nekohtml:1.9.20
+|    |    \--- xerces:xercesImpl:2.10.0
+|    |         \--- xml-apis:xml-apis:1.4.01
+|    \--- org.apache.httpcomponents:httpclient:4.2.3 -> 4.3.3 (*)
++--- org.springframework.security.extensions:spring-security-saml2-core:1.0.2.RELEASE
+|    +--- org.slf4j:slf4j-api:1.6.3 -> 1.7.16
+|    +--- org.springframework.security:spring-security-config:3.1.2.RELEASE -> 4.1.2.RELEASE (*)
+|    +--- org.springframework.security:spring-security-core:3.1.2.RELEASE -> 4.1.2.RELEASE (*)
+|    +--- org.springframework.security:spring-security-web:3.1.2.RELEASE -> 4.1.2.RELEASE (*)
+|    \--- xml-apis:xml-apis:1.4.01
++--- org.opensaml:opensaml:2.6.4
+|    +--- org.opensaml:openws:1.5.4
+|    |    +--- org.opensaml:xmltooling:1.4.4
+|    |    |    +--- commons-codec:commons-codec:1.7 -> 1.9
+|    |    |    +--- joda-time:joda-time:2.2
+|    |    |    +--- ca.juliusdavies:not-yet-commons-ssl:0.3.9
+|    |    |    |    \--- commons-httpclient:commons-httpclient:3.0 -> 3.1
+|    |    |    |         \--- commons-codec:commons-codec:1.2 -> 1.9
+|    |    |    \--- org.apache.santuario:xmlsec:1.5.7
+|    |    |         \--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    +--- commons-codec:commons-codec:1.7 -> 1.9
+|    |    +--- commons-httpclient:commons-httpclient:3.1 (*)
+|    |    +--- joda-time:joda-time:2.2
+|    |    \--- org.apache.santuario:xmlsec:1.5.7 (*)
+|    +--- commons-codec:commons-codec:1.7 -> 1.9
+|    +--- commons-collections:commons-collections:3.2.1
+|    +--- commons-lang:commons-lang:2.6
+|    +--- org.apache.velocity:velocity:1.7
+|    |    +--- commons-collections:commons-collections:3.2.1
+|    |    \--- commons-lang:commons-lang:2.4 -> 2.6
+|    +--- org.owasp.esapi:esapi:2.0.1
+|    +--- joda-time:joda-time:2.2
+|    \--- org.apache.santuario:xmlsec:1.5.7 (*)
++--- org.springframework.security.oauth:spring-security-oauth2:2.0.10.RELEASE (*)
++--- com.google.guava:guava:19.0
++--- org.aspectj:aspectjrt:1.6.9
++--- org.thymeleaf:thymeleaf-spring4:2.1.2.RELEASE
+|    +--- org.thymeleaf:thymeleaf:2.1.2.RELEASE
+|    |    +--- ognl:ognl:3.0.6
+|    |    +--- org.javassist:javassist:3.16.1-GA
+|    |    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.16
+|    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.16
++--- nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:1.2.3
+|    \--- org.thymeleaf:thymeleaf:2.1.2.RELEASE (*)
++--- org.thymeleaf.extras:thymeleaf-extras-springsecurity3:2.1.1.RELEASE
+|    +--- org.thymeleaf:thymeleaf:2.1.2.RELEASE (*)
+|    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.16
++--- com.unboundid.product.scim:scim-sdk:1.6.0
+|    \--- com.unboundid.components:json:1.0.0
++--- org.hibernate:hibernate-validator:4.3.1.Final
+|    +--- javax.validation:validation-api:1.0.0.GA
+|    \--- org.jboss.logging:jboss-logging:3.1.0.CR2
++--- org.flywaydb:flyway-core:4.0
++--- org.hsqldb:hsqldb:2.3.1
++--- org.springframework.cloud:spring-cloud-spring-service-connector:1.2.1.RELEASE
+|    +--- org.springframework.cloud:spring-cloud-core:1.2.1.RELEASE
+|    \--- org.springframework:spring-context:3.1.4.RELEASE -> 4.3.1.RELEASE (*)
++--- org.springframework.cloud:spring-cloud-cloudfoundry-connector:1.2.1.RELEASE
+|    \--- org.springframework.cloud:spring-cloud-core:1.2.1.RELEASE
++--- org.yaml:snakeyaml:1.12
++--- org.springframework.security:spring-security-ldap:4.1.2.RELEASE
+|    +--- org.springframework.ldap:spring-ldap-core:2.0.2.RELEASE -> 2.1.0.RELEASE
+|    |    +--- org.slf4j:slf4j-api:1.7.12 -> 1.7.16
+|    |    +--- org.springframework:spring-beans:4.2.5.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.2.5.RELEASE -> 4.3.1.RELEASE (*)
+|    |    \--- org.springframework:spring-tx:4.2.5.RELEASE -> 4.3.1.RELEASE (*)
+|    +--- org.springframework.security:spring-security-core:4.1.2.RELEASE (*)
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    \--- org.springframework:spring-tx:4.3.1.RELEASE (*)
++--- org.springframework.ldap:spring-ldap-core:2.1.0.RELEASE (*)
++--- org.springframework.ldap:spring-ldap-core-tiger:2.1.0.RELEASE
+|    +--- org.springframework.ldap:spring-ldap-core:2.1.0.RELEASE (*)
+|    \--- org.springframework:spring-tx:4.2.5.RELEASE -> 4.3.1.RELEASE (*)
++--- org.apache.directory.api:api-ldap-model:1.0.0-M22
+|    +--- org.apache.directory.api:api-util:1.0.0-M22
+|    |    \--- org.apache.directory.api:api-i18n:1.0.0-M22
+|    +--- org.apache.directory.api:api-asn1-api:1.0.0-M22
+|    |    \--- org.apache.directory.api:api-i18n:1.0.0-M22
+|    +--- org.apache.directory.api:api-asn1-ber:1.0.0-M22
+|    |    +--- org.apache.directory.api:api-i18n:1.0.0-M22
+|    |    +--- org.apache.directory.api:api-asn1-api:1.0.0-M22 (*)
+|    |    \--- org.apache.directory.api:api-util:1.0.0-M22 (*)
+|    +--- org.apache.directory.api:api-i18n:1.0.0-M22
+|    +--- org.apache.mina:mina-core:2.0.7
+|    +--- antlr:antlr:2.7.7
+|    +--- commons-lang:commons-lang:2.6
+|    \--- commons-collections:commons-collections:3.2.1
+\--- org.passay:passay:1.0
+     \--- org.cryptacular:cryptacular:1.0
+          \--- org.bouncycastle:bcprov-jdk15on:1.50
+
+jacocoAgent - The Jacoco agent to use to get coverage data.
+\--- org.jacoco:org.jacoco.agent:0.7.7.201606060606
+
+jacocoAnt - The Jacoco ant tasks to use to get execute Gradle tasks.
+\--- org.jacoco:org.jacoco.ant:0.7.7.201606060606
+     +--- org.jacoco:org.jacoco.core:0.7.7.201606060606
+     |    \--- org.ow2.asm:asm-debug-all:5.1
+     +--- org.jacoco:org.jacoco.report:0.7.7.201606060606
+     |    +--- org.jacoco:org.jacoco.core:0.7.7.201606060606 (*)
+     |    \--- org.ow2.asm:asm-debug-all:5.1
+     \--- org.jacoco:org.jacoco.agent:0.7.7.201606060606
+
+optional
+No dependencies
+
+provided
+\--- javax.servlet:javax.servlet-api:3.1.0
+
+runtime - Runtime dependencies for source set 'main'.
++--- project :cloudfoundry-identity-model
+|    +--- javax.validation:validation-api:1.0.0.GA
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.8.3
+|    |    +--- com.fasterxml.jackson.core:jackson-annotations:2.8.0
+|    |    \--- com.fasterxml.jackson.core:jackson-core:2.8.3
+|    +--- org.springframework:spring-web:4.3.1.RELEASE
+|    |    +--- org.springframework:spring-aop:4.3.1.RELEASE
+|    |    |    +--- org.springframework:spring-beans:4.3.1.RELEASE
+|    |    |    |    \--- org.springframework:spring-core:4.3.1.RELEASE
+|    |    |    |         \--- commons-logging:commons-logging:1.2
+|    |    |    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.3.1.RELEASE
+|    |    |    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    |    \--- org.springframework:spring-expression:4.3.1.RELEASE
+|    |    |         \--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-webmvc:4.3.1.RELEASE
+|    |    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-expression:4.3.1.RELEASE (*)
+|    |    \--- org.springframework:spring-web:4.3.1.RELEASE (*)
+|    +--- org.springframework.security:spring-security-config:4.1.2.RELEASE
+|    |    +--- aopalliance:aopalliance:1.0
+|    |    +--- org.springframework.security:spring-security-core:4.1.2.RELEASE
+|    |    |    +--- aopalliance:aopalliance:1.0
+|    |    |    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    |    \--- org.springframework:spring-expression:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    |    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    +--- org.springframework.security.oauth:spring-security-oauth:2.0.10.RELEASE
+|    |    +--- org.springframework:spring-beans:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-web:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-aop:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-core:3.2.8.RELEASE -> 4.1.2.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-web:3.2.8.RELEASE -> 4.1.2.RELEASE
+|    |    |    +--- aopalliance:aopalliance:1.0
+|    |    |    +--- org.springframework.security:spring-security-core:4.1.2.RELEASE (*)
+|    |    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-expression:4.3.1.RELEASE (*)
+|    |    |    \--- org.springframework:spring-web:4.3.1.RELEASE (*)
+|    |    +--- commons-codec:commons-codec:1.9
+|    |    \--- org.apache.httpcomponents:httpclient:4.3.3
+|    |         +--- org.apache.httpcomponents:httpcore:4.3.2
+|    |         +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|    |         \--- commons-codec:commons-codec:1.6 -> 1.9
+|    +--- org.springframework.security.oauth:spring-security-oauth2:2.0.10.RELEASE
+|    |    +--- org.springframework:spring-beans:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-webmvc:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-core:3.2.8.RELEASE -> 4.1.2.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-config:3.2.8.RELEASE -> 4.1.2.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-web:3.2.8.RELEASE -> 4.1.2.RELEASE (*)
+|    |    \--- commons-codec:commons-codec:1.9
+|    +--- org.slf4j:slf4j-log4j12:1.7.7
+|    |    +--- org.slf4j:slf4j-api:1.7.7 -> 1.7.16
+|    |    \--- log4j:log4j:1.2.17
+|    \--- org.slf4j:slf4j-api:1.7.7 -> 1.7.16
++--- javax.mail:mail:1.4.7
+|    \--- javax.activation:activation:1.1
++--- commons-logging:commons-logging:1.2
++--- com.jayway.jsonpath:json-path:2.2.0
+|    +--- net.minidev:json-smart:2.2.1
+|    |    \--- net.minidev:accessors-smart:1.1
+|    |         \--- org.ow2.asm:asm:5.0.3
+|    \--- org.slf4j:slf4j-api:1.7.16
++--- org.springframework:spring-beans:4.3.1.RELEASE (*)
++--- org.springframework:spring-context:4.3.1.RELEASE (*)
++--- org.springframework:spring-tx:4.3.1.RELEASE
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
++--- org.springframework:spring-jdbc:4.3.1.RELEASE
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    \--- org.springframework:spring-tx:4.3.1.RELEASE (*)
++--- org.springframework:spring-web:4.3.1.RELEASE (*)
++--- org.springframework:spring-context-support:4.3.1.RELEASE
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
++--- org.springframework.security:spring-security-core:4.1.2.RELEASE (*)
++--- org.springframework.security:spring-security-jwt:1.0.4.RELEASE
+|    \--- org.bouncycastle:bcpkix-jdk15on:1.47
+|         \--- org.bouncycastle:bcprov-jdk15on:1.47 -> 1.50
++--- org.springframework.security:spring-security-openid:4.1.2.RELEASE
+|    +--- com.google.inject:guice:2.0
+|    |    \--- aopalliance:aopalliance:1.0
+|    +--- org.openid4java:openid4java-nodeps:0.9.6
+|    |    +--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    \--- net.jcip:jcip-annotations:1.0
+|    +--- org.springframework.security:spring-security-core:4.1.2.RELEASE (*)
+|    +--- org.springframework.security:spring-security-web:4.1.2.RELEASE (*)
+|    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-web:4.3.1.RELEASE (*)
+|    +--- net.sourceforge.nekohtml:nekohtml:1.9.20
+|    |    \--- xerces:xercesImpl:2.10.0
+|    |         \--- xml-apis:xml-apis:1.4.01
+|    \--- org.apache.httpcomponents:httpclient:4.2.3 -> 4.3.3 (*)
++--- org.springframework.security.extensions:spring-security-saml2-core:1.0.2.RELEASE
+|    +--- org.slf4j:slf4j-api:1.6.3 -> 1.7.16
+|    +--- org.springframework.security:spring-security-config:3.1.2.RELEASE -> 4.1.2.RELEASE (*)
+|    +--- org.springframework.security:spring-security-core:3.1.2.RELEASE -> 4.1.2.RELEASE (*)
+|    +--- org.springframework.security:spring-security-web:3.1.2.RELEASE -> 4.1.2.RELEASE (*)
+|    \--- xml-apis:xml-apis:1.4.01
++--- org.opensaml:opensaml:2.6.4
+|    +--- org.opensaml:openws:1.5.4
+|    |    +--- org.opensaml:xmltooling:1.4.4
+|    |    |    +--- commons-codec:commons-codec:1.7 -> 1.9
+|    |    |    +--- joda-time:joda-time:2.2
+|    |    |    +--- ca.juliusdavies:not-yet-commons-ssl:0.3.9
+|    |    |    |    \--- commons-httpclient:commons-httpclient:3.0 -> 3.1
+|    |    |    |         \--- commons-codec:commons-codec:1.2 -> 1.9
+|    |    |    \--- org.apache.santuario:xmlsec:1.5.7
+|    |    |         \--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    +--- commons-codec:commons-codec:1.7 -> 1.9
+|    |    +--- commons-httpclient:commons-httpclient:3.1 (*)
+|    |    +--- joda-time:joda-time:2.2
+|    |    \--- org.apache.santuario:xmlsec:1.5.7 (*)
+|    +--- commons-codec:commons-codec:1.7 -> 1.9
+|    +--- commons-collections:commons-collections:3.2.1
+|    +--- commons-lang:commons-lang:2.6
+|    +--- org.apache.velocity:velocity:1.7
+|    |    +--- commons-collections:commons-collections:3.2.1
+|    |    \--- commons-lang:commons-lang:2.4 -> 2.6
+|    +--- org.owasp.esapi:esapi:2.0.1
+|    +--- joda-time:joda-time:2.2
+|    \--- org.apache.santuario:xmlsec:1.5.7 (*)
++--- org.springframework.security.oauth:spring-security-oauth2:2.0.10.RELEASE (*)
++--- com.google.guava:guava:19.0
++--- org.aspectj:aspectjrt:1.6.9
++--- org.thymeleaf:thymeleaf-spring4:2.1.2.RELEASE
+|    +--- org.thymeleaf:thymeleaf:2.1.2.RELEASE
+|    |    +--- ognl:ognl:3.0.6
+|    |    +--- org.javassist:javassist:3.16.1-GA
+|    |    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.16
+|    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.16
++--- nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:1.2.3
+|    \--- org.thymeleaf:thymeleaf:2.1.2.RELEASE (*)
++--- org.thymeleaf.extras:thymeleaf-extras-springsecurity3:2.1.1.RELEASE
+|    +--- org.thymeleaf:thymeleaf:2.1.2.RELEASE (*)
+|    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.16
++--- com.unboundid.product.scim:scim-sdk:1.6.0
+|    \--- com.unboundid.components:json:1.0.0
++--- org.hibernate:hibernate-validator:4.3.1.Final
+|    +--- javax.validation:validation-api:1.0.0.GA
+|    \--- org.jboss.logging:jboss-logging:3.1.0.CR2
++--- org.flywaydb:flyway-core:4.0
++--- org.hsqldb:hsqldb:2.3.1
++--- org.springframework.cloud:spring-cloud-spring-service-connector:1.2.1.RELEASE
+|    +--- org.springframework.cloud:spring-cloud-core:1.2.1.RELEASE
+|    \--- org.springframework:spring-context:3.1.4.RELEASE -> 4.3.1.RELEASE (*)
++--- org.springframework.cloud:spring-cloud-cloudfoundry-connector:1.2.1.RELEASE
+|    \--- org.springframework.cloud:spring-cloud-core:1.2.1.RELEASE
++--- org.yaml:snakeyaml:1.12
++--- org.springframework.security:spring-security-ldap:4.1.2.RELEASE
+|    +--- org.springframework.ldap:spring-ldap-core:2.0.2.RELEASE -> 2.1.0.RELEASE
+|    |    +--- org.slf4j:slf4j-api:1.7.12 -> 1.7.16
+|    |    +--- org.springframework:spring-beans:4.2.5.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.2.5.RELEASE -> 4.3.1.RELEASE (*)
+|    |    \--- org.springframework:spring-tx:4.2.5.RELEASE -> 4.3.1.RELEASE (*)
+|    +--- org.springframework.security:spring-security-core:4.1.2.RELEASE (*)
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    \--- org.springframework:spring-tx:4.3.1.RELEASE (*)
++--- org.springframework.ldap:spring-ldap-core:2.1.0.RELEASE (*)
++--- org.springframework.ldap:spring-ldap-core-tiger:2.1.0.RELEASE
+|    +--- org.springframework.ldap:spring-ldap-core:2.1.0.RELEASE (*)
+|    \--- org.springframework:spring-tx:4.2.5.RELEASE -> 4.3.1.RELEASE (*)
++--- org.apache.directory.api:api-ldap-model:1.0.0-M22
+|    +--- org.apache.directory.api:api-util:1.0.0-M22
+|    |    \--- org.apache.directory.api:api-i18n:1.0.0-M22
+|    +--- org.apache.directory.api:api-asn1-api:1.0.0-M22
+|    |    \--- org.apache.directory.api:api-i18n:1.0.0-M22
+|    +--- org.apache.directory.api:api-asn1-ber:1.0.0-M22
+|    |    +--- org.apache.directory.api:api-i18n:1.0.0-M22
+|    |    +--- org.apache.directory.api:api-asn1-api:1.0.0-M22 (*)
+|    |    \--- org.apache.directory.api:api-util:1.0.0-M22 (*)
+|    +--- org.apache.directory.api:api-i18n:1.0.0-M22
+|    +--- org.apache.mina:mina-core:2.0.7
+|    +--- antlr:antlr:2.7.7
+|    +--- commons-lang:commons-lang:2.6
+|    \--- commons-collections:commons-collections:3.2.1
++--- org.passay:passay:1.0
+|    \--- org.cryptacular:cryptacular:1.0
+|         \--- org.bouncycastle:bcprov-jdk15on:1.50
+\--- javax.servlet:javax.servlet-api:3.1.0
+
+testCompile - Dependencies for source set 'test'.
++--- project :cloudfoundry-identity-model
+|    +--- javax.validation:validation-api:1.0.0.GA
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.8.3
+|    |    +--- com.fasterxml.jackson.core:jackson-annotations:2.8.0
+|    |    \--- com.fasterxml.jackson.core:jackson-core:2.8.3
+|    +--- org.springframework:spring-web:4.3.1.RELEASE
+|    |    +--- org.springframework:spring-aop:4.3.1.RELEASE
+|    |    |    +--- org.springframework:spring-beans:4.3.1.RELEASE
+|    |    |    |    \--- org.springframework:spring-core:4.3.1.RELEASE
+|    |    |    |         \--- commons-logging:commons-logging:1.2
+|    |    |    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.3.1.RELEASE
+|    |    |    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    |    \--- org.springframework:spring-expression:4.3.1.RELEASE
+|    |    |         \--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-webmvc:4.3.1.RELEASE
+|    |    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-expression:4.3.1.RELEASE (*)
+|    |    \--- org.springframework:spring-web:4.3.1.RELEASE (*)
+|    +--- org.springframework.security:spring-security-config:4.1.2.RELEASE
+|    |    +--- aopalliance:aopalliance:1.0
+|    |    +--- org.springframework.security:spring-security-core:4.1.2.RELEASE
+|    |    |    +--- aopalliance:aopalliance:1.0
+|    |    |    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    |    \--- org.springframework:spring-expression:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    |    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    +--- org.springframework.security.oauth:spring-security-oauth:2.0.10.RELEASE
+|    |    +--- org.springframework:spring-beans:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-web:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-aop:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-core:3.2.8.RELEASE -> 4.1.2.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-web:3.2.8.RELEASE -> 4.1.2.RELEASE
+|    |    |    +--- aopalliance:aopalliance:1.0
+|    |    |    +--- org.springframework.security:spring-security-core:4.1.2.RELEASE (*)
+|    |    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-expression:4.3.1.RELEASE (*)
+|    |    |    \--- org.springframework:spring-web:4.3.1.RELEASE (*)
+|    |    +--- commons-codec:commons-codec:1.9
+|    |    \--- org.apache.httpcomponents:httpclient:4.3.3
+|    |         +--- org.apache.httpcomponents:httpcore:4.3.2
+|    |         +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|    |         \--- commons-codec:commons-codec:1.6 -> 1.9
+|    +--- org.springframework.security.oauth:spring-security-oauth2:2.0.10.RELEASE
+|    |    +--- org.springframework:spring-beans:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-webmvc:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-core:3.2.8.RELEASE -> 4.1.2.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-config:3.2.8.RELEASE -> 4.1.2.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-web:3.2.8.RELEASE -> 4.1.2.RELEASE (*)
+|    |    \--- commons-codec:commons-codec:1.9
+|    +--- org.slf4j:slf4j-log4j12:1.7.7
+|    |    +--- org.slf4j:slf4j-api:1.7.7 -> 1.7.16
+|    |    \--- log4j:log4j:1.2.17
+|    \--- org.slf4j:slf4j-api:1.7.7 -> 1.7.16
++--- javax.mail:mail:1.4.7
+|    \--- javax.activation:activation:1.1
++--- commons-logging:commons-logging:1.2
++--- com.jayway.jsonpath:json-path:2.2.0
+|    +--- net.minidev:json-smart:2.2.1
+|    |    \--- net.minidev:accessors-smart:1.1
+|    |         \--- org.ow2.asm:asm:5.0.3
+|    \--- org.slf4j:slf4j-api:1.7.16
++--- org.springframework:spring-beans:4.3.1.RELEASE (*)
++--- org.springframework:spring-context:4.3.1.RELEASE (*)
++--- org.springframework:spring-tx:4.3.1.RELEASE
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
++--- org.springframework:spring-jdbc:4.3.1.RELEASE
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    \--- org.springframework:spring-tx:4.3.1.RELEASE (*)
++--- org.springframework:spring-web:4.3.1.RELEASE (*)
++--- org.springframework:spring-context-support:4.3.1.RELEASE
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
++--- org.springframework.security:spring-security-core:4.1.2.RELEASE (*)
++--- org.springframework.security:spring-security-jwt:1.0.4.RELEASE
+|    \--- org.bouncycastle:bcpkix-jdk15on:1.47
+|         \--- org.bouncycastle:bcprov-jdk15on:1.47 -> 1.50
++--- org.springframework.security:spring-security-openid:4.1.2.RELEASE
+|    +--- com.google.inject:guice:2.0
+|    |    \--- aopalliance:aopalliance:1.0
+|    +--- org.openid4java:openid4java-nodeps:0.9.6
+|    |    +--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    \--- net.jcip:jcip-annotations:1.0
+|    +--- org.springframework.security:spring-security-core:4.1.2.RELEASE (*)
+|    +--- org.springframework.security:spring-security-web:4.1.2.RELEASE (*)
+|    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-web:4.3.1.RELEASE (*)
+|    +--- net.sourceforge.nekohtml:nekohtml:1.9.20
+|    |    \--- xerces:xercesImpl:2.10.0
+|    |         \--- xml-apis:xml-apis:1.4.01
+|    \--- org.apache.httpcomponents:httpclient:4.2.3 -> 4.3.3 (*)
++--- org.springframework.security.extensions:spring-security-saml2-core:1.0.2.RELEASE
+|    +--- org.slf4j:slf4j-api:1.6.3 -> 1.7.16
+|    +--- org.springframework.security:spring-security-config:3.1.2.RELEASE -> 4.1.2.RELEASE (*)
+|    +--- org.springframework.security:spring-security-core:3.1.2.RELEASE -> 4.1.2.RELEASE (*)
+|    +--- org.springframework.security:spring-security-web:3.1.2.RELEASE -> 4.1.2.RELEASE (*)
+|    \--- xml-apis:xml-apis:1.4.01
++--- org.opensaml:opensaml:2.6.4
+|    +--- org.opensaml:openws:1.5.4
+|    |    +--- org.opensaml:xmltooling:1.4.4
+|    |    |    +--- commons-codec:commons-codec:1.7 -> 1.9
+|    |    |    +--- joda-time:joda-time:2.2
+|    |    |    +--- ca.juliusdavies:not-yet-commons-ssl:0.3.9
+|    |    |    |    \--- commons-httpclient:commons-httpclient:3.0 -> 3.1
+|    |    |    |         \--- commons-codec:commons-codec:1.2 -> 1.9
+|    |    |    \--- org.apache.santuario:xmlsec:1.5.7
+|    |    |         \--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    +--- commons-codec:commons-codec:1.7 -> 1.9
+|    |    +--- commons-httpclient:commons-httpclient:3.1 (*)
+|    |    +--- joda-time:joda-time:2.2
+|    |    \--- org.apache.santuario:xmlsec:1.5.7 (*)
+|    +--- commons-codec:commons-codec:1.7 -> 1.9
+|    +--- commons-collections:commons-collections:3.2.1
+|    +--- commons-lang:commons-lang:2.6
+|    +--- org.apache.velocity:velocity:1.7
+|    |    +--- commons-collections:commons-collections:3.2.1
+|    |    \--- commons-lang:commons-lang:2.4 -> 2.6
+|    +--- org.owasp.esapi:esapi:2.0.1
+|    +--- joda-time:joda-time:2.2
+|    \--- org.apache.santuario:xmlsec:1.5.7 (*)
++--- org.springframework.security.oauth:spring-security-oauth2:2.0.10.RELEASE (*)
++--- com.google.guava:guava:19.0
++--- org.aspectj:aspectjrt:1.6.9
++--- org.thymeleaf:thymeleaf-spring4:2.1.2.RELEASE
+|    +--- org.thymeleaf:thymeleaf:2.1.2.RELEASE
+|    |    +--- ognl:ognl:3.0.6
+|    |    +--- org.javassist:javassist:3.16.1-GA
+|    |    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.16
+|    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.16
++--- nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:1.2.3
+|    \--- org.thymeleaf:thymeleaf:2.1.2.RELEASE (*)
++--- org.thymeleaf.extras:thymeleaf-extras-springsecurity3:2.1.1.RELEASE
+|    +--- org.thymeleaf:thymeleaf:2.1.2.RELEASE (*)
+|    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.16
++--- com.unboundid.product.scim:scim-sdk:1.6.0
+|    \--- com.unboundid.components:json:1.0.0
++--- org.hibernate:hibernate-validator:4.3.1.Final
+|    +--- javax.validation:validation-api:1.0.0.GA
+|    \--- org.jboss.logging:jboss-logging:3.1.0.CR2
++--- org.flywaydb:flyway-core:4.0
++--- org.hsqldb:hsqldb:2.3.1
++--- org.springframework.cloud:spring-cloud-spring-service-connector:1.2.1.RELEASE
+|    +--- org.springframework.cloud:spring-cloud-core:1.2.1.RELEASE
+|    \--- org.springframework:spring-context:3.1.4.RELEASE -> 4.3.1.RELEASE (*)
++--- org.springframework.cloud:spring-cloud-cloudfoundry-connector:1.2.1.RELEASE
+|    \--- org.springframework.cloud:spring-cloud-core:1.2.1.RELEASE
++--- org.yaml:snakeyaml:1.12
++--- org.springframework.security:spring-security-ldap:4.1.2.RELEASE
+|    +--- org.springframework.ldap:spring-ldap-core:2.0.2.RELEASE -> 2.1.0.RELEASE
+|    |    +--- org.slf4j:slf4j-api:1.7.12 -> 1.7.16
+|    |    +--- org.springframework:spring-beans:4.2.5.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.2.5.RELEASE -> 4.3.1.RELEASE (*)
+|    |    \--- org.springframework:spring-tx:4.2.5.RELEASE -> 4.3.1.RELEASE (*)
+|    +--- org.springframework.security:spring-security-core:4.1.2.RELEASE (*)
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    \--- org.springframework:spring-tx:4.3.1.RELEASE (*)
++--- org.springframework.ldap:spring-ldap-core:2.1.0.RELEASE (*)
++--- org.springframework.ldap:spring-ldap-core-tiger:2.1.0.RELEASE
+|    +--- org.springframework.ldap:spring-ldap-core:2.1.0.RELEASE (*)
+|    \--- org.springframework:spring-tx:4.2.5.RELEASE -> 4.3.1.RELEASE (*)
++--- org.apache.directory.api:api-ldap-model:1.0.0-M22
+|    +--- org.apache.directory.api:api-util:1.0.0-M22
+|    |    \--- org.apache.directory.api:api-i18n:1.0.0-M22
+|    +--- org.apache.directory.api:api-asn1-api:1.0.0-M22
+|    |    \--- org.apache.directory.api:api-i18n:1.0.0-M22
+|    +--- org.apache.directory.api:api-asn1-ber:1.0.0-M22
+|    |    +--- org.apache.directory.api:api-i18n:1.0.0-M22
+|    |    +--- org.apache.directory.api:api-asn1-api:1.0.0-M22 (*)
+|    |    \--- org.apache.directory.api:api-util:1.0.0-M22 (*)
+|    +--- org.apache.directory.api:api-i18n:1.0.0-M22
+|    +--- org.apache.mina:mina-core:2.0.7
+|    +--- antlr:antlr:2.7.7
+|    +--- commons-lang:commons-lang:2.6
+|    \--- commons-collections:commons-collections:3.2.1
++--- org.passay:passay:1.0
+|    \--- org.cryptacular:cryptacular:1.0
+|         \--- org.bouncycastle:bcprov-jdk15on:1.50
++--- javax.servlet:javax.servlet-api:3.1.0
++--- org.springframework:spring-test:4.3.1.RELEASE
+|    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
++--- junit:junit:4.12
++--- org.hamcrest:hamcrest-all:1.3
++--- org.mockito:mockito-all:1.8.5
++--- postgresql:postgresql:9.1-901.jdbc3
++--- org.apache.tomcat:tomcat-jdbc:7.0.70
+|    \--- org.apache.tomcat:tomcat-juli:7.0.70
+\--- com.jayway.jsonpath:json-path-assert:2.2.0
+     +--- com.jayway.jsonpath:json-path:2.2.0 (*)
+     +--- org.hamcrest:hamcrest-core:1.3
+     +--- org.hamcrest:hamcrest-library:1.3
+     |    \--- org.hamcrest:hamcrest-core:1.3
+     \--- org.slf4j:slf4j-api:1.7.16
+
+testCompileClasspath - Compile classpath for source set 'test'.
++--- project :cloudfoundry-identity-model
+|    +--- javax.validation:validation-api:1.0.0.GA
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.8.3
+|    |    +--- com.fasterxml.jackson.core:jackson-annotations:2.8.0
+|    |    \--- com.fasterxml.jackson.core:jackson-core:2.8.3
+|    +--- org.springframework:spring-web:4.3.1.RELEASE
+|    |    +--- org.springframework:spring-aop:4.3.1.RELEASE
+|    |    |    +--- org.springframework:spring-beans:4.3.1.RELEASE
+|    |    |    |    \--- org.springframework:spring-core:4.3.1.RELEASE
+|    |    |    |         \--- commons-logging:commons-logging:1.2
+|    |    |    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.3.1.RELEASE
+|    |    |    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    |    \--- org.springframework:spring-expression:4.3.1.RELEASE
+|    |    |         \--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-webmvc:4.3.1.RELEASE
+|    |    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-expression:4.3.1.RELEASE (*)
+|    |    \--- org.springframework:spring-web:4.3.1.RELEASE (*)
+|    +--- org.springframework.security:spring-security-config:4.1.2.RELEASE
+|    |    +--- aopalliance:aopalliance:1.0
+|    |    +--- org.springframework.security:spring-security-core:4.1.2.RELEASE
+|    |    |    +--- aopalliance:aopalliance:1.0
+|    |    |    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    |    \--- org.springframework:spring-expression:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    |    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    +--- org.springframework.security.oauth:spring-security-oauth:2.0.10.RELEASE
+|    |    +--- org.springframework:spring-beans:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-web:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-aop:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-core:3.2.8.RELEASE -> 4.1.2.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-web:3.2.8.RELEASE -> 4.1.2.RELEASE
+|    |    |    +--- aopalliance:aopalliance:1.0
+|    |    |    +--- org.springframework.security:spring-security-core:4.1.2.RELEASE (*)
+|    |    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-expression:4.3.1.RELEASE (*)
+|    |    |    \--- org.springframework:spring-web:4.3.1.RELEASE (*)
+|    |    +--- commons-codec:commons-codec:1.9
+|    |    \--- org.apache.httpcomponents:httpclient:4.3.3
+|    |         +--- org.apache.httpcomponents:httpcore:4.3.2
+|    |         +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|    |         \--- commons-codec:commons-codec:1.6 -> 1.9
+|    +--- org.springframework.security.oauth:spring-security-oauth2:2.0.10.RELEASE
+|    |    +--- org.springframework:spring-beans:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-webmvc:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-core:3.2.8.RELEASE -> 4.1.2.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-config:3.2.8.RELEASE -> 4.1.2.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-web:3.2.8.RELEASE -> 4.1.2.RELEASE (*)
+|    |    \--- commons-codec:commons-codec:1.9
+|    +--- org.slf4j:slf4j-log4j12:1.7.7
+|    |    +--- org.slf4j:slf4j-api:1.7.7 -> 1.7.16
+|    |    \--- log4j:log4j:1.2.17
+|    \--- org.slf4j:slf4j-api:1.7.7 -> 1.7.16
++--- javax.mail:mail:1.4.7
+|    \--- javax.activation:activation:1.1
++--- commons-logging:commons-logging:1.2
++--- com.jayway.jsonpath:json-path:2.2.0
+|    +--- net.minidev:json-smart:2.2.1
+|    |    \--- net.minidev:accessors-smart:1.1
+|    |         \--- org.ow2.asm:asm:5.0.3
+|    \--- org.slf4j:slf4j-api:1.7.16
++--- org.springframework:spring-beans:4.3.1.RELEASE (*)
++--- org.springframework:spring-context:4.3.1.RELEASE (*)
++--- org.springframework:spring-tx:4.3.1.RELEASE
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
++--- org.springframework:spring-jdbc:4.3.1.RELEASE
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    \--- org.springframework:spring-tx:4.3.1.RELEASE (*)
++--- org.springframework:spring-web:4.3.1.RELEASE (*)
++--- org.springframework:spring-context-support:4.3.1.RELEASE
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
++--- org.springframework.security:spring-security-core:4.1.2.RELEASE (*)
++--- org.springframework.security:spring-security-jwt:1.0.4.RELEASE
+|    \--- org.bouncycastle:bcpkix-jdk15on:1.47
+|         \--- org.bouncycastle:bcprov-jdk15on:1.47 -> 1.50
++--- org.springframework.security:spring-security-openid:4.1.2.RELEASE
+|    +--- com.google.inject:guice:2.0
+|    |    \--- aopalliance:aopalliance:1.0
+|    +--- org.openid4java:openid4java-nodeps:0.9.6
+|    |    +--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    \--- net.jcip:jcip-annotations:1.0
+|    +--- org.springframework.security:spring-security-core:4.1.2.RELEASE (*)
+|    +--- org.springframework.security:spring-security-web:4.1.2.RELEASE (*)
+|    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-web:4.3.1.RELEASE (*)
+|    +--- net.sourceforge.nekohtml:nekohtml:1.9.20
+|    |    \--- xerces:xercesImpl:2.10.0
+|    |         \--- xml-apis:xml-apis:1.4.01
+|    \--- org.apache.httpcomponents:httpclient:4.2.3 -> 4.3.3 (*)
++--- org.springframework.security.extensions:spring-security-saml2-core:1.0.2.RELEASE
+|    +--- org.slf4j:slf4j-api:1.6.3 -> 1.7.16
+|    +--- org.springframework.security:spring-security-config:3.1.2.RELEASE -> 4.1.2.RELEASE (*)
+|    +--- org.springframework.security:spring-security-core:3.1.2.RELEASE -> 4.1.2.RELEASE (*)
+|    +--- org.springframework.security:spring-security-web:3.1.2.RELEASE -> 4.1.2.RELEASE (*)
+|    \--- xml-apis:xml-apis:1.4.01
++--- org.opensaml:opensaml:2.6.4
+|    +--- org.opensaml:openws:1.5.4
+|    |    +--- org.opensaml:xmltooling:1.4.4
+|    |    |    +--- commons-codec:commons-codec:1.7 -> 1.9
+|    |    |    +--- joda-time:joda-time:2.2
+|    |    |    +--- ca.juliusdavies:not-yet-commons-ssl:0.3.9
+|    |    |    |    \--- commons-httpclient:commons-httpclient:3.0 -> 3.1
+|    |    |    |         \--- commons-codec:commons-codec:1.2 -> 1.9
+|    |    |    \--- org.apache.santuario:xmlsec:1.5.7
+|    |    |         \--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    +--- commons-codec:commons-codec:1.7 -> 1.9
+|    |    +--- commons-httpclient:commons-httpclient:3.1 (*)
+|    |    +--- joda-time:joda-time:2.2
+|    |    \--- org.apache.santuario:xmlsec:1.5.7 (*)
+|    +--- commons-codec:commons-codec:1.7 -> 1.9
+|    +--- commons-collections:commons-collections:3.2.1
+|    +--- commons-lang:commons-lang:2.6
+|    +--- org.apache.velocity:velocity:1.7
+|    |    +--- commons-collections:commons-collections:3.2.1
+|    |    \--- commons-lang:commons-lang:2.4 -> 2.6
+|    +--- org.owasp.esapi:esapi:2.0.1
+|    +--- joda-time:joda-time:2.2
+|    \--- org.apache.santuario:xmlsec:1.5.7 (*)
++--- org.springframework.security.oauth:spring-security-oauth2:2.0.10.RELEASE (*)
++--- com.google.guava:guava:19.0
++--- org.aspectj:aspectjrt:1.6.9
++--- org.thymeleaf:thymeleaf-spring4:2.1.2.RELEASE
+|    +--- org.thymeleaf:thymeleaf:2.1.2.RELEASE
+|    |    +--- ognl:ognl:3.0.6
+|    |    +--- org.javassist:javassist:3.16.1-GA
+|    |    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.16
+|    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.16
++--- nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:1.2.3
+|    \--- org.thymeleaf:thymeleaf:2.1.2.RELEASE (*)
++--- org.thymeleaf.extras:thymeleaf-extras-springsecurity3:2.1.1.RELEASE
+|    +--- org.thymeleaf:thymeleaf:2.1.2.RELEASE (*)
+|    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.16
++--- com.unboundid.product.scim:scim-sdk:1.6.0
+|    \--- com.unboundid.components:json:1.0.0
++--- org.hibernate:hibernate-validator:4.3.1.Final
+|    +--- javax.validation:validation-api:1.0.0.GA
+|    \--- org.jboss.logging:jboss-logging:3.1.0.CR2
++--- org.flywaydb:flyway-core:4.0
++--- org.hsqldb:hsqldb:2.3.1
++--- org.springframework.cloud:spring-cloud-spring-service-connector:1.2.1.RELEASE
+|    +--- org.springframework.cloud:spring-cloud-core:1.2.1.RELEASE
+|    \--- org.springframework:spring-context:3.1.4.RELEASE -> 4.3.1.RELEASE (*)
++--- org.springframework.cloud:spring-cloud-cloudfoundry-connector:1.2.1.RELEASE
+|    \--- org.springframework.cloud:spring-cloud-core:1.2.1.RELEASE
++--- org.yaml:snakeyaml:1.12
++--- org.springframework.security:spring-security-ldap:4.1.2.RELEASE
+|    +--- org.springframework.ldap:spring-ldap-core:2.0.2.RELEASE -> 2.1.0.RELEASE
+|    |    +--- org.slf4j:slf4j-api:1.7.12 -> 1.7.16
+|    |    +--- org.springframework:spring-beans:4.2.5.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.2.5.RELEASE -> 4.3.1.RELEASE (*)
+|    |    \--- org.springframework:spring-tx:4.2.5.RELEASE -> 4.3.1.RELEASE (*)
+|    +--- org.springframework.security:spring-security-core:4.1.2.RELEASE (*)
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    \--- org.springframework:spring-tx:4.3.1.RELEASE (*)
++--- org.springframework.ldap:spring-ldap-core:2.1.0.RELEASE (*)
++--- org.springframework.ldap:spring-ldap-core-tiger:2.1.0.RELEASE
+|    +--- org.springframework.ldap:spring-ldap-core:2.1.0.RELEASE (*)
+|    \--- org.springframework:spring-tx:4.2.5.RELEASE -> 4.3.1.RELEASE (*)
++--- org.apache.directory.api:api-ldap-model:1.0.0-M22
+|    +--- org.apache.directory.api:api-util:1.0.0-M22
+|    |    \--- org.apache.directory.api:api-i18n:1.0.0-M22
+|    +--- org.apache.directory.api:api-asn1-api:1.0.0-M22
+|    |    \--- org.apache.directory.api:api-i18n:1.0.0-M22
+|    +--- org.apache.directory.api:api-asn1-ber:1.0.0-M22
+|    |    +--- org.apache.directory.api:api-i18n:1.0.0-M22
+|    |    +--- org.apache.directory.api:api-asn1-api:1.0.0-M22 (*)
+|    |    \--- org.apache.directory.api:api-util:1.0.0-M22 (*)
+|    +--- org.apache.directory.api:api-i18n:1.0.0-M22
+|    +--- org.apache.mina:mina-core:2.0.7
+|    +--- antlr:antlr:2.7.7
+|    +--- commons-lang:commons-lang:2.6
+|    \--- commons-collections:commons-collections:3.2.1
++--- org.passay:passay:1.0
+|    \--- org.cryptacular:cryptacular:1.0
+|         \--- org.bouncycastle:bcprov-jdk15on:1.50
++--- javax.servlet:javax.servlet-api:3.1.0
++--- org.springframework:spring-test:4.3.1.RELEASE
+|    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
++--- junit:junit:4.12
++--- org.hamcrest:hamcrest-all:1.3
++--- org.mockito:mockito-all:1.8.5
++--- postgresql:postgresql:9.1-901.jdbc3
++--- org.apache.tomcat:tomcat-jdbc:7.0.70
+|    \--- org.apache.tomcat:tomcat-juli:7.0.70
+\--- com.jayway.jsonpath:json-path-assert:2.2.0
+     +--- com.jayway.jsonpath:json-path:2.2.0 (*)
+     +--- org.hamcrest:hamcrest-core:1.3
+     +--- org.hamcrest:hamcrest-library:1.3
+     |    \--- org.hamcrest:hamcrest-core:1.3
+     \--- org.slf4j:slf4j-api:1.7.16
+
+testCompileOnly - Compile dependencies for source set 'test'.
++--- project :cloudfoundry-identity-model
+|    +--- javax.validation:validation-api:1.0.0.GA
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.8.3
+|    |    +--- com.fasterxml.jackson.core:jackson-annotations:2.8.0
+|    |    \--- com.fasterxml.jackson.core:jackson-core:2.8.3
+|    +--- org.springframework:spring-web:4.3.1.RELEASE
+|    |    +--- org.springframework:spring-aop:4.3.1.RELEASE
+|    |    |    +--- org.springframework:spring-beans:4.3.1.RELEASE
+|    |    |    |    \--- org.springframework:spring-core:4.3.1.RELEASE
+|    |    |    |         \--- commons-logging:commons-logging:1.2
+|    |    |    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.3.1.RELEASE
+|    |    |    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    |    \--- org.springframework:spring-expression:4.3.1.RELEASE
+|    |    |         \--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-webmvc:4.3.1.RELEASE
+|    |    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-expression:4.3.1.RELEASE (*)
+|    |    \--- org.springframework:spring-web:4.3.1.RELEASE (*)
+|    +--- org.springframework.security:spring-security-config:4.1.2.RELEASE
+|    |    +--- aopalliance:aopalliance:1.0
+|    |    +--- org.springframework.security:spring-security-core:4.1.2.RELEASE
+|    |    |    +--- aopalliance:aopalliance:1.0
+|    |    |    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    |    \--- org.springframework:spring-expression:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    |    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    +--- org.springframework.security.oauth:spring-security-oauth:2.0.10.RELEASE
+|    |    +--- org.springframework:spring-beans:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-web:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-aop:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-core:3.2.8.RELEASE -> 4.1.2.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-web:3.2.8.RELEASE -> 4.1.2.RELEASE
+|    |    |    +--- aopalliance:aopalliance:1.0
+|    |    |    +--- org.springframework.security:spring-security-core:4.1.2.RELEASE (*)
+|    |    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-expression:4.3.1.RELEASE (*)
+|    |    |    \--- org.springframework:spring-web:4.3.1.RELEASE (*)
+|    |    +--- commons-codec:commons-codec:1.9
+|    |    \--- org.apache.httpcomponents:httpclient:4.3.3
+|    |         +--- org.apache.httpcomponents:httpcore:4.3.2
+|    |         +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|    |         \--- commons-codec:commons-codec:1.6 -> 1.9
+|    +--- org.springframework.security.oauth:spring-security-oauth2:2.0.10.RELEASE
+|    |    +--- org.springframework:spring-beans:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-webmvc:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-core:3.2.8.RELEASE -> 4.1.2.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-config:3.2.8.RELEASE -> 4.1.2.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-web:3.2.8.RELEASE -> 4.1.2.RELEASE (*)
+|    |    \--- commons-codec:commons-codec:1.9
+|    +--- org.slf4j:slf4j-log4j12:1.7.7
+|    |    +--- org.slf4j:slf4j-api:1.7.7 -> 1.7.16
+|    |    \--- log4j:log4j:1.2.17
+|    \--- org.slf4j:slf4j-api:1.7.7 -> 1.7.16
++--- javax.mail:mail:1.4.7
+|    \--- javax.activation:activation:1.1
++--- commons-logging:commons-logging:1.2
++--- com.jayway.jsonpath:json-path:2.2.0
+|    +--- net.minidev:json-smart:2.2.1
+|    |    \--- net.minidev:accessors-smart:1.1
+|    |         \--- org.ow2.asm:asm:5.0.3
+|    \--- org.slf4j:slf4j-api:1.7.16
++--- org.springframework:spring-beans:4.3.1.RELEASE (*)
++--- org.springframework:spring-context:4.3.1.RELEASE (*)
++--- org.springframework:spring-tx:4.3.1.RELEASE
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
++--- org.springframework:spring-jdbc:4.3.1.RELEASE
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    \--- org.springframework:spring-tx:4.3.1.RELEASE (*)
++--- org.springframework:spring-web:4.3.1.RELEASE (*)
++--- org.springframework:spring-context-support:4.3.1.RELEASE
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
++--- org.springframework.security:spring-security-core:4.1.2.RELEASE (*)
++--- org.springframework.security:spring-security-jwt:1.0.4.RELEASE
+|    \--- org.bouncycastle:bcpkix-jdk15on:1.47
+|         \--- org.bouncycastle:bcprov-jdk15on:1.47 -> 1.50
++--- org.springframework.security:spring-security-openid:4.1.2.RELEASE
+|    +--- com.google.inject:guice:2.0
+|    |    \--- aopalliance:aopalliance:1.0
+|    +--- org.openid4java:openid4java-nodeps:0.9.6
+|    |    +--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    \--- net.jcip:jcip-annotations:1.0
+|    +--- org.springframework.security:spring-security-core:4.1.2.RELEASE (*)
+|    +--- org.springframework.security:spring-security-web:4.1.2.RELEASE (*)
+|    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-web:4.3.1.RELEASE (*)
+|    +--- net.sourceforge.nekohtml:nekohtml:1.9.20
+|    |    \--- xerces:xercesImpl:2.10.0
+|    |         \--- xml-apis:xml-apis:1.4.01
+|    \--- org.apache.httpcomponents:httpclient:4.2.3 -> 4.3.3 (*)
++--- org.springframework.security.extensions:spring-security-saml2-core:1.0.2.RELEASE
+|    +--- org.slf4j:slf4j-api:1.6.3 -> 1.7.16
+|    +--- org.springframework.security:spring-security-config:3.1.2.RELEASE -> 4.1.2.RELEASE (*)
+|    +--- org.springframework.security:spring-security-core:3.1.2.RELEASE -> 4.1.2.RELEASE (*)
+|    +--- org.springframework.security:spring-security-web:3.1.2.RELEASE -> 4.1.2.RELEASE (*)
+|    \--- xml-apis:xml-apis:1.4.01
++--- org.opensaml:opensaml:2.6.4
+|    +--- org.opensaml:openws:1.5.4
+|    |    +--- org.opensaml:xmltooling:1.4.4
+|    |    |    +--- commons-codec:commons-codec:1.7 -> 1.9
+|    |    |    +--- joda-time:joda-time:2.2
+|    |    |    +--- ca.juliusdavies:not-yet-commons-ssl:0.3.9
+|    |    |    |    \--- commons-httpclient:commons-httpclient:3.0 -> 3.1
+|    |    |    |         \--- commons-codec:commons-codec:1.2 -> 1.9
+|    |    |    \--- org.apache.santuario:xmlsec:1.5.7
+|    |    |         \--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    +--- commons-codec:commons-codec:1.7 -> 1.9
+|    |    +--- commons-httpclient:commons-httpclient:3.1 (*)
+|    |    +--- joda-time:joda-time:2.2
+|    |    \--- org.apache.santuario:xmlsec:1.5.7 (*)
+|    +--- commons-codec:commons-codec:1.7 -> 1.9
+|    +--- commons-collections:commons-collections:3.2.1
+|    +--- commons-lang:commons-lang:2.6
+|    +--- org.apache.velocity:velocity:1.7
+|    |    +--- commons-collections:commons-collections:3.2.1
+|    |    \--- commons-lang:commons-lang:2.4 -> 2.6
+|    +--- org.owasp.esapi:esapi:2.0.1
+|    +--- joda-time:joda-time:2.2
+|    \--- org.apache.santuario:xmlsec:1.5.7 (*)
++--- org.springframework.security.oauth:spring-security-oauth2:2.0.10.RELEASE (*)
++--- com.google.guava:guava:19.0
++--- org.aspectj:aspectjrt:1.6.9
++--- org.thymeleaf:thymeleaf-spring4:2.1.2.RELEASE
+|    +--- org.thymeleaf:thymeleaf:2.1.2.RELEASE
+|    |    +--- ognl:ognl:3.0.6
+|    |    +--- org.javassist:javassist:3.16.1-GA
+|    |    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.16
+|    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.16
++--- nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:1.2.3
+|    \--- org.thymeleaf:thymeleaf:2.1.2.RELEASE (*)
++--- org.thymeleaf.extras:thymeleaf-extras-springsecurity3:2.1.1.RELEASE
+|    +--- org.thymeleaf:thymeleaf:2.1.2.RELEASE (*)
+|    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.16
++--- com.unboundid.product.scim:scim-sdk:1.6.0
+|    \--- com.unboundid.components:json:1.0.0
++--- org.hibernate:hibernate-validator:4.3.1.Final
+|    +--- javax.validation:validation-api:1.0.0.GA
+|    \--- org.jboss.logging:jboss-logging:3.1.0.CR2
++--- org.flywaydb:flyway-core:4.0
++--- org.hsqldb:hsqldb:2.3.1
++--- org.springframework.cloud:spring-cloud-spring-service-connector:1.2.1.RELEASE
+|    +--- org.springframework.cloud:spring-cloud-core:1.2.1.RELEASE
+|    \--- org.springframework:spring-context:3.1.4.RELEASE -> 4.3.1.RELEASE (*)
++--- org.springframework.cloud:spring-cloud-cloudfoundry-connector:1.2.1.RELEASE
+|    \--- org.springframework.cloud:spring-cloud-core:1.2.1.RELEASE
++--- org.yaml:snakeyaml:1.12
++--- org.springframework.security:spring-security-ldap:4.1.2.RELEASE
+|    +--- org.springframework.ldap:spring-ldap-core:2.0.2.RELEASE -> 2.1.0.RELEASE
+|    |    +--- org.slf4j:slf4j-api:1.7.12 -> 1.7.16
+|    |    +--- org.springframework:spring-beans:4.2.5.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.2.5.RELEASE -> 4.3.1.RELEASE (*)
+|    |    \--- org.springframework:spring-tx:4.2.5.RELEASE -> 4.3.1.RELEASE (*)
+|    +--- org.springframework.security:spring-security-core:4.1.2.RELEASE (*)
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    \--- org.springframework:spring-tx:4.3.1.RELEASE (*)
++--- org.springframework.ldap:spring-ldap-core:2.1.0.RELEASE (*)
++--- org.springframework.ldap:spring-ldap-core-tiger:2.1.0.RELEASE
+|    +--- org.springframework.ldap:spring-ldap-core:2.1.0.RELEASE (*)
+|    \--- org.springframework:spring-tx:4.2.5.RELEASE -> 4.3.1.RELEASE (*)
++--- org.apache.directory.api:api-ldap-model:1.0.0-M22
+|    +--- org.apache.directory.api:api-util:1.0.0-M22
+|    |    \--- org.apache.directory.api:api-i18n:1.0.0-M22
+|    +--- org.apache.directory.api:api-asn1-api:1.0.0-M22
+|    |    \--- org.apache.directory.api:api-i18n:1.0.0-M22
+|    +--- org.apache.directory.api:api-asn1-ber:1.0.0-M22
+|    |    +--- org.apache.directory.api:api-i18n:1.0.0-M22
+|    |    +--- org.apache.directory.api:api-asn1-api:1.0.0-M22 (*)
+|    |    \--- org.apache.directory.api:api-util:1.0.0-M22 (*)
+|    +--- org.apache.directory.api:api-i18n:1.0.0-M22
+|    +--- org.apache.mina:mina-core:2.0.7
+|    +--- antlr:antlr:2.7.7
+|    +--- commons-lang:commons-lang:2.6
+|    \--- commons-collections:commons-collections:3.2.1
++--- org.passay:passay:1.0
+|    \--- org.cryptacular:cryptacular:1.0
+|         \--- org.bouncycastle:bcprov-jdk15on:1.50
++--- javax.servlet:javax.servlet-api:3.1.0
++--- org.springframework:spring-test:4.3.1.RELEASE
+|    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
++--- junit:junit:4.12
++--- org.hamcrest:hamcrest-all:1.3
++--- org.mockito:mockito-all:1.8.5
++--- postgresql:postgresql:9.1-901.jdbc3
++--- org.apache.tomcat:tomcat-jdbc:7.0.70
+|    \--- org.apache.tomcat:tomcat-juli:7.0.70
+\--- com.jayway.jsonpath:json-path-assert:2.2.0
+     +--- com.jayway.jsonpath:json-path:2.2.0 (*)
+     +--- org.hamcrest:hamcrest-core:1.3
+     +--- org.hamcrest:hamcrest-library:1.3
+     |    \--- org.hamcrest:hamcrest-core:1.3
+     \--- org.slf4j:slf4j-api:1.7.16
+
+testRuntime - Runtime dependencies for source set 'test'.
++--- project :cloudfoundry-identity-model
+|    +--- javax.validation:validation-api:1.0.0.GA
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.8.3
+|    |    +--- com.fasterxml.jackson.core:jackson-annotations:2.8.0
+|    |    \--- com.fasterxml.jackson.core:jackson-core:2.8.3
+|    +--- org.springframework:spring-web:4.3.1.RELEASE
+|    |    +--- org.springframework:spring-aop:4.3.1.RELEASE
+|    |    |    +--- org.springframework:spring-beans:4.3.1.RELEASE
+|    |    |    |    \--- org.springframework:spring-core:4.3.1.RELEASE
+|    |    |    |         \--- commons-logging:commons-logging:1.2
+|    |    |    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.3.1.RELEASE
+|    |    |    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    |    \--- org.springframework:spring-expression:4.3.1.RELEASE
+|    |    |         \--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-webmvc:4.3.1.RELEASE
+|    |    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-expression:4.3.1.RELEASE (*)
+|    |    \--- org.springframework:spring-web:4.3.1.RELEASE (*)
+|    +--- org.springframework.security:spring-security-config:4.1.2.RELEASE
+|    |    +--- aopalliance:aopalliance:1.0
+|    |    +--- org.springframework.security:spring-security-core:4.1.2.RELEASE
+|    |    |    +--- aopalliance:aopalliance:1.0
+|    |    |    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    |    \--- org.springframework:spring-expression:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    |    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    +--- org.springframework.security.oauth:spring-security-oauth:2.0.10.RELEASE
+|    |    +--- org.springframework:spring-beans:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-web:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-aop:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-core:3.2.8.RELEASE -> 4.1.2.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-web:3.2.8.RELEASE -> 4.1.2.RELEASE
+|    |    |    +--- aopalliance:aopalliance:1.0
+|    |    |    +--- org.springframework.security:spring-security-core:4.1.2.RELEASE (*)
+|    |    |    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    |    |    +--- org.springframework:spring-expression:4.3.1.RELEASE (*)
+|    |    |    \--- org.springframework:spring-web:4.3.1.RELEASE (*)
+|    |    +--- commons-codec:commons-codec:1.9
+|    |    \--- org.apache.httpcomponents:httpclient:4.3.3
+|    |         +--- org.apache.httpcomponents:httpcore:4.3.2
+|    |         +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|    |         \--- commons-codec:commons-codec:1.6 -> 1.9
+|    +--- org.springframework.security.oauth:spring-security-oauth2:2.0.10.RELEASE
+|    |    +--- org.springframework:spring-beans:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-webmvc:4.0.9.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-core:3.2.8.RELEASE -> 4.1.2.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-config:3.2.8.RELEASE -> 4.1.2.RELEASE (*)
+|    |    +--- org.springframework.security:spring-security-web:3.2.8.RELEASE -> 4.1.2.RELEASE (*)
+|    |    \--- commons-codec:commons-codec:1.9
+|    +--- org.slf4j:slf4j-log4j12:1.7.7
+|    |    +--- org.slf4j:slf4j-api:1.7.7 -> 1.7.16
+|    |    \--- log4j:log4j:1.2.17
+|    \--- org.slf4j:slf4j-api:1.7.7 -> 1.7.16
++--- javax.mail:mail:1.4.7
+|    \--- javax.activation:activation:1.1
++--- commons-logging:commons-logging:1.2
++--- com.jayway.jsonpath:json-path:2.2.0
+|    +--- net.minidev:json-smart:2.2.1
+|    |    \--- net.minidev:accessors-smart:1.1
+|    |         \--- org.ow2.asm:asm:5.0.3
+|    \--- org.slf4j:slf4j-api:1.7.16
++--- org.springframework:spring-beans:4.3.1.RELEASE (*)
++--- org.springframework:spring-context:4.3.1.RELEASE (*)
++--- org.springframework:spring-tx:4.3.1.RELEASE
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
++--- org.springframework:spring-jdbc:4.3.1.RELEASE
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    \--- org.springframework:spring-tx:4.3.1.RELEASE (*)
++--- org.springframework:spring-web:4.3.1.RELEASE (*)
++--- org.springframework:spring-context-support:4.3.1.RELEASE
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
++--- org.springframework.security:spring-security-core:4.1.2.RELEASE (*)
++--- org.springframework.security:spring-security-jwt:1.0.4.RELEASE
+|    \--- org.bouncycastle:bcpkix-jdk15on:1.47
+|         \--- org.bouncycastle:bcprov-jdk15on:1.47 -> 1.50
++--- org.springframework.security:spring-security-openid:4.1.2.RELEASE
+|    +--- com.google.inject:guice:2.0
+|    |    \--- aopalliance:aopalliance:1.0
+|    +--- org.openid4java:openid4java-nodeps:0.9.6
+|    |    +--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    \--- net.jcip:jcip-annotations:1.0
+|    +--- org.springframework.security:spring-security-core:4.1.2.RELEASE (*)
+|    +--- org.springframework.security:spring-security-web:4.1.2.RELEASE (*)
+|    +--- org.springframework:spring-aop:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-web:4.3.1.RELEASE (*)
+|    +--- net.sourceforge.nekohtml:nekohtml:1.9.20
+|    |    \--- xerces:xercesImpl:2.10.0
+|    |         \--- xml-apis:xml-apis:1.4.01
+|    \--- org.apache.httpcomponents:httpclient:4.2.3 -> 4.3.3 (*)
++--- org.springframework.security.extensions:spring-security-saml2-core:1.0.2.RELEASE
+|    +--- org.slf4j:slf4j-api:1.6.3 -> 1.7.16
+|    +--- org.springframework.security:spring-security-config:3.1.2.RELEASE -> 4.1.2.RELEASE (*)
+|    +--- org.springframework.security:spring-security-core:3.1.2.RELEASE -> 4.1.2.RELEASE (*)
+|    +--- org.springframework.security:spring-security-web:3.1.2.RELEASE -> 4.1.2.RELEASE (*)
+|    \--- xml-apis:xml-apis:1.4.01
++--- org.opensaml:opensaml:2.6.4
+|    +--- org.opensaml:openws:1.5.4
+|    |    +--- org.opensaml:xmltooling:1.4.4
+|    |    |    +--- commons-codec:commons-codec:1.7 -> 1.9
+|    |    |    +--- joda-time:joda-time:2.2
+|    |    |    +--- ca.juliusdavies:not-yet-commons-ssl:0.3.9
+|    |    |    |    \--- commons-httpclient:commons-httpclient:3.0 -> 3.1
+|    |    |    |         \--- commons-codec:commons-codec:1.2 -> 1.9
+|    |    |    \--- org.apache.santuario:xmlsec:1.5.7
+|    |    |         \--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    +--- commons-codec:commons-codec:1.7 -> 1.9
+|    |    +--- commons-httpclient:commons-httpclient:3.1 (*)
+|    |    +--- joda-time:joda-time:2.2
+|    |    \--- org.apache.santuario:xmlsec:1.5.7 (*)
+|    +--- commons-codec:commons-codec:1.7 -> 1.9
+|    +--- commons-collections:commons-collections:3.2.1
+|    +--- commons-lang:commons-lang:2.6
+|    +--- org.apache.velocity:velocity:1.7
+|    |    +--- commons-collections:commons-collections:3.2.1
+|    |    \--- commons-lang:commons-lang:2.4 -> 2.6
+|    +--- org.owasp.esapi:esapi:2.0.1
+|    +--- joda-time:joda-time:2.2
+|    \--- org.apache.santuario:xmlsec:1.5.7 (*)
++--- org.springframework.security.oauth:spring-security-oauth2:2.0.10.RELEASE (*)
++--- com.google.guava:guava:19.0
++--- org.aspectj:aspectjrt:1.6.9
++--- org.thymeleaf:thymeleaf-spring4:2.1.2.RELEASE
+|    +--- org.thymeleaf:thymeleaf:2.1.2.RELEASE
+|    |    +--- ognl:ognl:3.0.6
+|    |    +--- org.javassist:javassist:3.16.1-GA
+|    |    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.16
+|    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.16
++--- nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:1.2.3
+|    \--- org.thymeleaf:thymeleaf:2.1.2.RELEASE (*)
++--- org.thymeleaf.extras:thymeleaf-extras-springsecurity3:2.1.1.RELEASE
+|    +--- org.thymeleaf:thymeleaf:2.1.2.RELEASE (*)
+|    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.16
++--- com.unboundid.product.scim:scim-sdk:1.6.0
+|    \--- com.unboundid.components:json:1.0.0
++--- org.hibernate:hibernate-validator:4.3.1.Final
+|    +--- javax.validation:validation-api:1.0.0.GA
+|    \--- org.jboss.logging:jboss-logging:3.1.0.CR2
++--- org.flywaydb:flyway-core:4.0
++--- org.hsqldb:hsqldb:2.3.1
++--- org.springframework.cloud:spring-cloud-spring-service-connector:1.2.1.RELEASE
+|    +--- org.springframework.cloud:spring-cloud-core:1.2.1.RELEASE
+|    \--- org.springframework:spring-context:3.1.4.RELEASE -> 4.3.1.RELEASE (*)
++--- org.springframework.cloud:spring-cloud-cloudfoundry-connector:1.2.1.RELEASE
+|    \--- org.springframework.cloud:spring-cloud-core:1.2.1.RELEASE
++--- org.yaml:snakeyaml:1.12
++--- org.springframework.security:spring-security-ldap:4.1.2.RELEASE
+|    +--- org.springframework.ldap:spring-ldap-core:2.0.2.RELEASE -> 2.1.0.RELEASE
+|    |    +--- org.slf4j:slf4j-api:1.7.12 -> 1.7.16
+|    |    +--- org.springframework:spring-beans:4.2.5.RELEASE -> 4.3.1.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.2.5.RELEASE -> 4.3.1.RELEASE (*)
+|    |    \--- org.springframework:spring-tx:4.2.5.RELEASE -> 4.3.1.RELEASE (*)
+|    +--- org.springframework.security:spring-security-core:4.1.2.RELEASE (*)
+|    +--- org.springframework:spring-beans:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-context:4.3.1.RELEASE (*)
+|    +--- org.springframework:spring-core:4.3.1.RELEASE (*)
+|    \--- org.springframework:spring-tx:4.3.1.RELEASE (*)
++--- org.springframework.ldap:spring-ldap-core:2.1.0.RELEASE (*)
++--- org.springframework.ldap:spring-ldap-core-tiger:2.1.0.RELEASE
+|    +--- org.springframework.ldap:spring-ldap-core:2.1.0.RELEASE (*)
+|    \--- org.springframework:spring-tx:4.2.5.RELEASE -> 4.3.1.RELEASE (*)
++--- org.apache.directory.api:api-ldap-model:1.0.0-M22
+|    +--- org.apache.directory.api:api-util:1.0.0-M22
+|    |    \--- org.apache.directory.api:api-i18n:1.0.0-M22
+|    +--- org.apache.directory.api:api-asn1-api:1.0.0-M22
+|    |    \--- org.apache.directory.api:api-i18n:1.0.0-M22
+|    +--- org.apache.directory.api:api-asn1-ber:1.0.0-M22
+|    |    +--- org.apache.directory.api:api-i18n:1.0.0-M22
+|    |    +--- org.apache.directory.api:api-asn1-api:1.0.0-M22 (*)
+|    |    \--- org.apache.directory.api:api-util:1.0.0-M22 (*)
+|    +--- org.apache.directory.api:api-i18n:1.0.0-M22
+|    +--- org.apache.mina:mina-core:2.0.7
+|    +--- antlr:antlr:2.7.7
+|    +--- commons-lang:commons-lang:2.6
+|    \--- commons-collections:commons-collections:3.2.1
++--- org.passay:passay:1.0
+|    \--- org.cryptacular:cryptacular:1.0
+|         \--- org.bouncycastle:bcprov-jdk15on:1.50
++--- javax.servlet:javax.servlet-api:3.1.0
++--- org.springframework:spring-test:4.3.1.RELEASE
+|    \--- org.springframework:spring-core:4.3.1.RELEASE (*)
++--- junit:junit:4.12
++--- org.hamcrest:hamcrest-all:1.3
++--- org.mockito:mockito-all:1.8.5
++--- postgresql:postgresql:9.1-901.jdbc3
++--- org.apache.tomcat:tomcat-jdbc:7.0.70
+|    \--- org.apache.tomcat:tomcat-juli:7.0.70
+\--- com.jayway.jsonpath:json-path-assert:2.2.0
+     +--- com.jayway.jsonpath:json-path:2.2.0 (*)
+     +--- org.hamcrest:hamcrest-core:1.3
+     +--- org.hamcrest:hamcrest-library:1.3
+     |    \--- org.hamcrest:hamcrest-core:1.3
+     \--- org.slf4j:slf4j-api:1.7.16
+
+(*) - dependencies omitted (listed previously)
+:cloudfoundry-identity-server:dependencies took 151ms
+
+BUILD SUCCESSFUL
+
+Total time: 1.055 secs
+Task timings:
+Test timings:

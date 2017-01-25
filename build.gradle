@@ -13,6 +13,13 @@ buildscript {
     maven {
       url 'https://plugins.gradle.org/m2/'
     }
+    maven {
+      credentials {
+        username 'svc-dsp-reader'
+        password 'xeY3MegUdr'
+      }
+      url 'https://devcloud.swcoe.ge.com/artifactory/PREDIX-SNAPSHOT/'
+    }
   }
 
   dependencies {
@@ -161,6 +168,14 @@ subprojects {
     maven { url "http://objectstyle.org/maven2/" }
     maven { url "http://repo.springsource.org/ext-release-local" }
     maven { url "http://repo.maven.apache.org/maven2" }
+
+    maven {
+      credentials {
+        username 'svc-dsp-reader'
+        password 'xeY3MegUdr'
+      }
+      url 'https://devcloud.swcoe.ge.com/artifactory/PREDIX-SNAPSHOT/'
+    }
   }
 
   install {

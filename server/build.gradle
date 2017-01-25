@@ -2,6 +2,7 @@ description = 'CloudFoundry Identity Server JAR'
 
 Project identityModel = parent.subprojects.find { it.name.equals('cloudfoundry-identity-model') }
 
+
 dependencies {
 
   compile(identityModel)
@@ -64,6 +65,11 @@ dependencies {
   }
 
   compile group: 'org.passay', name: 'passay', version: parent.passayVersion
+  compile(group: 'com.ge.predix.audit', name: 'audit-sdk', version: '0.0.2-SNAPSHOT') {
+    exclude(module: 'bcprov-jdk15on')
+    exclude(module: 'bcpkix-jdk15on')
+  }
+
 
   testCompile group: 'org.springframework', name: 'spring-test', version: parent.springVersion
   testCompile (group: 'junit', name: 'junit', version: parent.junitVersion) {
