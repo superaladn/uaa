@@ -35,12 +35,10 @@ public class AuditServiceConfig {
 
     @Bean
     public AuditConfiguration auditConfiguration() throws VcapLoadException {
-        ((VcapLoaderServiceImpl) vcapLoaderService).setAuditServiceName("predix-audit");
+        ((VcapLoaderServiceImpl) vcapLoaderService).setUaaUrl("https://predix-uaa.run.asv-pr.ice.predix.io");
+        ((VcapLoaderServiceImpl) vcapLoaderService).setUaaClientId("audit-service-test");
+        ((VcapLoaderServiceImpl) vcapLoaderService).setUaaClientSecret("secret");
         AuditConfiguration config = vcapLoaderService.getConfigFromVcap();
-        config.setUaaUrl("https://predix-uaa.run.asv-pr.ice.predix.io");
-        config.setUaaClientId("audit-service-test");
-        config.setUaaClientSecret("secret");
-
         return config;
     }
 
