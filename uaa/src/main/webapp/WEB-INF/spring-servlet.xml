@@ -28,12 +28,6 @@
     <bean class="com.google.gson.Gson"/>
     <import resource="spring/spring-metering-filter.xml"/>
 
-    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location">
-            <value>classpath:spring/audit.properties</value>
-        </property>
-    </bean>
-
     <bean id="uaaConfig" class="org.cloudfoundry.identity.uaa.impl.config.YamlConfigurationValidator">
         <constructor-arg>
             <bean class="org.cloudfoundry.identity.uaa.impl.config.UaaConfiguration.UaaConfigConstructor" />
