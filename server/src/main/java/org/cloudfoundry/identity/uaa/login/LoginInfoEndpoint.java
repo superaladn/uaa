@@ -422,7 +422,7 @@ public class LoginInfoEndpoint {
             boolean discoveryNeeded = IdentityZoneHolder.get().getConfig().isIdpDiscoveryEnabled()
                 && (request == null || !Boolean.parseBoolean(request.getParameter("discoveryPerformed")));
 
-            if(discoveryNeeded) {
+            if(discoveryNeeded && !loginHintParam.isPresent()) {
                 return "idp_discovery/email";
             }
 

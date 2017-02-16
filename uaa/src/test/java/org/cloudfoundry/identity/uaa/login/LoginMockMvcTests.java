@@ -2179,7 +2179,8 @@ public class LoginMockMvcTests extends InjectedMockContextTest {
         getMockMvc().perform(post("/login/idp_discovery")
             .with(cookieCsrf())
             .param("email", "test@email.com"))
-            .andExpect(xpath("//input[@name='username']/@value").string("test@email.com"))
+            .andExpect(xpath("//h4[@id='email']").string("test@email.com"))
+            .andExpect(xpath("//input[@name='username']").exists())
             .andExpect(xpath("//input[@name='X-Uaa-Csrf']").exists());
     }
 

@@ -475,6 +475,4 @@
         <property name="clientDetailsService" ref="jdbcClientDetailsService"/>
         <property name="userDatabase" ref="userDatabase"/>
     </bean>
-
-
 </beans>
