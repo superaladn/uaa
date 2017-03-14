@@ -76,10 +76,9 @@ allprojects {
       username geArtifactoryReader
       password geArtifactoryReaderPassword
      }
-     url 'https://devcloud.swcoe.ge.com/artifactory/predix-virtual'
+     url 'https://repo.jenkins.build.ge.com/artifactory/maven-virtual'
    }
   }
-
 }
 
 //apply plugin: 'com.bmuschko.cargo-base'
@@ -195,7 +194,14 @@ subprojects {
        username geArtifactoryReader
        password geArtifactoryReaderPassword
       }
-      url 'https://devcloud.swcoe.ge.com/artifactory/predix-virtual'
+      url 'https://repo.jenkins.build.ge.com/artifactory/maven-virtual'
+    }
+    maven {
+    credentials {
+      username geArtifactoryReader
+      password geArtifactoryReaderPassword
+     }
+     url 'https://devcloud.swcoe.ge.com/artifactory/predix-virtual'
     }
   }
 
