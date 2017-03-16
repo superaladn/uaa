@@ -72,12 +72,12 @@ allprojects {
     mavenLocal()
     mavenCentral()
     maven {
-    credentials {
-      username geArtifactoryReader
-      password geArtifactoryReaderPassword
-     }
-     url 'https://devcloud.swcoe.ge.com/artifactory/predix-virtual'
-   }
+      credentials {
+        username geArtifactoryReader
+        password geArtifactoryReaderPassword
+      }
+      url 'https://devcloud.swcoe.ge.com/artifactory/predix-virtual'
+    }
   }
 
 }
