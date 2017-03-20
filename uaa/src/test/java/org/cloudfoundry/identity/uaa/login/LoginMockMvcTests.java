@@ -563,6 +563,8 @@ public class LoginMockMvcTests extends InjectedMockContextTest {
             .andExpect(emptyCurrentUserCookie());
     }
 
+    //Unignore when nullifying logout whitelist is removed
+    @Ignore
     @Test
     public void testLogOutIgnoreRedirectParameter() throws Exception {
         getMockMvc().perform(get("/uaa/logout.do").param("redirect", "https://www.google.com").contextPath("/uaa"))
@@ -570,6 +572,17 @@ public class LoginMockMvcTests extends InjectedMockContextTest {
             .andExpect(redirectedUrl("/uaa/login"))
             .andExpect(emptyCurrentUserCookie());
     }
+    
+
+    //This test applies to our changes of nullifying the logout whitelist to match any redirect value
+    @Test
+    public void testLogOutNullifiedLogoutWhitelist() throws Exception {
+        getMockMvc().perform(get("/uaa/logout.do").param("redirect", "https://www.google.com").contextPath("/uaa"))
+            .andExpect(status().isFound())
+            .andExpect(redirectedUrl("https://www.google.com"))
+            .andExpect(emptyCurrentUserCookie());
+    }
+
 
     @Test
     public void testLogOutEnableRedirectParameter() throws Exception {
@@ -789,7 +802,7 @@ public class LoginMockMvcTests extends InjectedMockContextTest {
                                 .param("redirect", "http://google.com")
         )
             .andExpect(status().isFound())
-            .andExpect(redirectedUrl("http://test.redirect.com"))
+            .andExpect(redirectedUrl("http://google.com"))
             .andExpect(emptyCurrentUserCookie());
 
         zone.getConfig().getLinks().getLogout().setDisableRedirectParameter(false);

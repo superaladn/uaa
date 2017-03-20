@@ -189,7 +189,7 @@ public class BootstrapTests {
         assertNull(zoneConfiguration.getLinks().getHomeRedirect());
         assertEquals("redirect", zoneConfiguration.getLinks().getLogout().getRedirectParameterName());
         assertEquals("/login", zoneConfiguration.getLinks().getLogout().getRedirectUrl());
-        assertNull(zoneConfiguration.getLinks().getLogout().getWhitelist());
+        assertEquals(zoneConfiguration.getLinks().getLogout().getWhitelist(), Arrays.asList("http*://*"));
         assertFalse(zoneConfiguration.getLinks().getLogout().isDisableRedirectParameter());
         assertFalse(context.getBean(IdentityZoneProvisioning.class).retrieve(IdentityZone.getUaa().getId()).getConfig().getTokenPolicy().isJwtRevocable());
         assertEquals(
