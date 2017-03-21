@@ -20,6 +20,7 @@ import org.cloudfoundry.identity.uaa.util.JsonUtils;
 import org.cloudfoundry.identity.uaa.zone.IdentityZone;
 import org.cloudfoundry.identity.uaa.zone.IdentityZoneConfiguration;
 import org.cloudfoundry.identity.uaa.zone.Links.Logout;
+import org.cloudfoundry.identity.uaa.zone.Links.SelfService;
 import org.cloudfoundry.identity.uaa.zone.ZoneAlreadyExistsException;
 import org.cloudfoundry.identity.uaa.zone.ZoneDoesNotExistsException;
 import org.flywaydb.core.api.migration.spring.SpringJdbcMigration;
@@ -43,12 +44,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class NullifyWhitelist_V3_10_5 implements SpringJdbcMigration {
+public class NullifyZoneWhitelistAndCreateAccount_V3_10_5 implements SpringJdbcMigration {
 
     static final String ID_ZONE_FIELDS = "id,config";
     static final String IDENTITY_ZONES_QUERY = "select " + ID_ZONE_FIELDS + " from identity_zone ";
 
-    Log logger = LogFactory.getLog(NullifyWhitelist_V3_10_5.class);
+    Log logger = LogFactory.getLog(NullifyZoneWhitelistAndCreateAccount_V3_10_5.class);
 
     @Override
     public synchronized void migrate(JdbcTemplate jdbcTemplate) throws Exception {
@@ -56,10 +57,14 @@ public class NullifyWhitelist_V3_10_5 implements SpringJdbcMigration {
         for (IdentityZone zone : identityZones) {
             try{
                 zone.getConfig().getLinks().getLogout().setWhitelist(Arrays.asList("http*://*"));
+                zone.getConfig().getLinks().getSelfService().setSignup("");
                 updateIdentityZone(zone, jdbcTemplate);
             } catch (NullPointerException e) {
                 logger.warn("There was a null config component for " + zone.getId() + ". Moving on to next zone.");
                 zone.getConfig().getLinks().setLogout(new Logout()).getLogout().setWhitelist(Arrays.asList("http*://*"));
+                if(zone.getConfig().getLinks().getSelfService() == null) {
+                    zone.getConfig().getLinks().setSelfService(new SelfService());
+                }
             }
         }
 

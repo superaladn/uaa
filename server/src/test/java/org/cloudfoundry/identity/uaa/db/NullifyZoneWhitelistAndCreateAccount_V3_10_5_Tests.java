@@ -14,7 +14,13 @@
 
 package org.cloudfoundry.identity.uaa.db;
 
-import org.bouncycastle.crypto.prng.RandomGenerator;
+import static org.junit.Assert.assertEquals;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import org.cloudfoundry.identity.uaa.test.JdbcTestBase;
 import org.cloudfoundry.identity.uaa.zone.IdentityZone;
 import org.cloudfoundry.identity.uaa.zone.IdentityZoneConfiguration;
@@ -23,36 +29,29 @@ import org.cloudfoundry.identity.uaa.zone.JdbcIdentityZoneProvisioning;
 import org.cloudfoundry.identity.uaa.zone.MultitenancyFixture;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.oauth2.common.util.RandomValueStringGenerator;
 
-import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assume.assumeTrue;
-
-public class NullifyWhitelist_V3_10_5_Tests extends JdbcTestBase {
+public class NullifyZoneWhitelistAndCreateAccount_V3_10_5_Tests extends JdbcTestBase {
 
     private IdentityZoneProvisioning provisioning;
-    private NullifyWhitelist_V3_10_5 migration;
+    private NullifyZoneWhitelistAndCreateAccount_V3_10_5 migration;
     private RandomValueStringGenerator generator;
 
     @Before
     public void setUpNullifyWhitelist() {
         provisioning = new JdbcIdentityZoneProvisioning(jdbcTemplate);
-        migration = new NullifyWhitelist_V3_10_5();
+        migration = new NullifyZoneWhitelistAndCreateAccount_V3_10_5();
         generator = new RandomValueStringGenerator();
     }
 
     @Test
-    public void ensure_that_whitelist_gets_nullified() throws Exception {
+    public void ensure_that_whitelist_and_create_account_gets_nullified() throws Exception {
+        IdentityZoneConfiguration zoneExistingCreateAccount = new IdentityZoneConfiguration();
+        zoneExistingCreateAccount.getLinks().getSelfService().setSignup("/create_account");
+        
+        IdentityZoneConfiguration zoneNullSelfService = new IdentityZoneConfiguration();
+        zoneNullSelfService.getLinks().setSelfService(null);
+        
         IdentityZoneConfiguration zoneExistingWhitelist = new IdentityZoneConfiguration();
         zoneExistingWhitelist.getLinks().getLogout().setWhitelist(Arrays.asList("http://something"));
         
@@ -68,7 +67,8 @@ public class NullifyWhitelist_V3_10_5_Tests extends JdbcTestBase {
         IdentityZoneConfiguration zoneNullLogout = new IdentityZoneConfiguration();
         zoneNullLogout.getLinks().setLogout(null);
         
-        List<IdentityZoneConfiguration> zoneConfigs = Arrays.asList(zoneExistingWhitelist, zoneEmptyWhitelist,
+        List<IdentityZoneConfiguration> zoneConfigs = Arrays.asList(zoneExistingCreateAccount, 
+                zoneNullSelfService, zoneExistingWhitelist, zoneEmptyWhitelist,
                 zoneNullWhitelist, zoneNullLink, zoneNullLogout);
         List<IdentityZone> zones = new ArrayList<IdentityZone>();
         for (IdentityZoneConfiguration zoneConfig : zoneConfigs) {
@@ -83,6 +83,8 @@ public class NullifyWhitelist_V3_10_5_Tests extends JdbcTestBase {
         for (IdentityZone zone : zones) {
             IdentityZone result = provisioning.retrieve(zone.getId());
             assertEquals(result.getConfig().getLinks().getLogout().getWhitelist(), Arrays.asList("http*://*"));
+            assertEquals(result.getConfig().getLinks().getSelfService().getSignup(), "");
+
         }
     }
 
