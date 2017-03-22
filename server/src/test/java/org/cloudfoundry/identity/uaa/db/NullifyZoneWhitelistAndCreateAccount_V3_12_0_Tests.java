@@ -31,16 +31,16 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.security.oauth2.common.util.RandomValueStringGenerator;
 
-public class NullifyZoneWhitelistAndCreateAccount_V3_10_5_Tests extends JdbcTestBase {
+public class NullifyZoneWhitelistAndCreateAccount_V3_12_0_Tests extends JdbcTestBase {
 
     private IdentityZoneProvisioning provisioning;
-    private NullifyZoneWhitelistAndCreateAccount_V3_10_5 migration;
+    private NullifyZoneWhitelistAndCreateAccount_V3_12_0 migration;
     private RandomValueStringGenerator generator;
 
     @Before
     public void setUpNullifyWhitelist() {
         provisioning = new JdbcIdentityZoneProvisioning(jdbcTemplate);
-        migration = new NullifyZoneWhitelistAndCreateAccount_V3_10_5();
+        migration = new NullifyZoneWhitelistAndCreateAccount_V3_12_0();
         generator = new RandomValueStringGenerator();
     }
 

@@ -44,12 +44,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class NullifyZoneWhitelistAndCreateAccount_V3_10_5 implements SpringJdbcMigration {
+public class NullifyZoneWhitelistAndCreateAccount_V3_12_0 implements SpringJdbcMigration {
 
     static final String ID_ZONE_FIELDS = "id,config";
     static final String IDENTITY_ZONES_QUERY = "select " + ID_ZONE_FIELDS + " from identity_zone ";
 
-    Log logger = LogFactory.getLog(NullifyZoneWhitelistAndCreateAccount_V3_10_5.class);
+    Log logger = LogFactory.getLog(NullifyZoneWhitelistAndCreateAccount_V3_12_0.class);
 
     @Override
     public synchronized void migrate(JdbcTemplate jdbcTemplate) throws Exception {
