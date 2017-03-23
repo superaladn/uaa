@@ -60,7 +60,7 @@ public class Links {
         private String redirectUrl = "/login";
         private String redirectParameterName = "redirect";
         private boolean disableRedirectParameter = false;
-        private List<String> whitelist = Arrays.asList("http*://*");
+        private List<String> whitelist = Arrays.asList("http*://**");
 
         public boolean isDisableRedirectParameter() {
             return disableRedirectParameter;

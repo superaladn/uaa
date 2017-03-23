@@ -95,7 +95,7 @@ public class WhitelistLogoutHandlerTest {
 
     @Test
     public void test_whitelist_redirect_with_ultimate_wildcard() throws Exception {
-        handler.setWhitelist(Arrays.asList("http*://*"));
+        handler.setWhitelist(Arrays.asList("http*://**"));
         handler.setAlwaysUseDefaultTargetUrl(false);
         request.setParameter("redirect", "http://www.somethingelse.com");
         assertEquals("http://www.somethingelse.com", handler.determineTargetUrl(request, response));
@@ -109,6 +109,14 @@ public class WhitelistLogoutHandlerTest {
         assertEquals("http://testing.com/path", handler.determineTargetUrl(request, response));
     }
  
+    @Test
+    public void test_client_redirect_with_path_and_wildcard() throws Exception {
+        handler.setAlwaysUseDefaultTargetUrl(false);
+        handler.setWhitelist(Arrays.asList("http*://**"));
+        request.setParameter("redirect", "http://testing.com/path");
+        assertEquals("http://testing.com/path", handler.determineTargetUrl(request, response));
+    }
+
     @Test
     public void test_client_redirect_with_no_redirect_uri() throws Exception {
         String clientId = "openRedirectClient";

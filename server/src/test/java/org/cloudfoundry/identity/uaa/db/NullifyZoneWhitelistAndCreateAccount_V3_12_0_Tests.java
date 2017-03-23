@@ -82,7 +82,7 @@ public class NullifyZoneWhitelistAndCreateAccount_V3_12_0_Tests extends JdbcTest
         migration.migrate(jdbcTemplate);
         for (IdentityZone zone : zones) {
             IdentityZone result = provisioning.retrieve(zone.getId());
-            assertEquals(result.getConfig().getLinks().getLogout().getWhitelist(), Arrays.asList("http*://*"));
+            assertEquals(result.getConfig().getLinks().getLogout().getWhitelist(), Arrays.asList("http*://**"));
             assertEquals(result.getConfig().getLinks().getSelfService().getSignup(), "");
 
         }

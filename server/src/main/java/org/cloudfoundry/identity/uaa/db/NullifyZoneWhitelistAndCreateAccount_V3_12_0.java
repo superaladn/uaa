@@ -56,7 +56,7 @@ public class NullifyZoneWhitelistAndCreateAccount_V3_12_0 implements SpringJdbcM
         List<IdentityZone> identityZones = retrieveIdentityZones(jdbcTemplate);
         for (IdentityZone zone : identityZones) {
             try{
-                zone.getConfig().getLinks().getLogout().setWhitelist(Arrays.asList("http*://*"));
+                zone.getConfig().getLinks().getLogout().setWhitelist(Arrays.asList("http*://**"));
                 zone.getConfig().getLinks().getSelfService().setSignup("");
                 updateIdentityZone(zone, jdbcTemplate);
             } catch (NullPointerException e) {
