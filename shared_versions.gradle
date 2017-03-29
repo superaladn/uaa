@@ -39,4 +39,5 @@ ext {
   tomcatContainerId = 'tomcat8x'
   validationAPIVersion = '1.0.0.GA'
   predixpublickeyProviderVersion = '1.0.2'
+  predixAuditSdkVersion = '0.0.6'
 }
