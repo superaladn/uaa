@@ -31,7 +31,13 @@ public class PredixAuditConfig {
         AuditConfiguration sdkConfig = getConfig();
         AuditCallback auditCallback = auditCallback();
         log.info("Connecting to Audit Service.");
-        return new AuditClient(sdkConfig, auditCallback);
+        try {
+            return new AuditClient(sdkConfig, auditCallback);
+        }
+        catch(AuditException | EventHubClientException e) {
+            log.info("Error wiring up predixAudit Client. " + e.getMessage());
+            return null;
+        }
     }
 
     private AuditConfiguration getConfig() {
@@ -62,7 +68,14 @@ public class PredixAuditConfig {
 
             @Override
             public void onFailure(FailReport failReport, String description) {
-                log.info("onFailure {} \n {}", failReport, description);
+                log.info(String.format("onFailure %s \n %s", failReport, description));
+                //if (failReport == FailReport.STREAM_IS_CLOSE){
+                    //try {
+                        //auditClient.reconnect();
+                    //} catch (EventHubClientException e) {
+                        //log.info(e.getMessage());
+                    //}
+                //}
             }
 
             @Override
