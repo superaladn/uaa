@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -25,6 +26,8 @@ public class PredixAuditConfig {
     private VcapLoaderServiceImpl vcapLoaderService = new VcapLoaderServiceImpl();
     private static final Logger log = LoggerFactory.getLogger(PredixAuditConfig.class);
 
+//    @Autowired
+//    private AuditClient auditClient;
 
     @Bean
     public AuditClient auditClient() throws AuditException, EventHubClientException {
@@ -69,13 +72,13 @@ public class PredixAuditConfig {
             @Override
             public void onFailure(FailReport failReport, String description) {
                 log.info(String.format("onFailure %s \n %s", failReport, description));
-                //if (failReport == FailReport.STREAM_IS_CLOSE){
-                    //try {
-                        //auditClient.reconnect();
-                    //} catch (EventHubClientException e) {
-                        //log.info(e.getMessage());
-                    //}
-                //}
+//                if (failReport == FailReport.STREAM_IS_CLOSE){
+//                    try {
+//                        auditClient.reconnect();
+//                    } catch (EventHubClientException e) {
+//                        log.info(e.getMessage());
+//                    }
+//                }
             }
 
             @Override
