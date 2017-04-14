@@ -122,7 +122,7 @@ public class ScimGroupEndpointsMockMvcTests extends InjectedMockContextTest {
                 "clients.read clients.write clients.secret clients.admin");
         clientId = generator.generate().toLowerCase();
         clientSecret = generator.generate().toLowerCase();
-        String authorities = "scim.read,scim.write,password.write,oauth.approvals,scim.create";
+        String authorities = "scim.read,scim.write,password.write,oauth.approvals,scim.create,stupid.scope";
         utils().createClient(this.getMockMvc(), adminToken, clientId, clientSecret, Collections.singleton("oauth"), Arrays.asList("foo","bar","scim.read"), Arrays.asList("client_credentials", "password"), authorities);
         scimReadToken = testClient.getClientCredentialsOAuthAccessToken(clientId, clientSecret,"scim.read password.write");
         scimWriteToken = testClient.getClientCredentialsOAuthAccessToken(clientId, clientSecret,"scim.write password.write");
@@ -1016,6 +1016,23 @@ public class ScimGroupEndpointsMockMvcTests extends InjectedMockContextTest {
             .andExpect(status().isCreated())
             .andReturn().getResponse().getContentAsString();
         assertEquals(JsonUtils.writeValueAsString(scimGroupMember), responseBody);
+    }
+    
+
+    @Test
+    public void add_member_bad_token() throws Exception {
+        ScimUser user = createUserAndAddToGroups(IdentityZone.getUaa(), Collections.EMPTY_SET);
+        String groupId = getGroupId("scim.read");
+        String anyOldToken = testClient.getClientCredentialsOAuthAccessToken(clientId, clientSecret,"stupid.scope");
+
+        ScimGroupMember scimGroupMember = new ScimGroupMember(user.getId(), ScimGroupMember.Type.USER, Arrays.asList(ScimGroupMember.Role.MEMBER, ScimGroupMember.Role.READER));
+        MockHttpServletRequestBuilder post = post("/Groups/" + groupId + "/members")
+            .header("Authorization", "Bearer " + anyOldToken)
+            .header("Content-Type", APPLICATION_JSON_VALUE)
+            .content(JsonUtils.writeValueAsString(scimGroupMember));
+        getMockMvc().perform(post)
+            .andExpect(status().isForbidden());
+
     }
 
     @Test
