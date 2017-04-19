@@ -73,7 +73,7 @@ public class LdapLoginIT {
         Long beforeTest = System.currentTimeMillis();
         performLdapLogin("testzone2", "ldap://52.87.212.253:389/", true, true);
         Long afterTest = System.currentTimeMillis();
-        assertThat(webDriver.findElement(By.cssSelector("h1")).getText(), Matchers.containsString("Where to?"));
+        assertThat(webDriver.findElement(By.cssSelector("h1")).getText(), Matchers.containsString("You should not see this page."));
         ScimUser user = IntegrationTestUtils.getUserByZone(zoneAdminToken, baseUrl, "testzone2", "marissa4");
         IntegrationTestUtils.validateUserLastLogon(user, beforeTest, afterTest);
         IntegrationTestUtils.validateAccountChooserCookie(baseUrl.replace("localhost","testzone2.localhost"), webDriver);
