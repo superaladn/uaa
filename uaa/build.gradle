@@ -117,6 +117,7 @@ generateDocs {
 
 integrationTest {
   filter {
+    exclude '**/*AT.class'
     includeTestsMatching "org.cloudfoundry.identity.uaa.integration.*"
     includeTestsMatching "*IT"
   }
