@@ -53,7 +53,7 @@ dependencies {
   runtime group: 'com.github.fge', name: 'json-schema-validator', version:'2.2.6'
   
   // For dynamic log level configuration
-  runtime group: 'com.ge.predix', name: 'security-dynamic-log-configurer', version: '1.1.0'
+  runtime group: 'com.ge.predix', name: 'security-dynamic-log-configurer', version: '1.1.1'
 
 
   testCompile identityServer.configurations.testCompile.dependencies
@@ -92,6 +92,7 @@ ext {
 test {
   exclude 'org/cloudfoundry/identity/uaa/integration/*.class'
   exclude '**/*IT.class'
+  exclude '**/*AT.class'
   systemProperty 'java.io.tmpdir', '/tmp'
   systemProperty "mock.suite.test", "true"
   systemProperty "java.io.tmpdir", "/tmp"
@@ -116,10 +117,16 @@ generateDocs {
 
 integrationTest {
   filter {
+    exclude '**/*AT.class'
     includeTestsMatching "org.cloudfoundry.identity.uaa.integration.*"
     includeTestsMatching "*IT"
   }
 }
+
+task acceptanceTest(type: Test) {
+  include "org/cloudfoundry/identity/uaa/acceptance/*.class"
+}
+
 
 //asciidoctor {
 //  sourceDir 'src/asciidoc'
