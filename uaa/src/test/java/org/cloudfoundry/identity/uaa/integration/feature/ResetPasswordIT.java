@@ -232,7 +232,7 @@ public class ResetPasswordIT {
         assertEquals(receivedEmailSize, simpleSmtpServer.getReceivedEmailSize());
         
         webDriver.get(baseUrl + "/login");
-        Assert.assertEquals("Cloud Foundry", webDriver.getTitle());
+        Assert.assertEquals("Predix", webDriver.getTitle());
         webDriver.findElement(By.linkText("Reset password")).click();
         Assert.assertEquals("Reset Password", webDriver.findElement(By.tagName("h1")).getText());
 
