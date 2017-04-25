@@ -94,6 +94,7 @@ import static java.util.Objects.isNull;
 import static java.util.Optional.ofNullable;
 import static org.cloudfoundry.identity.uaa.constants.OriginKeys.UAA;
 import static org.cloudfoundry.identity.uaa.util.UaaUrlUtils.addSubdomainToUrl;
+import static org.cloudfoundry.identity.uaa.web.UaaSavedRequestAwareAuthenticationSuccessHandler.FORM_REDIRECT_PARAMETER;
 import static org.cloudfoundry.identity.uaa.web.UaaSavedRequestAwareAuthenticationSuccessHandler.SAVED_REQUEST_SESSION_ATTRIBUTE;
 import static org.springframework.util.StringUtils.hasText;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -260,7 +261,13 @@ public class LoginInfoEndpoint {
     }
 
     private String login(Model model, Principal principal, List<String> excludedPrompts, boolean jsonResponse, HttpServletRequest request) {
-        if(principal instanceof UaaAuthentication && ((UaaAuthentication)principal).isAuthenticated()) { return "redirect:/home"; }
+        if(principal instanceof UaaAuthentication && ((UaaAuthentication)principal).isAuthenticated()) {
+            if(request.getSession().getAttribute(FORM_REDIRECT_PARAMETER) != null){
+                return "redirect:" + request.getSession().getAttribute(FORM_REDIRECT_PARAMETER);
+            } else {
+                return "redirect:/home";
+            }
+        }
 
         HttpSession session = request != null ? request.getSession(false) : null;
         List<String> allowedIdps = null;
@@ -322,6 +329,12 @@ public class LoginInfoEndpoint {
             if(matchingIdps.size() == 1) {
                 idpForRedirect = matchingIdps.get(0);
             }
+        }
+
+        if(session != null
+                && session.getAttribute(SAVED_REQUEST_SESSION_ATTRIBUTE) == null
+                && session.getAttribute(FORM_REDIRECT_PARAMETER) != null) {
+            model.addAttribute(FORM_REDIRECT_PARAMETER, session.getAttribute(FORM_REDIRECT_PARAMETER));
         }
 
         if(idpForRedirect == null && !jsonResponse && !fieldUsernameShow && combinedIdps.size() == 1) {

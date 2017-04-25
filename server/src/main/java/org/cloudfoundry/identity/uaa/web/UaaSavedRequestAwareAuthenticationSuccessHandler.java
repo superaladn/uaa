@@ -17,10 +17,14 @@ package org.cloudfoundry.identity.uaa.web;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+import org.springframework.security.web.savedrequest.SavedRequest;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 public class UaaSavedRequestAwareAuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
     public static final String SAVED_REQUEST_SESSION_ATTRIBUTE = "SPRING_SECURITY_SAVED_REQUEST";
@@ -30,6 +34,17 @@ public class UaaSavedRequestAwareAuthenticationSuccessHandler extends SavedReque
     public static final String FORM_REDIRECT_PARAMETER = "form_redirect_uri";
 
     private static Log logger = LogFactory.getLog(UaaSavedRequestAwareAuthenticationSuccessHandler.class);
+
+    @Override
+    public void onAuthenticationSuccess(HttpServletRequest request,
+                                        HttpServletResponse response, Authentication authentication)
+            throws ServletException, IOException {
+        SavedRequest redirectFormParam = (SavedRequest) request.getSession().getAttribute(SAVED_REQUEST_SESSION_ATTRIBUTE);
+        if(redirectFormParam != null) {
+            request.getSession().setAttribute(FORM_REDIRECT_PARAMETER, redirectFormParam.getRedirectUrl());
+        }
+        super.onAuthenticationSuccess(request, response, authentication);
+    }
 
     @Override
     public String determineTargetUrl(HttpServletRequest request, HttpServletResponse response) {
