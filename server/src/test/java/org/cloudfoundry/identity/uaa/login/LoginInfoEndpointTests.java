@@ -140,10 +140,22 @@ public class LoginInfoEndpointTests {
     }
 
     @Test
-    public void testAlreadyLoggedInRedirectsToHome() throws Exception {
+    public void testAlreadyLoggedInRedirectsToFormRedirectUrl() throws Exception {
         LoginInfoEndpoint endpoint = getEndpoint();
         UaaAuthentication authentication = mock(UaaAuthentication.class);
         when(authentication.isAuthenticated()).thenReturn(true);
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        request.getSession().setAttribute("form_redirect_uri", "some.redirect");
+        String result = endpoint.loginForHtml(model, authentication, request);
+        assertEquals("redirect:some.redirect", result);
+    }
+
+    @Test
+    public void testAlreadyLoggedInRedirectsToHomeByDefault() throws Exception {
+        LoginInfoEndpoint endpoint = getEndpoint();
+        UaaAuthentication authentication = mock(UaaAuthentication.class);
+        when(authentication.isAuthenticated()).thenReturn(true);
+
         String result = endpoint.loginForHtml(model, authentication, new MockHttpServletRequest());
         assertEquals("redirect:/home", result);
     }
