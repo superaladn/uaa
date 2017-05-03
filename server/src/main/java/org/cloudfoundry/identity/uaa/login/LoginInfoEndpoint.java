@@ -12,6 +12,8 @@
  *******************************************************************************/
 package org.cloudfoundry.identity.uaa.login;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.cloudfoundry.identity.uaa.authentication.AuthzAuthenticationRequest;
 import org.cloudfoundry.identity.uaa.authentication.UaaAuthentication;
 import org.cloudfoundry.identity.uaa.authentication.UaaPrincipal;
@@ -33,6 +35,7 @@ import org.cloudfoundry.identity.uaa.provider.saml.SamlRedirectUtils;
 import org.cloudfoundry.identity.uaa.util.ColorHash;
 import org.cloudfoundry.identity.uaa.util.DomainFilter;
 import org.cloudfoundry.identity.uaa.util.JsonUtils;
+import org.cloudfoundry.identity.uaa.util.JsonUtils.JsonUtilException;
 import org.cloudfoundry.identity.uaa.util.MapCollector;
 import org.cloudfoundry.identity.uaa.util.UaaStringUtils;
 import org.cloudfoundry.identity.uaa.util.UaaUrlUtils;
@@ -97,6 +100,7 @@ import static org.cloudfoundry.identity.uaa.util.UaaUrlUtils.addSubdomainToUrl;
 import static org.cloudfoundry.identity.uaa.web.UaaSavedRequestAwareAuthenticationSuccessHandler.SAVED_REQUEST_SESSION_ATTRIBUTE;
 import static org.springframework.util.StringUtils.hasText;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * Controller that sends login info (e.g. prompts) to clients wishing to
@@ -106,6 +110,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
  */
 @Controller
 public class LoginInfoEndpoint {
+
+    private static Log logger = LogFactory.getLog(LoginInfoEndpoint.class);
 
     public static final String NotANumber = OriginKeys.NotANumber;
     public static final String CREATE_ACCOUNT_LINK = "createAccountLink";
@@ -242,12 +248,29 @@ public class LoginInfoEndpoint {
         return login(model, principal, Arrays.asList(PASSCODE), false, request);
     }
 
-    private static <T extends SavedAccountOption> List<T> getSavedAccounts(Cookie[] cookies, Class<T> clazz) {
+    private static <T extends SavedAccountOption> List<T> getSavedAccounts(
+            Cookie[] cookies, Class<T> clazz) {
         return Arrays.asList(ofNullable(cookies).orElse(new Cookie[]{}))
-                .stream()
-                .filter(c -> c.getName().startsWith("Saved-Account"))
-                .map(c -> JsonUtils.readValue(c.getValue(), clazz))
-                .collect(Collectors.toList());
+                .stream().filter(c -> c.getName().startsWith("Saved-Account"))
+                .map(c -> {
+                    try {
+                        return JsonUtils.readValue(
+                                decodeCookieValue(c.getValue()), clazz);
+                    } catch (JsonUtilException e) {
+                        return null;
+                    }
+                }).filter(c -> c != null).collect(Collectors.toList());
+    }
+
+    private static String decodeCookieValue(String inValue) {
+        String out = null;
+        try {
+            out = URLDecoder.decode(inValue, UTF_8.name());
+        } catch (Exception e) {
+            logger.debug("URLDecoder.decode failed for " + inValue, e);
+            return "";
+        }
+        return out;
     }
 
     @RequestMapping(value = {"/invalid_request"})
