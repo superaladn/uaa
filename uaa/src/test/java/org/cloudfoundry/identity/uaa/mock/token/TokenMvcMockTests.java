@@ -334,6 +334,8 @@ public class TokenMvcMockTests extends AbstractTokenMockMvcTests {
         //create an actual IDP, so we can fetch metadata
         String idpMetadata = MockMvcUtils.getIDPMetaData(getMockMvc(), subdomain);
 
+        System.out.println("idp Metadata: ");
+        System.out.println(idpMetadata);
         //create an IDP in the default zone
         SamlIdentityProviderDefinition idpDef = createLocalSamlIdpDefinition(origin, zone.getIdentityZone().getId(), idpMetadata);
         IdentityProvider provider = new IdentityProvider();
