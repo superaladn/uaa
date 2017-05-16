@@ -152,15 +152,18 @@ public class UaaResetPasswordService implements ResetPasswordService, Applicatio
         String jsonUsername = JsonUtils.writeValueAsString(username);
         List<ScimUser> results = scimUserProvisioning.query("userName eq " + jsonUsername + " and origin eq \"" + OriginKeys.UAA + "\"");
         if (results.isEmpty()) {
+            System.out.println("<<<<<<<<<<<<<<Empty>>>>>>>>>>>>>>>>>>>>");
             results = scimUserProvisioning.query("userName eq " + jsonUsername);
             if (results.isEmpty()) {
+                System.out.println("<<<<<<<<<<<<<<Empty Again>>>>>>>>>>>>>>>>>>>>");
                 throw new NotFoundException();
             } else {
+                System.out.println("<<<<<<<<<<<<<<throw ConflictException>>>>>>>>>>>>>>>>>>>>");
                 throw new ConflictException(results.get(0).getId(), results.get(0).getPrimaryEmail());
             }
         }
         ScimUser scimUser = results.get(0);
-
+        System.out.println("<<<<<<<<<<<<<<Hitting the UaaResetPasswordService::Sending Email>>>>>>>>>>>>>>>>>>>>");
         PasswordChange change = new PasswordChange(scimUser.getId(), scimUser.getUserName(), scimUser.getPasswordLastModified(), clientId, redirectUri);
         String intent = FORGOT_PASSWORD_INTENT_PREFIX+scimUser.getId();
         expiringCodeStore.expireByIntent(intent);

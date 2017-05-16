@@ -95,13 +95,14 @@ public class ResetPasswordController {
         String htmlContent = null;
         String userId = null;
         String email = null;
-
+        System.out.println("<<<<<<<<<<<<<<Hitting the ResetPasswordController>>>>>>>>>>>>>>>>>>>>");
         try {
             ForgotPasswordInfo forgotPasswordInfo = resetPasswordService.forgotPassword(username, clientId, redirectUri);
             userId = forgotPasswordInfo.getUserId();
             email = forgotPasswordInfo.getEmail();
             htmlContent = getCodeSentEmailHtml(forgotPasswordInfo.getResetPasswordCode().getCode());
         } catch (ConflictException e) {
+            System.out.println("<<<<<<<<<<<<<<Hitting the ResetPasswordController::shadow User---not able to reset--but send email>>>>>>>>>>>>>>>>>>>>");
             email = e.getEmail();
             htmlContent = getResetUnavailableEmailHtml(email);
             userId = e.getUserId();
