@@ -37,7 +37,7 @@ public abstract class AbstractQueryable<T> implements Queryable<T> {
 
     private SearchQueryConverter queryConverter = new SimpleSearchQueryConverter();
 
-    private int pageSize = 200;
+    private int pageSize = 10;
 
     protected AbstractQueryable(JdbcTemplate jdbcTemplate, JdbcPagingListFactory pagingListFactory,
                     RowMapper<T> rowMapper) {

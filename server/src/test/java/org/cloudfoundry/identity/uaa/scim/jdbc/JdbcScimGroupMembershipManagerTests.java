@@ -528,6 +528,23 @@ public class JdbcScimGroupMembershipManagerTests extends JdbcTestBase {
 
         }
     }
+    
+
+    @Test
+    public void cannotRemoveMemberByIdAcrossZones() throws Exception {
+        IdentityZoneHolder.set(zone);
+        addMember("g1", "m1", "USER", "READER");
+        validateCount(1);
+        String realGroupId = IdentityZoneHolder.get().getId() + "-g1";
+        String realMemberId = IdentityZoneHolder.get().getId() + "-m1";
+        dao.getMemberById(realGroupId, realMemberId);
+
+        IdentityZoneHolder.set(IdentityZoneHolder.getUaaZone());
+        dao.removeMemberById(realGroupId, realMemberId);
+
+        IdentityZoneHolder.set(zone);
+        validateCount(1);
+    }
 
     @Test
     public void canRemoveNestedGroupMember() {
