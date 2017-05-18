@@ -16,6 +16,7 @@ dependencies {
   compile group: 'com.ge.predix', name: 'jwt-bearer-key-provider', version:parent.predixpublickeyProviderVersion
   compile group: 'javax.mail', name: 'javax.mail-api', version: parent.javamailVersion
   compile group: 'javax.mail', name: 'mail', version: parent.javamailVersion
+  compile group: 'com.sun.mail', name: 'javax.mail', version: parent.javamailVersion
   compile group: 'com.sun.mail', name: 'smtp', version: '1.4.7'
   compile group: 'commons-logging', name: 'commons-logging', version: parent.commonsLoggingVersion
 
