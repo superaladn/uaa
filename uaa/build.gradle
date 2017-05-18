@@ -48,7 +48,9 @@ dependencies {
   runtime group: 'org.apache.httpcomponents', name: 'httpasyncclient', version:'4.1'
   runtime group: 'org.springframework.data', name: 'spring-data-commons', version:'1.9.1.RELEASE'
   runtime group: 'com.nurego', name: 'nurego-java', version:'1.0.10'
-  runtime group: 'com.github.fge', name: 'json-schema-validator', version:'2.2.6'
+  runtime(group: 'com.github.fge', name: 'json-schema-validator', version:'2.2.6') {
+    exclude(group:'javax.mail', module:'mailapi')
+  }
 
   // For dynamic log level configuration
   runtime group: 'com.ge.predix', name: 'security-dynamic-log-configurer', version: '1.1.1'
@@ -73,10 +75,7 @@ dependencies {
   testCompile(group: 'com.github.detro.ghostdriver', name: 'phantomjsdriver', version:'1.1.0') {
     exclude(module: 'servlet-api-2.5')
   }
-  testCompile (group: 'dumbster', name: 'dumbster', version:'1.6') {
-    exclude( group: 'javax.mail', module: 'mail')
-    exclude( group: 'com.sun', module: 'mail')
-  }
+  testCompile (group: 'dumbster', name: 'dumbster', version:'1.6')
   testCompile group: 'org.reflections', name: 'reflections', version: '0.9.10'
   testCompile group: 'org.skyscreamer', name:'jsonassert', version: '0.9.0'
   testCompile group: 'org.springframework', name: 'spring-test', version: parent.springVersion
