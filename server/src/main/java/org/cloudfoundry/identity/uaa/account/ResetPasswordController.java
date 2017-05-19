@@ -91,6 +91,12 @@ public class ResetPasswordController {
     }
 
     private void forgotPassword(String username, String clientId, String redirectUri) {
+        java.net.URL classUrl = this.getClass().getResource("com.sun.mail.util.MailLogger");
+        logger.info("<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        logger.info("loaded MailLogger Class:"+ classUrl.getFile());
+        logger.info("<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
+
         String subject = getSubjectText();
         String htmlContent = null;
         String userId = null;
