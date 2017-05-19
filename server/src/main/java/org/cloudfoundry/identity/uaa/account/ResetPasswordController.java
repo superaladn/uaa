@@ -91,10 +91,12 @@ public class ResetPasswordController {
     }
 
     private void forgotPassword(String username, String clientId, String redirectUri) {
-        java.net.URL classUrl = this.getClass().getResource("com.sun.mail.util.MailLogger");
-        logger.info("<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-        logger.info("loaded MailLogger Class:"+ classUrl.getFile());
-        logger.info("<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+//        java.net.URL class1Url = Thread.currentThread().getContextClassLoader().getResource("com.sun.mail.util.TraceInputStream");
+//        logger.info("loaded TraceInputStream Class:"+ class1Url.getFile());
+//        java.net.URL classUrl = Thread.currentThread().getContextClassLoader().getResource("com.sun.mail.util.MailLogger");
+//        logger.info("<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+//        logger.info("loaded MailLogger Class:"+ classUrl.getFile());
+//        logger.info("<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
 
         String subject = getSubjectText();
