@@ -86,7 +86,6 @@ allprojects {
       url 'https://devcloud.swcoe.ge.com/artifactory/PREDIX-SNAPSHOT'
     }
   }
-
 }
 
 //apply plugin: 'com.bmuschko.cargo-base'
@@ -151,6 +150,17 @@ task manifests(dependsOn: assemble, type: Copy) {
 
 subprojects {
   apply plugin: 'java'
+
+  configurations.all {
+    resolutionStrategy {
+      // prefer modules that are part of this build (multi-project or composite build) over external modules
+      preferProjectModules()
+      // force certain versions of dependencies (including transitive)
+      //  *append new forced modules:
+      force 'javax.mail:mail:1.4.7'
+    }
+  }
+
   [compileJava, compileTestJava]*.options*.compilerArgs = ['-Xlint:none', '-nowarn']
   sourceCompatibility = 1.8
   targetCompatibility = 1.8
@@ -168,7 +178,17 @@ subprojects {
     finalizedBy rootProject.cargoStopLocal
   }
 
-  task allDeps(type: DependencyReportTask) {}
+//  task allDeps(type: DependencyReportTask) {}
+
+  task allRuntimeDeps(type: DependencyReportTask) {
+    doFirst{
+      try {
+        configurations = [project.configurations.runtime] as Set
+      } catch(UnknownConfigurationException) {
+        // ignore for projects without desired config
+      }
+    }
+  }
 
 
   task packageSources(type: Jar) {
