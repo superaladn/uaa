@@ -168,6 +168,9 @@ subprojects {
     finalizedBy rootProject.cargoStopLocal
   }
 
+  task allDeps(type: DependencyReportTask) {}
+
+
   task packageSources(type: Jar) {
     classifier = 'sources'
     from sourceSets.main.allSource
