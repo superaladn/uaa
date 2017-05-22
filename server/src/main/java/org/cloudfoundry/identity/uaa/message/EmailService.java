@@ -63,6 +63,13 @@ public class EmailService implements MessageService {
 
     @Override
     public void sendMessage(String email, MessageType messageType, String subject, String htmlContent) {
+        String classUrl = whereFrom("com.sun.mail.util.TraceInputStream");
+        logger.error("Classpath of com.sun.mail.util.TraceInputStream: " + classUrl);
+        classUrl = whereFrom("org.springframework.mail.javamail.JavaMailSenderImpl");
+        logger.error("Classpath of org.springframework.mail.javamail.JavaMailSenderImpl: " + classUrl);
+        classUrl = whereFrom("javax.mail.Service");
+        logger.error("Classpath of javax.mail.Service: " + classUrl);
+
         MimeMessage message = mailSender.createMimeMessage();
         try {
             message.addFrom(getSenderAddresses());
@@ -77,4 +84,23 @@ public class EmailService implements MessageService {
 
         mailSender.send(message);
     }
+    
+    public String whereFrom(String s) {
+        Class<?> c = this.getClass();
+        ClassLoader loader = c.getClassLoader();
+        if ( loader == null ) {
+          // Try the bootstrap classloader - obtained from the ultimate parent of the System Class Loader.
+          loader = ClassLoader.getSystemClassLoader();
+          while ( loader != null && loader.getParent() != null ) {
+            loader = loader.getParent();
+          }
+        }
+        if (loader != null) {
+          java.net.URL resource = loader.getResource(s.replace(".", "/") + ".class");
+          if ( resource != null ) {
+            return resource.toString();
+          }
+        }
+        return "Unknown";
+      }
 }
