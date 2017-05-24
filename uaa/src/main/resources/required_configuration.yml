@@ -44,3 +44,9 @@ LOGIN_SECRET: loginsecret
 jwt:
   token:
     signing-key: tokenKey
+
+name: test-uaa
+
+zipkin:
+  reporting:
+    url: http://localhost:9411/api/v1/spans

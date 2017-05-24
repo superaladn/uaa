@@ -195,7 +195,7 @@
     <bean id="sessionFixationProtectionStrategy"
           class="org.springframework.security.web.authentication.session.ChangeSessionIdAuthenticationStrategy" />
 
-    <bean id="logFilter" class="com.ge.predix.log.filter.LogFilter">
+    <!--<bean id="logFilter" class="com.ge.predix.log.filter.LogFilter">
         <constructor-arg>
             <set value-type="java.lang.String">
                 <value>${METER_BASE_DOMAIN:localhost}</value>
@@ -207,7 +207,9 @@
             </set>
         </constructor-arg>
         <constructor-arg value="uaa" />
-    </bean>
+    </bean>-->
+
+    <import resource="classpath:spring/zipkin-brave.xml"/>
 
     <bean class="org.cloudfoundry.identity.uaa.security.web.SecurityFilterChainPostProcessor">
         <property name="requireHttps" value="${require_https:false}" />
@@ -234,6 +236,8 @@
         </property>
         <property name="additionalFilters">
             <map>
+                <entry value-ref="tracingFilter"
+                       key="#{T(org.cloudfoundry.identity.uaa.security.web.SecurityFilterChainPostProcessor.FilterPosition).before(T(org.cloudfoundry.identity.uaa.zone.IdentityZoneSwitchingFilter))}" />
                 <entry value-ref="utf8ConversionFilter"
                        key="#{T(org.cloudfoundry.identity.uaa.security.web.SecurityFilterChainPostProcessor.FilterPosition).position(0)}" />
                 <entry value-ref="corsFilter"
@@ -243,8 +247,8 @@
                 <!-- Add in a flag that removes id_token from /oauth/authorize requests-->
                 <entry value-ref="disableIdTokenResponseFilter"
                        key="#{T(org.cloudfoundry.identity.uaa.security.web.SecurityFilterChainPostProcessor.FilterPosition).position(3)}"/>
-                <entry value-ref="logFilter"
-                       key="#{T(org.cloudfoundry.identity.uaa.security.web.SecurityFilterChainPostProcessor.FilterPosition).position(4)}" />
+                <!--<entry value-ref="logFilter"
+                       key="#{T(org.cloudfoundry.identity.uaa.security.web.SecurityFilterChainPostProcessor.FilterPosition).position(4)}" />-->
                 <entry value-ref="meteringFilter"
                        key="#{T(org.cloudfoundry.identity.uaa.security.web.SecurityFilterChainPostProcessor.FilterPosition).position(5)}" />
                 <!-- Zone switcher goes *after* class OAuth2AuthenticationProcessingFilter as it requires a token to be present to work -->
@@ -501,5 +505,4 @@
     </bean>
 
     <import resource="classpath:META-INF/spring/tasks.xml"/>
-
 </beans>

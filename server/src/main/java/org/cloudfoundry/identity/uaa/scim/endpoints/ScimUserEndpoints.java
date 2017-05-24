@@ -46,10 +46,13 @@ import org.cloudfoundry.identity.uaa.util.UaaStringUtils;
 import org.cloudfoundry.identity.uaa.web.ConvertingExceptionView;
 import org.cloudfoundry.identity.uaa.web.ExceptionReport;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.dao.OptimisticLockingFailureException;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -138,6 +141,11 @@ public class ScimUserEndpoints implements InitializingBean, ApplicationEventPubl
     private ExpiringCodeStore codeStore;
 
     private ApplicationEventPublisher publisher;
+
+
+    @Autowired
+    @Qualifier("tracingRestTemplate")
+    private RestTemplate restTemplate;
 
     public void checkIsEditAllowed(String origin, HttpServletRequest request) {
         Object attr = request.getAttribute(DisableInternalUserManagementFilter.DISABLE_INTERNAL_USER_MANAGEMENT);
@@ -230,6 +238,22 @@ public class ScimUserEndpoints implements InitializingBean, ApplicationEventPubl
         }
         scimUser = syncApprovals(syncGroups(scimUser));
         addETagHeader(response, scimUser);
+
+        //TODO  [BEGIN]
+        // REMOVE this only used for demo of Users endpoint for Zipkin reporting.
+        //Need to have a httpserver running on port 8000 locally and have a file a.txt in the root path
+        // verify outbound traces/spans
+        try{
+            HttpHeaders headers = restTemplate.headForHeaders("http://localhost:8000/a.txt");
+            if(headers.isEmpty()) {
+                logger.debug("SimpleHttpServer did not return any header");
+            } else {
+                logger.debug(headers.toString());
+            }
+        }catch (Exception e) {
+            //Swallow it...this is just test code...
+        }
+        //TODO  [END]
         return scimUser;
     }
 

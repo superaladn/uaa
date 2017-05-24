@@ -31,6 +31,11 @@ dependencies {
   compile(group: 'org.springframework.security.extensions', name: 'spring-security-saml2-core', version:parent.springSecuritySamlVersion) {
     exclude(module: 'opensaml')
   }
+  compile group: 'io.zipkin.brave', name: 'brave', version:'4.3.3'
+  compile group: 'io.zipkin.reporter', name: 'zipkin-sender-okhttp3', version:'0.9.0'
+  compile group: 'io.zipkin.brave', name: 'brave-instrumentation-servlet', version:'4.3.3'
+  compile group: 'io.zipkin.brave', name: 'brave-context-slf4j', version:'4.3.3'
+  compile group: 'io.zipkin.brave', name: 'brave-instrumentation-spring-web', version:'4.3.3'
   compile(group: 'org.opensaml', name: 'opensaml', version: '2.6.4') {
     exclude(module: 'bcprov-jdk15on')
   }
