@@ -99,6 +99,8 @@ public class UaaConfiguration {
     @Valid
     public Map<String,Object> uaa;
     @Valid
+    public Map<String,Object> zipkin;
+    @Valid
     public String assetBaseUrl;
     @Valid
     public String LOGIN_SECRET;

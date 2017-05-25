@@ -1,7 +1,7 @@
 package org.cloudfoundry.identity.uaa.impl.config;
 
 import brave.Tracing;
-import brave.context.slf4j.MDCCurrentTraceContext;
+import brave.context.log4j12.MDCCurrentTraceContext;
 import brave.http.HttpTracing;
 import brave.servlet.TracingFilter;
 import brave.spring.web.TracingClientHttpRequestInterceptor;
@@ -45,7 +45,7 @@ public class ZipkinBraveConfig {
     Tracing tracing() {
         return Tracing.newBuilder()
                 .localServiceName(serviceNameForTracing)
-//                .currentTraceContext(MDCCurrentTraceContext.create()) // puts trace IDs into logs
+                .currentTraceContext(MDCCurrentTraceContext.create()) // puts trace IDs into logs
                 .reporter(reporter()).build();
     }
 
