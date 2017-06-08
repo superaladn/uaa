@@ -129,6 +129,7 @@ public class SamlIdentityProviderConfiguratorTests {
     }
 
     @Test
+    @Ignore
     public void testGetEntityID() throws Exception {
         Timer t = new Timer();
         bootstrap.setIdentityProviders(BootstrapSamlIdentityProviderConfiguratorTests.parseYaml(BootstrapSamlIdentityProviderConfiguratorTests.sampleYaml));
