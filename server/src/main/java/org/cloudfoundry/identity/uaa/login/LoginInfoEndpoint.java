@@ -35,6 +35,7 @@ import org.cloudfoundry.identity.uaa.provider.saml.SamlRedirectUtils;
 import org.cloudfoundry.identity.uaa.util.ColorHash;
 import org.cloudfoundry.identity.uaa.util.DomainFilter;
 import org.cloudfoundry.identity.uaa.util.JsonUtils;
+import org.cloudfoundry.identity.uaa.util.JsonUtils.JsonUtilException;
 import org.cloudfoundry.identity.uaa.util.MapCollector;
 import org.cloudfoundry.identity.uaa.util.UaaStringUtils;
 import org.cloudfoundry.identity.uaa.util.UaaUrlUtils;
@@ -100,6 +101,7 @@ import static org.cloudfoundry.identity.uaa.util.UaaUrlUtils.addSubdomainToUrl;
 import static org.cloudfoundry.identity.uaa.web.UaaSavedRequestAwareAuthenticationSuccessHandler.SAVED_REQUEST_SESSION_ATTRIBUTE;
 import static org.springframework.util.StringUtils.hasText;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * Controller that sends login info (e.g. prompts) to clients wishing to
@@ -253,12 +255,18 @@ public class LoginInfoEndpoint {
         return login(model, principal, Arrays.asList(PASSCODE), false, request);
     }
 
-    private static <T extends SavedAccountOption> List<T> getSavedAccounts(Cookie[] cookies, Class<T> clazz) {
+    private static <T extends SavedAccountOption> List<T> getSavedAccounts(
+            Cookie[] cookies, Class<T> clazz) {
         return Arrays.asList(ofNullable(cookies).orElse(new Cookie[]{}))
-                .stream()
-                .filter(c -> c.getName().startsWith("Saved-Account"))
-                .map(c -> JsonUtils.readValue(decodeCookieValue(c.getValue()), clazz))
-                .collect(Collectors.toList());
+                .stream().filter(c -> c.getName().startsWith("Saved-Account"))
+                .map(c -> {
+                    try {
+                        return JsonUtils.readValue(
+                                decodeCookieValue(c.getValue()), clazz);
+                    } catch (JsonUtilException e) {
+                        return null;
+                    }
+                }).filter(c -> c != null).collect(Collectors.toList());
     }
 
     private static String decodeCookieValue(String inValue) {
