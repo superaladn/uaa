@@ -132,14 +132,13 @@ task acceptanceTest(type: Test) {
   include "org/cloudfoundry/identity/uaa/acceptance/*.class"
 }
 
-task degradedTest(type: Test) {
-  dependsOn rootProject.cargoStartLocal
-  finalizedBy rootProject.cargoStopLocal
-  include "org/cloudfoundry/identity/uaa/degraded/*.class"
+task degradedJwtTestCloud(type: Test) {
+  systemProperty "RUN_AGAINST_CLOUD", true
+  include "org/cloudfoundry/identity/uaa/jwt/degraded/*.class"
 }
 
-
-task degradedJwtTest(type: Test) {
+task degradedJwtTestLocal(type: Test) {
+  systemProperty "RUN_AGAINST_CLOUD", false
   dependsOn rootProject.cargoStartLocal
   finalizedBy rootProject.cargoStopLocal
   include "org/cloudfoundry/identity/uaa/jwt/degraded/*.class"
