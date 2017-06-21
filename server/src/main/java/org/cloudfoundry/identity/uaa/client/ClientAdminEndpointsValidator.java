@@ -19,6 +19,7 @@ import org.cloudfoundry.identity.uaa.oauth.OauthGrant;
 import org.cloudfoundry.identity.uaa.resources.QueryableResourceManager;
 import org.cloudfoundry.identity.uaa.security.DefaultSecurityContextAccessor;
 import org.cloudfoundry.identity.uaa.security.SecurityContextAccessor;
+import org.cloudfoundry.identity.uaa.util.UaaUrlUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.oauth2.provider.ClientDetails;
@@ -85,14 +86,14 @@ public class ClientAdminEndpointsValidator implements InitializingBean, ClientDe
         }
 
         client.setAdditionalInformation(prototype.getAdditionalInformation());
-
         String clientId = client.getClientId();
         if (create && reservedClientIds.contains(clientId)) {
             throw new InvalidClientDetailsException("Not allowed: " + clientId + " is a reserved client_id");
         }
 
-        Set<String> requestedGrantTypes = client.getAuthorizedGrantTypes();
+        validateClientRedirectUri(client);
 
+        Set<String> requestedGrantTypes = client.getAuthorizedGrantTypes();
         if (requestedGrantTypes.isEmpty()) {
             throw new InvalidClientDetailsException("An authorized grant type must be provided. Must be one of: "
                             + OauthGrant.SUPPORTED_GRANTS.toString());
@@ -214,6 +215,30 @@ public class ClientAdminEndpointsValidator implements InitializingBean, ClientDe
 
     }
 
+    public void validateClientRedirectUri(ClientDetails client) {
+        Set<String> uris = client.getRegisteredRedirectUri();
+
+        for(String grant_type: Arrays.asList("authorization_code", "implicit")) {
+            if(client.getAuthorizedGrantTypes().contains(grant_type)) {
+
+                if (isMissingRedirectUris(uris)) {
+                    throw new InvalidClientDetailsException(grant_type + " grant type requires at least one redirect URL.");
+                }
+
+                for (String uri : uris) {
+                    if (!UaaUrlUtils.isValidRegisteredRedirectUrl(uri)) {
+                        throw new InvalidClientDetailsException(
+                            String.format("One of the redirect_uri is invalid: %s", uri));
+                    }
+                }
+            }
+        }
+    }
+
+    private boolean isMissingRedirectUris(Set<String> uris) {
+        return uris == null || uris.isEmpty();
+    }
+
     public static void checkRequestedGrantTypes(Set<String> requestedGrantTypes) {
         for (String grant : requestedGrantTypes) {
             if (!OauthGrant.SUPPORTED_GRANTS.contains(grant.toLowerCase())) {
@@ -222,6 +247,4 @@ public class ClientAdminEndpointsValidator implements InitializingBean, ClientDe
             }
         }
     }
-
-
 }
