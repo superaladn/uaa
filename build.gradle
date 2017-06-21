@@ -340,7 +340,12 @@ task integrationTest {
 }
 integrationTest.dependsOn subprojects.integrationTest
 
-task setupDegradedTestsForJwtBearer(type: Exec, dependsOn: cargoStartLocal) {
+task setupDegradedTestsForJwtBearerCloud(type: Exec) {
+  workingDir 'scripts'
+  commandLine './setupDegradedTestsForJwtBearer.sh'
+}
+
+task setupDegradedTestsForJwtBearerLocal(type: Exec, dependsOn: cargoStartLocal) {
   workingDir 'scripts'
   commandLine './setupDegradedTestsForJwtBearer.sh'
   finalizedBy cargoStopLocal
