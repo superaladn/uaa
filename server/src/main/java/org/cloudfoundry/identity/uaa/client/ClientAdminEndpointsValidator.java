@@ -34,9 +34,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.cloudfoundry.identity.uaa.oauth.token.TokenConstants.GRANT_TYPE_SAML2_BEARER;
-import static org.cloudfoundry.identity.uaa.oauth.token.TokenConstants.GRANT_TYPE_USER_TOKEN;
-
 public class ClientAdminEndpointsValidator implements InitializingBean, ClientDetailsValidator {
 
 
