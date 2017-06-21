@@ -90,6 +90,13 @@ allprojects {
     maven {
         url 'https://build.shibboleth.net/nexus/content/repositories/releases/'
     }
+    maven {
+      credentials {
+        username geArtifactoryReader
+        password geArtifactoryReaderPassword
+      }
+      url 'https://devcloud.swcoe.ge.com/artifactory/predix-virtual'
+   }
   }
 }
 
@@ -159,6 +166,11 @@ subprojects {
   targetCompatibility = 1.8
   test {
     jvmArgs += [ "-Xmx1024m" ]
+  }
+
+  tasks.withType(Test) {
+    systemProperties = System.properties
+    systemProperties['user.dir'] = workingDir
   }
 
   task integrationTest(type: Test) {
