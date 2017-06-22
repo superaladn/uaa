@@ -112,7 +112,6 @@ public class JwtBearerAssertionTokenAuthenticator {
             jwt.verifySignature(getVerifier(devicePublicKey));
 
             validateClaims(claims);
-
             String issuer = (String) claims.get(ClaimConstants.ISS);
             assertSubjectIsAuthorized(issuer, (String) claims.get(ClaimConstants.SUB));
 
@@ -126,7 +125,6 @@ public class JwtBearerAssertionTokenAuthenticator {
         } catch (RuntimeException e) {
             this.logger.debug("Validation failed for jwt-bearer assertion token. token:{" + jwt + "} error: " + e);
         }
-
         // Do not include error detail in this exception.
         throw new BadCredentialsException("Authentication of client failed.");
     }

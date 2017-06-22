@@ -66,7 +66,6 @@ public class JwtBearerAssertionAuthenticationFilter extends OncePerRequestFilter
         	else if (grantType.equals(OauthGrant.JWT_BEARER)) {
                 String assertion = request.getParameter("assertion");
                 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
                 if (StringUtils.isEmpty(assertion)) {
                     throw new BadCredentialsException("No assertion token provided.");
                 }
