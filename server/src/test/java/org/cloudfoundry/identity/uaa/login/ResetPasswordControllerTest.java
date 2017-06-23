@@ -225,7 +225,7 @@ public class ResetPasswordControllerTest extends TestClassNullifier {
 
         mockMvc.perform(post("/forgot_password.do")
                 .contentType(APPLICATION_FORM_URLENCODED)
-                .param("email", "user@example.com")
+                .param("username", "user@example.com")
                 .param("client_id", "example")
                 .param("redirect_uri", "redirect.example.com"))
                 .andExpect(status().isNotFound())
