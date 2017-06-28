@@ -32,6 +32,7 @@ buildscript {
 
 apply plugin: "com.dorongold.task-tree"
 
+
 ext {
   databaseType = {
     List activeProfiles = System.getProperty('spring.profiles.active', 'default').split(',')
@@ -148,6 +149,8 @@ task manifests(dependsOn: assemble, type: Copy) {
   }
   into 'build/sample-manifests'
 }
+
+
 
 subprojects {
   apply plugin: 'java'
@@ -367,6 +370,12 @@ task integrationTest {
 }
 integrationTest.dependsOn subprojects.integrationTest
 
+task setupDegradedTestsForJwtBearer(type: Exec, dependsOn: cargoStartLocal) {
+  workingDir 'scripts'
+  commandLine './setupDegradedTestsForJwtBearer.sh'
+  finalizedBy cargoStopLocal
+}
+
 test.dependsOn subprojects.test
 test.mustRunAfter integrationTest
 
@@ -423,12 +432,16 @@ tasks.coveralls {
   description = 'Uploads the aggregated coverage report to Coveralls'
 }
 
-task setupDegradedTest(type: Exec, dependsOn: cargoStartLocal) {
+task setupDegradedTestLocal(type: Exec, dependsOn: cargoStartLocal) {
   workingDir 'scripts'
   commandLine './setupDegradedTests.sh'
   finalizedBy 'cargoStopLocal'
 }
 
+task setupDegradedTestCloud(type: Exec) {
+  workingDir 'scripts'
+  commandLine './setupDegradedTests.sh'
+}
 
 // Log timings per task.
 class TimingsListener implements TaskExecutionListener, BuildListener, org.gradle.api.tasks.testing.TestListener {
