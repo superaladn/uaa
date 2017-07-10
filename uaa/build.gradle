@@ -133,6 +133,13 @@ generateDocs {
   dependsOn slate
 }
 
+task runUaaDockerTests(type: Test) {
+    systemProperty 'RUN_AGAINST_LOCAL_UAA', true
+    systemProperty 'ACCEPTANCE_ZONE_ID', 'uaa-acceptance-zone'
+    systemProperty 'ACCEPTANCE_SUBDOMAIN', 'uaa-acceptance-zone'
+    include "org/cloudfoundry/identity/uaa/acceptance/*.class"
+}
+
 integrationTest {
   exclude 'org/cloudfoundry/identity/uaa/jwt/degraded/*.class'
   filter {

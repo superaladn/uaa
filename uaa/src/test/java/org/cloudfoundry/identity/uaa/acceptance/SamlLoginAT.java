@@ -96,6 +96,9 @@ public class SamlLoginAT {
     @Value("${ARTIFACTORY_READER_PW}")
     String GESSOPassword;
 
+    @Value("${RUN_AGAINST_LOCAL_UAA:false}")
+    boolean runAgainstLocalUaa;
+
     @Autowired
     TestAccounts testAccounts;
 
@@ -124,7 +127,12 @@ public class SamlLoginAT {
 
     @Before
     public void clearWebDriverOfCookies() throws Exception {
-        baseUrl = "https://" + zoneSubdomain + "."  + publishedHost + "." + cfDomain;
+        if (runAgainstLocalUaa) {
+            baseUrl = "http://" + zoneSubdomain + ".localhost:8080/uaa";
+        }
+        else {
+            baseUrl = "https://" + zoneSubdomain + "."  + publishedHost + "." + cfDomain;
+        }
         zoneAdminToken = IntegrationTestUtils.getClientCredentialsToken(baseUrl, "admin", "acceptance-test");
 
         screenShootRule.setWebDriver(webDriver);
@@ -147,7 +155,9 @@ public class SamlLoginAT {
         webDriver.get(baseUrl + firstUrl);
         webDriver.findElement(By.xpath("//a[text()='" + provider.getConfig().getLinkText() + "']")).click();
         logger.info(webDriver.getCurrentUrl());
-        webDriver.findElement(By.xpath("//h1[contains(text(), 'GE Single Sign On')]"));
+        String page = webDriver.getPageSource();
+        logger.info(page);
+        //webDriver.findElement(By.xpath("//h1[contains(text(), 'GE Single Sign On')]"));
         webDriver.findElement(By.name("username")).clear();
         webDriver.findElement(By.name("username")).sendKeys(GESSOUsername);
         webDriver.findElement(By.name("password")).sendKeys(GESSOPassword);
