@@ -38,6 +38,9 @@ apply plugin: 'java'
 
 import com.bmuschko.gradle.docker.tasks.image.Dockerfile
 import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
+import com.bmuschko.gradle.docker.tasks.image.DockerPullImage
+import com.bmuschko.gradle.docker.tasks.image.DockerPushImage
+import com.bmuschko.gradle.docker.DockerRegistryCredentials
 import com.bmuschko.gradle.docker.tasks.container.DockerCreateContainer
 import com.bmuschko.gradle.docker.tasks.container.DockerStartContainer
 import com.bmuschko.gradle.docker.tasks.container.DockerStopContainer
@@ -56,7 +59,7 @@ task createDockerfile(type: Dockerfile) {
     instruction 'RUN bash -c "rm -r /usr/local/tomcat/webapps/manager"'
     instruction 'RUN bash -c "rm -r /usr/local/tomcat/webapps/examples"'
     instruction 'RUN bash -c "rm -r /usr/local/tomcat/webapps/docs"'
-    instruction 'ADD cloudfoundry-identity-uaa-4.4.0.war /usr/local/tomcat/webapps/uaa.war'
+    instruction 'ADD cloudfoundry-identity-uaa-' + version + '.war /usr/local/tomcat/webapps/uaa.war'
     instruction 'RUN bash -c "echo $LOGIN_CONFIG_URL"'
     instruction 'EXPOSE 8080'
 }
@@ -75,7 +78,7 @@ task copyContainerFiles(type: Copy) {
 task buildImage(type: DockerBuildImage) {
     dependsOn copyContainerFiles
     inputDir = createDockerfile.destFile.parentFile
-    tag = 'uaa:4.4.0'
+    tag = System.getenv('DOCKER_REPO_URL') + '/uaa:' + version
 }
 
 task createUaaContainer(type: DockerCreateContainer) {
@@ -102,6 +105,16 @@ task setupDockerTests(type: Exec) {
 task runUaaDockerTests(type: Test) {
     dependsOn setupDockerTests
     //finalizedBy stopUaaContainer
+}
+
+task pushUaaImage(type: DockerPushImage) {
+    dependsOn buildImage
+    imageName = System.getenv('DOCKER_REPO_URL') + '/uaa'
+    registryCredentials = new DockerRegistryCredentials()
+    registryCredentials.url = System.getenv('DOCKER_REPO_URL')
+    registryCredentials.username = System.getenv('DOCKER_REPO_USER')
+    registryCredentials.password = System.getenv('DOCKER_REPO_USER_PW')
+    registryCredentials.email = 'uaa@ge.com'
 }
 
 
