@@ -53,7 +53,7 @@ task createDockerfile(type: Dockerfile) {
     instruction 'ENV LOGIN_CONFIG_URL WEB-INF/classes/required_configuration.yml'
     instruction 'ENV ARTIFACTORY_READER $ARTIFACTORY_READER'
     instruction 'ENV ARTIFACTORY_READER_PW $ARTIFACTORY_READER_PW'
-    instruction 'ENV CATALINA_OPTS -Dspring.profiles.active=default,postgresql'
+    instruction 'ENV CATALINA_OPTS -Dspring.profiles.active=default'
     instruction 'RUN bash -c "rm -r /usr/local/tomcat/webapps/ROOT"'
     instruction 'RUN bash -c "rm -r /usr/local/tomcat/webapps/host-manager"'
     instruction 'RUN bash -c "rm -r /usr/local/tomcat/webapps/manager"'
@@ -100,11 +100,6 @@ task setupDockerTests(type: Exec) {
     dependsOn startUaaContainer
     workingDir 'scripts'
     commandLine './setupDockerTests.sh'
-}
-
-task runUaaDockerTests(type: Test) {
-    dependsOn setupDockerTests
-    finalizedBy stopUaaContainer
 }
 
 task pushUaaImage(type: DockerPushImage) {
