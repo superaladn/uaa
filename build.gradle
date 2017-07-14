@@ -53,13 +53,14 @@ task createDockerfile(type: Dockerfile) {
     instruction 'ENV LOGIN_CONFIG_URL WEB-INF/classes/required_configuration.yml'
     instruction 'ENV ARTIFACTORY_READER $ARTIFACTORY_READER'
     instruction 'ENV ARTIFACTORY_READER_PW $ARTIFACTORY_READER_PW'
-    instruction 'ENV CATALINA_OPTS -Dspring.profiles.active=postgresql -Ddatabase.driverClassName=org.postgresql.Driver -Ddatabase.url=postgres://db:5432 -Ddatabase.username=postgres'
+    instruction 'ENV CATALINA_OPTS -Dspring.profiles.active=default,postgresql -Ddatabase.driverClassName=org.postgresql.Driver -Ddatabase.url=jdbc:postgresql://db:5432/ -Ddatabase.username=postgres'
     instruction 'RUN bash -c "rm -r /usr/local/tomcat/webapps/ROOT"'
     instruction 'RUN bash -c "rm -r /usr/local/tomcat/webapps/host-manager"'
     instruction 'RUN bash -c "rm -r /usr/local/tomcat/webapps/manager"'
     instruction 'RUN bash -c "rm -r /usr/local/tomcat/webapps/examples"'
     instruction 'RUN bash -c "rm -r /usr/local/tomcat/webapps/docs"'
     instruction 'ADD cloudfoundry-identity-uaa-' + version + '.war /usr/local/tomcat/webapps/uaa.war'
+    // instruction 'ADD uaa.yml /usr/local/tomcat/'
     instruction 'RUN bash -c "echo $LOGIN_CONFIG_URL"'
     instruction 'EXPOSE 8080'
 }
@@ -93,12 +94,20 @@ task startUaaContainer(type: DockerStartContainer) {
     targetContainerId { createUaaContainer.getContainerId() }
 }
 
+task dockerCompose(type: Exec) {
+    dependsOn copyContainerFiles
+    workingDir '.'
+    commandLine 'scripts/dockerCompose.sh'
+
+}
+
 task stopUaaContainer(type: DockerStopContainer) {
     targetContainerId { createUaaContainer.getContainerId() }
 }
 
 task setupDockerTests(type: Exec) {
-    dependsOn startUaaContainer
+    dependsOn dockerCompose
+    // dependsOn startUaaContainer
     workingDir 'scripts'
     commandLine './setupDockerTests.sh'
 }
