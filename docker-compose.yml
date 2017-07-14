@@ -1,0 +1,10 @@
+version: "3"
+services:
+  uaa:
+    build: .
+    ports:
+      - "8080:8080"
+  db:
+    image: postgres
+    ports:
+      - "8001:5432"

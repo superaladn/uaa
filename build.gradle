@@ -53,7 +53,7 @@ task createDockerfile(type: Dockerfile) {
     instruction 'ENV LOGIN_CONFIG_URL WEB-INF/classes/required_configuration.yml'
     instruction 'ENV ARTIFACTORY_READER $ARTIFACTORY_READER'
     instruction 'ENV ARTIFACTORY_READER_PW $ARTIFACTORY_READER_PW'
-    instruction 'ENV CATALINA_OPTS -Dspring.profiles.active=default'
+    instruction 'ENV CATALINA_OPTS -Dspring.profiles.active=postgresql -Ddatabase.driverClassName=org.postgresql.Driver -Ddatabase.url=postgres://db:5432 -Ddatabase.username=postgres'
     instruction 'RUN bash -c "rm -r /usr/local/tomcat/webapps/ROOT"'
     instruction 'RUN bash -c "rm -r /usr/local/tomcat/webapps/host-manager"'
     instruction 'RUN bash -c "rm -r /usr/local/tomcat/webapps/manager"'
@@ -72,6 +72,7 @@ task copyContainerFiles(type: Copy) {
     dependsOn createDockerfile
     from 'uaa/build/libs'
     from 'uaa/build/resources/main/tomcat-server.xml'
+    from 'docker-compose.yml'
     into 'build/docker'
 }
 
