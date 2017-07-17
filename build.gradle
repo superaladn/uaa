@@ -53,14 +53,14 @@ task createDockerfile(type: Dockerfile) {
     instruction 'ENV LOGIN_CONFIG_URL WEB-INF/classes/required_configuration.yml'
     instruction 'ENV ARTIFACTORY_READER $ARTIFACTORY_READER'
     instruction 'ENV ARTIFACTORY_READER_PW $ARTIFACTORY_READER_PW'
-    instruction 'ENV CATALINA_OPTS -Dspring.profiles.active=default,postgresql -Ddatabase.driverClassName=org.postgresql.Driver -Ddatabase.url=jdbc:postgresql://db:5432/ -Ddatabase.username=postgres'
+    instruction 'ENV CLOUD_FOUNDRY_CONFIG_PATH /uaa'
     instruction 'RUN bash -c "rm -r /usr/local/tomcat/webapps/ROOT"'
     instruction 'RUN bash -c "rm -r /usr/local/tomcat/webapps/host-manager"'
     instruction 'RUN bash -c "rm -r /usr/local/tomcat/webapps/manager"'
     instruction 'RUN bash -c "rm -r /usr/local/tomcat/webapps/examples"'
     instruction 'RUN bash -c "rm -r /usr/local/tomcat/webapps/docs"'
     instruction 'ADD cloudfoundry-identity-uaa-' + version + '.war /usr/local/tomcat/webapps/uaa.war'
-    // instruction 'ADD uaa.yml /usr/local/tomcat/'
+    instruction 'ADD uaa.yml /uaa/uaa.yml'
     instruction 'RUN bash -c "echo $LOGIN_CONFIG_URL"'
     instruction 'EXPOSE 8080'
 }
@@ -74,13 +74,14 @@ task copyContainerFiles(type: Copy) {
     from 'uaa/build/libs'
     from 'uaa/build/resources/main/tomcat-server.xml'
     from 'docker-compose.yml'
+    from 'uaa.yml'
     into 'build/docker'
 }
 
 task buildImage(type: DockerBuildImage) {
     dependsOn copyContainerFiles
     inputDir = createDockerfile.destFile.parentFile
-    tag = System.getenv('DOCKER_REPO_URL') + '/uaa:' + version
+    tag = System.getenv('DOCKER_REPO_URL') + '/' + System.getenv('DOCKER_REPO_USER') + '/uaa:' + version
 }
 
 task createUaaContainer(type: DockerCreateContainer) {
@@ -94,6 +95,7 @@ task startUaaContainer(type: DockerStartContainer) {
     targetContainerId { createUaaContainer.getContainerId() }
 }
 
+//TODO remove docker compose when creating pull request
 task dockerCompose(type: Exec) {
     dependsOn copyContainerFiles
     workingDir '.'
@@ -114,12 +116,12 @@ task setupDockerTests(type: Exec) {
 
 task pushUaaImage(type: DockerPushImage) {
     dependsOn buildImage
-    imageName = System.getenv('DOCKER_REPO_URL') + '/uaa'
+    imageName = System.getenv('DOCKER_REPO_URL') + '/' + System.getenv('DOCKER_REPO_USER') + '/uaa:' + version
     registryCredentials = new DockerRegistryCredentials()
     registryCredentials.url = System.getenv('DOCKER_REPO_URL')
     registryCredentials.username = System.getenv('DOCKER_REPO_USER')
     registryCredentials.password = System.getenv('DOCKER_REPO_USER_PW')
-    registryCredentials.email = 'uaa@ge.com'
+    // registryCredentials.email = 'uaa@ge.com'
 }
 
 
