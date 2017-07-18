@@ -74,7 +74,7 @@ task copyContainerFiles(type: Copy) {
     from 'uaa/build/libs'
     from 'uaa/build/resources/main/tomcat-server.xml'
     from 'docker-compose.yml'
-    from 'uaa.yml'
+    from 'uaa/build/resources/main/uaa.yml'
     into 'build/docker'
 }
 
@@ -108,8 +108,8 @@ task stopUaaContainer(type: DockerStopContainer) {
 }
 
 task setupDockerTests(type: Exec) {
-    dependsOn dockerCompose
-    // dependsOn startUaaContainer
+    dependsOn startUaaContainer
+    dependsOn startUaaContainer
     workingDir 'scripts'
     commandLine './setupDockerTests.sh'
 }
