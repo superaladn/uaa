@@ -136,9 +136,6 @@ generateDocs {
 task runUaaDockerTests(type: Test) {
     dependsOn rootProject.setupDockerTests
     finalizedBy rootProject.stopUaaContainer
-    systemProperty 'RUN_AGAINST_LOCAL_UAA', true
-    systemProperty 'ACCEPTANCE_ZONE_ID', 'uaa-acceptance-zone'
-    systemProperty 'ACCEPTANCE_SUBDOMAIN', 'uaa-acceptance-zone'
     include "org/cloudfoundry/identity/uaa/acceptance/*.class"
 }
 

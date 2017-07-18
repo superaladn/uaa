@@ -5,8 +5,8 @@ set -v
 
 sleep 10s
 
-export ACCEPTANCE_ZONE_ID=uaa-acceptance-zone
-export ACCEPTANCE_SUBDOMAIN=uaa-acceptance-zone
+#export ACCEPTANCE_ZONE_ID=test-zone-uaa
+#export ACCEPTANCE_SUBDOMAIN=test-zone-uaa
 
 uaac target http://localhost:8080/uaa
 uaac token client get admin -s adminsecret
