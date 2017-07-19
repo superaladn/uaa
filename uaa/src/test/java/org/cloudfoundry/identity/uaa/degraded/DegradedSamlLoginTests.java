@@ -56,9 +56,11 @@ public class DegradedSamlLoginTests {
     private static final String ZONE_AUTHCODE_CLIENT_ID = "exampleClient";
     private static final String ZONE_AUTHCODE_CLIENT_SECRET = "secret";
     public static final String ZONE_ADMIN = "admin";
-    public static final String ZONE_ADMINSECRET = "adminsecret";
     @Rule
     public ScreenshotOnFail screenShootRule = new ScreenshotOnFail();
+
+    @Value("${ZONE_ADMIN_SECRET:adminsecret}")
+    String zoneAdminSecret;
 
     @Value("${PUBLISHED_HOST:predix-uaa-integration}")
     String publishedHost;
@@ -83,21 +85,18 @@ public class DegradedSamlLoginTests {
 
     protected final static Logger logger = LoggerFactory.getLogger(DegradedSamlLoginTests.class);
     private final static String zoneSubdomain = "test-app-zone";
-    private String baseUaaZoneHost;
     private String protocol;
     private String baseUrl;
     private String testRedirectUri;
     private String zoneAdminToken;
-    private String baseBasicAuth;
-
 
     @Before
     public void setup() throws Exception {
-        baseUaaZoneHost = Boolean.valueOf(environment.getProperty("RUN_AGAINST_CLOUD")) ? (publishedHost + "." + cfDomain) : "localhost:8080/uaa";
+        String baseUaaZoneHost = Boolean.valueOf(environment.getProperty("RUN_AGAINST_CLOUD")) ? (publishedHost + "." + cfDomain) : "localhost:8080/uaa";
         protocol = Boolean.valueOf(environment.getProperty("RUN_AGAINST_CLOUD")) ? "https://" : "http://";
-        baseUrl = protocol + zoneSubdomain+ "." + baseUaaZoneHost;
+        baseUrl = protocol + zoneSubdomain + "." + baseUaaZoneHost;
         testRedirectUri = protocol +  "test-url.dummy.predix.io";
-        zoneAdminToken = IntegrationTestUtils.getClientCredentialsToken(baseUrl, ZONE_ADMIN, ZONE_ADMINSECRET);
+        zoneAdminToken = IntegrationTestUtils.getClientCredentialsToken(baseUrl, ZONE_ADMIN, zoneAdminSecret);
         screenShootRule.setWebDriver(webDriver);
     }
 
@@ -121,10 +120,9 @@ public class DegradedSamlLoginTests {
         RestTemplate restTemplate = new RestTemplate();
         MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
         headers.add("Accept", APPLICATION_JSON_VALUE);
-        headers.set("Authorization", getAuthorizationHeader(basicAuthClientId, basicAuthClientSecret));
         HttpEntity getHeaders = new HttpEntity(headers);
         ResponseEntity<Map> tokenKeyGet = restTemplate.exchange(
-                protocol + baseUaaZoneHost + "/token_key",
+                baseUrl + "/token_key",
                 HttpMethod.GET,
                 getHeaders,
                 Map.class
@@ -191,7 +189,7 @@ public class DegradedSamlLoginTests {
         headers.add(HttpHeaders.CONTENT_TYPE, APPLICATION_FORM_URLENCODED_VALUE);
         headers.set("Authorization", getAuthorizationHeader(basicAuthClientId, basicAuthClientSecret));
 
-        ResponseEntity<Map> tokenResponse = new RestTemplate().exchange(protocol + baseUaaZoneHost + "/oauth/token", HttpMethod.POST, new HttpEntity<MultiValueMap>(postBody, headers), Map.class);
+        ResponseEntity<Map> tokenResponse = new RestTemplate().exchange(baseUrl + "/oauth/token", HttpMethod.POST, new HttpEntity<MultiValueMap>(postBody, headers), Map.class);
         assertThat(tokenResponse.getStatusCode().value(), Matchers.equalTo(200));
 
         OAuth2AccessToken accessToken = DefaultOAuth2AccessToken.valueOf(tokenResponse.getBody());
@@ -199,7 +197,7 @@ public class DegradedSamlLoginTests {
         MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
         formData.add("token", accessToken.getValue());
 
-        ResponseEntity<Map> checkTokenResponse = new RestTemplate().exchange(protocol + baseUaaZoneHost + "/check_token", HttpMethod.POST, new HttpEntity<>(formData, headers), Map.class);
+        ResponseEntity<Map> checkTokenResponse = new RestTemplate().exchange(baseUrl + "/check_token", HttpMethod.POST, new HttpEntity<>(formData, headers), Map.class);
         assertEquals(checkTokenResponse.getStatusCode(), HttpStatus.OK);
         logger.info("check token response: " + checkTokenResponse.getBody());
         assertEquals("marissa", checkTokenResponse.getBody().get("user_name"));
@@ -207,8 +205,8 @@ public class DegradedSamlLoginTests {
 
     @Test
     public void testImplicitTokenAndCheckToken() throws Exception {
-        webDriver.get(protocol + baseUaaZoneHost + "/oauth/authorize?client_id=cf&response_type=token&redirect_uri=" + testRedirectUri +"/cf");
-
+        webDriver.get(baseUrl + "/oauth/authorize?client_id=cf&response_type=token&redirect_uri=" + testRedirectUri +"/cf");
+        Thread.sleep(1000);
         assertThat(webDriver.getCurrentUrl(), Matchers.containsString("login"));
         logger.info(webDriver.getCurrentUrl());
         webDriver.findElement(By.xpath("//title[contains(text(), 'Predix')]"));
@@ -238,7 +236,7 @@ public class DegradedSamlLoginTests {
         headers.add(HttpHeaders.CONTENT_TYPE, APPLICATION_FORM_URLENCODED_VALUE);
         headers.set("Authorization", getAuthorizationHeader(basicAuthClientId, basicAuthClientSecret));
 
-        ResponseEntity<Map> checkTokenResponse = new RestTemplate().exchange(protocol + baseUaaZoneHost + "/check_token", HttpMethod.POST, new HttpEntity<>(formData, headers), Map.class);
+        ResponseEntity<Map> checkTokenResponse = new RestTemplate().exchange(baseUrl + "/check_token", HttpMethod.POST, new HttpEntity<>(formData, headers), Map.class);
         assertEquals(checkTokenResponse.getStatusCode(), HttpStatus.OK);
         logger.info("check token response: " + checkTokenResponse.getBody());
         assertEquals("marissa", checkTokenResponse.getBody().get("user_name"));
@@ -297,7 +295,7 @@ public class DegradedSamlLoginTests {
         MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
         formData.add("token", accessToken.getValue());
 
-        headers.set("Authorization", getAuthorizationHeader(ZONE_ADMIN, ZONE_ADMINSECRET));
+        headers.set("Authorization", getAuthorizationHeader(ZONE_ADMIN, zoneAdminSecret));
 
         ResponseEntity<Map> checkTokenResponse = new RestTemplate().exchange(baseUrl + "/check_token", HttpMethod.POST, new HttpEntity<>(formData, headers), Map.class);
         assertEquals(checkTokenResponse.getStatusCode(), HttpStatus.OK);
@@ -329,7 +327,7 @@ public class DegradedSamlLoginTests {
 
     private boolean findZoneInUaa() {
         RestTemplate zoneAdminClient = IntegrationTestUtils.getClientCredentialsTemplate(
-                IntegrationTestUtils.getClientCredentialsResource(baseUrl, new String[0], ZONE_ADMIN, ZONE_ADMINSECRET));
+                IntegrationTestUtils.getClientCredentialsResource(baseUrl, new String[0], ZONE_ADMIN, zoneAdminSecret));
         ResponseEntity<String> responseEntity = zoneAdminClient.getForEntity(baseUrl + "/login", String.class);
 
         logger.info("response body: " + responseEntity.getStatusCode());
