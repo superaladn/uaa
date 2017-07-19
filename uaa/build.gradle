@@ -133,12 +133,6 @@ generateDocs {
   dependsOn slate
 }
 
-task runUaaDockerTests(type: Test) {
-    dependsOn rootProject.setupDockerTests
-    finalizedBy rootProject.stopUaaContainer
-    include "org/cloudfoundry/identity/uaa/acceptance/*.class"
-}
-
 integrationTest {
   exclude 'org/cloudfoundry/identity/uaa/jwt/degraded/*.class'
   filter {

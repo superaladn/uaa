@@ -73,7 +73,6 @@ task copyContainerFiles(type: Copy) {
     dependsOn createDockerfile
     from 'uaa/build/libs'
     from 'uaa/build/resources/main/tomcat-server.xml'
-    from 'docker-compose.yml'
     from 'uaa/build/resources/main/uaa.yml'
     into 'build/docker'
 }
@@ -96,23 +95,8 @@ task startUaaContainer(type: DockerStartContainer) {
     targetContainerId { createUaaContainer.getContainerId() }
 }
 
-//TODO remove docker compose when creating pull request
-task dockerCompose(type: Exec) {
-    dependsOn copyContainerFiles
-    workingDir '.'
-    commandLine 'scripts/dockerCompose.sh'
-
-}
-
 task stopUaaContainer(type: DockerStopContainer) {
     targetContainerId { createUaaContainer.getContainerId() }
-}
-
-task setupDockerTests(type: Exec) {
-    dependsOn startUaaContainer
-    dependsOn startUaaContainer
-    workingDir 'scripts'
-    commandLine './setupDockerTests.sh'
 }
 
 task pushUaaImage(type: DockerPushImage) {
