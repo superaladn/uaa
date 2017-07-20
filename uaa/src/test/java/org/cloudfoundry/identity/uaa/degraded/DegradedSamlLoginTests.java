@@ -89,10 +89,11 @@ public class DegradedSamlLoginTests {
     private String baseUrl;
     private String testRedirectUri;
     private String zoneAdminToken;
+    private String baseUaaZoneHost;
 
     @Before
     public void setup() throws Exception {
-        String baseUaaZoneHost = Boolean.valueOf(environment.getProperty("RUN_AGAINST_CLOUD")) ? (publishedHost + "." + cfDomain) : "localhost:8080/uaa";
+        baseUaaZoneHost = Boolean.valueOf(environment.getProperty("RUN_AGAINST_CLOUD")) ? (publishedHost + "." + cfDomain) : "localhost:8080/uaa";
         protocol = Boolean.valueOf(environment.getProperty("RUN_AGAINST_CLOUD")) ? "https://" : "http://";
         baseUrl = protocol + zoneSubdomain + "." + baseUaaZoneHost;
         testRedirectUri = protocol +  "test-url.dummy.predix.io";
@@ -205,11 +206,13 @@ public class DegradedSamlLoginTests {
 
     @Test
     public void testImplicitTokenAndCheckToken() throws Exception {
+        webDriver.get(baseUrl + "/logout.do");
         webDriver.get(baseUrl + "/oauth/authorize?client_id=cf&response_type=token&redirect_uri=" + testRedirectUri +"/cf");
-        Thread.sleep(1000);
+        logger.info("testImplicitTokenAndCheckToken() webdriver page source" + webDriver.getPageSource());
+        webDriver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
         assertThat(webDriver.getCurrentUrl(), Matchers.containsString("login"));
         logger.info(webDriver.getCurrentUrl());
-        webDriver.findElement(By.xpath("//title[contains(text(), 'Predix')]"));
+        webDriver.findElement(By.xpath("//title[contains(text(), '" + zoneSubdomain + "')]"));
         webDriver.findElement(By.name("username")).clear();
         webDriver.findElement(By.name("username")).sendKeys("marissa");
         webDriver.findElement(By.name("password")).sendKeys("koala");
