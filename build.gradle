@@ -86,6 +86,7 @@ task buildImage(type: DockerBuildImage) {
 task createUaaContainer(type: DockerCreateContainer) {
     dependsOn buildImage
     targetImageId { buildImage.getImageId() }
+    containerName = System.getenv('DOCKER_CONTAINER_NAME')
     portBindings = ['8080:8080']
     env = [ "CATALINA_OPTS='-Dspring.profiles.active=default'" ]
 }
