@@ -86,6 +86,7 @@ import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -268,6 +269,23 @@ public class XOAuthAuthenticationManagerTest {
         mockUaaServer.verify();
 
     }
+
+    @Test
+    public void clientAuthInBody_is_used() throws MalformedURLException {
+        config.setClientAuthInBody(true);
+        mockUaaServer.expect(requestTo(config.getTokenUrl().toString()))
+                .andExpect(request -> assertThat("Check Auth header not present", request.getHeaders().get("Authorization"), nullValue()))
+                .andExpect(content().string(containsString("client_id="+config.getRelyingPartyId())))
+                .andExpect(content().string(containsString("client_secret="+config.getRelyingPartySecret())))
+                .andRespond(withStatus(OK).contentType(APPLICATION_JSON).body(getIdTokenResponse()));
+        IdentityProvider<AbstractXOAuthIdentityProviderDefinition> identityProvider = getProvider();
+        when(provisioning.retrieveByOrigin(eq(ORIGIN), anyString())).thenReturn(identityProvider);
+
+        xoAuthAuthenticationManager.getClaimsFromToken(xCodeToken, config);
+
+        mockUaaServer.verify();
+    }
+
 
     @Test
     public void idToken_In_Redirect_Should_Use_it() throws Exception {
