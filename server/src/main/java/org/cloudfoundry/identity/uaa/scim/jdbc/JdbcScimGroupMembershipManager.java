@@ -36,7 +36,6 @@ import org.cloudfoundry.identity.uaa.scim.ScimGroupMembershipManager;
 import org.cloudfoundry.identity.uaa.scim.ScimGroupProvisioning;
 import org.cloudfoundry.identity.uaa.scim.ScimUser;
 import org.cloudfoundry.identity.uaa.scim.ScimUserProvisioning;
-import org.cloudfoundry.identity.uaa.scim.ScimGroupMember.Role;
 import org.cloudfoundry.identity.uaa.scim.exception.InvalidScimResourceException;
 import org.cloudfoundry.identity.uaa.scim.exception.MemberAlreadyExistsException;
 import org.cloudfoundry.identity.uaa.scim.exception.MemberNotFoundException;
@@ -55,7 +54,6 @@ import org.springframework.jdbc.core.SingleColumnRowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
-import java.util.stream.Collectors;
 
 public class JdbcScimGroupMembershipManager extends AbstractQueryable<ScimGroupMember> implements ScimGroupMembershipManager {
 
@@ -67,25 +65,25 @@ public class JdbcScimGroupMembershipManager extends AbstractQueryable<ScimGroupM
 
     public static final String MEMBERSHIP_TABLE = "group_membership";
 
-    public static final String ADD_MEMBER_SQL = String.format("insert into %s ( %s ) values (?,?,?,?,?,?,?)", MEMBERSHIP_TABLE, MEMBERSHIP_FIELDS + ",identity_zone_id");
+    public static final String ADD_MEMBER_SQL = String.format("insert into %s ( %s ) values (?,?,?,?,?,?)", MEMBERSHIP_TABLE, MEMBERSHIP_FIELDS);
 
     public static final String UPDATE_MEMBER_SQL = String.format("update %s set authorities=? where group_id=? and member_id=?", MEMBERSHIP_TABLE);
 
-    public static final String GET_MEMBERS_FILTER_SQL = String.format("select %s from %s where identity_zone_id='%%s'", MEMBERSHIP_FIELDS, MEMBERSHIP_TABLE);
+    public static final String GET_MEMBERS_FILTER_SQL = String.format("select %s from %s where group_id in (select id from groups where identity_zone_id=%s)", MEMBERSHIP_FIELDS, MEMBERSHIP_TABLE, "'%s'");
 
-    public static final String GET_GROUPS_BY_MEMBER_SQL = String.format("select distinct(group_id) from %s where member_id=? and identity_zone_id=?", MEMBERSHIP_TABLE);
+    public static final String GET_GROUPS_BY_MEMBER_SQL = String.format("select distinct(group_id) from %s where member_id=? and group_id in (select id from groups where identity_zone_id=?)", MEMBERSHIP_TABLE);
 
     public static final String GET_MEMBERS_WITH_AUTHORITY_SQL = String.format("select %s from %s where group_id=? and lower(authorities) like ?", MEMBERSHIP_FIELDS,MEMBERSHIP_TABLE);
 
-    public static final String GET_MEMBER_SQL = String.format("select %s from %s where member_id=? and group_id=? and identity_zone_id=?",MEMBERSHIP_FIELDS, MEMBERSHIP_TABLE);
+    public static final String GET_MEMBER_SQL = String.format("select %s from %s where member_id=? and group_id in (select id from groups where id=? and identity_zone_id=?)",MEMBERSHIP_FIELDS, MEMBERSHIP_TABLE);
 
-    public static final String DELETE_MEMBER_SQL = String.format("delete from %s where member_id=? and group_id = ? and identity_zone_id=?",MEMBERSHIP_TABLE);
+    public static final String DELETE_MEMBER_SQL = String.format("delete from %s where member_id=? and group_id in (select id from groups where id=? and identity_zone_id=?)",MEMBERSHIP_TABLE);
 
-    public static final String DELETE_MEMBERS_IN_GROUP_SQL = String.format("delete from %s where group_id=? and identity_zone_id=?",MEMBERSHIP_TABLE);
+    public static final String DELETE_MEMBERS_IN_GROUP_SQL = String.format("delete from %s where group_id in (select id from groups where id=? and identity_zone_id=?)",MEMBERSHIP_TABLE);
 
-    public static final String DELETE_MEMBER_IN_GROUPS_SQL_USER = String.format("delete from %s where member_id=? and member_type='USER' and identity_zone_id=?",MEMBERSHIP_TABLE);
+    public static final String DELETE_MEMBER_IN_GROUPS_SQL_USER = String.format("delete from %s where member_id in (select id from users where id=? and identity_zone_id=?)",MEMBERSHIP_TABLE);
 
-    public static final String DELETE_MEMBER_IN_GROUPS_SQL_GROUP = String.format("delete from %s where member_id=? and member_type='GROUP' and identity_zone_id=?",MEMBERSHIP_TABLE);
+    public static final String DELETE_MEMBER_IN_GROUPS_SQL_GROUP = String.format("delete from %s where member_id in (select id from groups where id=? and identity_zone_id=?)",MEMBERSHIP_TABLE);
 
     private ScimUserProvisioning userProvisioning;
 
@@ -193,7 +191,6 @@ public class JdbcScimGroupMembershipManager extends AbstractQueryable<ScimGroupM
                     ps.setString(4, authorities);
                     ps.setTimestamp(5, new Timestamp(new Date().getTime()));
                     ps.setString(6, member.getOrigin());
-                    ps.setString(7, IdentityZoneHolder.get().getId());
                 }
             });
         } catch (DuplicateKeyException e) {
@@ -352,20 +349,8 @@ public class JdbcScimGroupMembershipManager extends AbstractQueryable<ScimGroupM
         List<ScimGroupMember> membersToUpdate = new ArrayList<>(members);
         membersToUpdate.retainAll(currentMembers);
         logger.debug("updating members: " + membersToUpdate);
-        Map<String, ScimGroupMember> currentMembersMap = 
-                currentMembers.stream().collect(Collectors.toMap(
-                        ScimGroupMember::getMemberId, member -> member));
         for (ScimGroupMember member : membersToUpdate) {
-            ScimGroupMember currentMemberMatch = currentMembersMap.get(member.getMemberId());
-            List<Role> sortedCurrentMemberRoles = currentMemberMatch.getRoles() != null ?
-                    currentMemberMatch.getRoles() : Collections.emptyList();
-            List<Role> sortedMemberRoles = member.getRoles() != null ?
-                    member.getRoles() : Collections.emptyList();
-            Collections.sort(sortedCurrentMemberRoles);
-            Collections.sort(sortedMemberRoles);
-            if(!sortedMemberRoles.equals(sortedCurrentMemberRoles)){
-                updateMember(groupId, member);
-            }
+            updateMember(groupId, member);
         }
 
         return getMembers(groupId, null, false);
