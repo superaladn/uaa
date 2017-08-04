@@ -444,7 +444,7 @@ public class IdentityProviderEndpointsDocs extends InjectedMockContextTest {
             fieldWithPath("config.scopes").optional(null).type(ARRAY).description("What scopes to request on a call to the external OAuth provider"),
             fieldWithPath("config.checkTokenUrl").optional(null).type(OBJECT).description("Reserved for future OAuth use."),
             fieldWithPath("config.responseType").optional("code").type(STRING).description("Response type for the authorize request, will be sent to OAuth server, defaults to `code`"),
-            fieldWithPath("config.clientAuthInBody").optional(false).type(BOOLEAN).description("(Advanced) Passes client credentials for token call in body instad of as Basic Authorization header."),
+            fieldWithPath("config.clientAuthInBody").optional(false).type(BOOLEAN).description("(Advanced) Passes client credentials for token call in body instead of as Basic Authorization header."),
 
                 ADD_SHADOW_USER_ON_LOGIN,
             EXTERNAL_GROUPS,
