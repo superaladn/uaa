@@ -54,10 +54,12 @@ public class PredixAuditService implements UaaAuditService {
             } else {
                 logger.debug("Mock publish to audit service: " + predixEvent.toString());
             }
-        } catch (Exception e) {
+        } catch (Throwable e) {
+            logger.error("Is this an Error? i.e., Not an Exception:" + (e instanceof Error) +
+                    ":: The Error is:" + e.getClass().getCanonicalName());
             logger.error(e.getMessage());
+            predixAuditClient = null;
         }
-
     }
 
     public String getCorrelationId() {
