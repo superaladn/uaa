@@ -330,6 +330,22 @@ public class LoginMockMvcTests extends InjectedMockContextTest {
             .andExpect(cookie().maxAge(CookieBasedCsrfTokenRepository.DEFAULT_CSRF_COOKIE_NAME, CookieBasedCsrfTokenRepository.DEFAULT_COOKIE_MAX_AGE));
     }
 
+    public void testLogin_Csrf_Does_Not_Reset_On_Refresh() throws Exception {
+        MvcResult mvcResult = getMockMvc()
+            .perform(
+                get("/login"))
+            .andReturn();
+        Cookie csrf1 = mvcResult.getResponse().getCookie(CookieBasedCsrfTokenRepository.DEFAULT_CSRF_COOKIE_NAME);
+
+        mvcResult = getMockMvc()
+            .perform(
+                get("/login")
+                    .cookie(csrf1))
+            .andReturn();
+        Cookie csrf2 = mvcResult.getResponse().getCookie(CookieBasedCsrfTokenRepository.DEFAULT_CSRF_COOKIE_NAME);
+        assertNull(csrf2);
+    }
+
     @Test
     public void testLoginPageReloadOnCsrfExpire() throws Exception {
         CookieBasedCsrfTokenRepository cookieBasedCsrfTokenRepository = webApplicationContext.getBean(CookieBasedCsrfTokenRepository.class);
