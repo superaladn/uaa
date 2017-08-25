@@ -216,6 +216,15 @@ public class LoginIT {
     }
 
     @Test
+    public void testCsrfIsResetDuringLoginPageReload() {
+        webDriver.get(baseUrl + "/login");
+        String csrf1 = webDriver.manage().getCookieNamed(CookieBasedCsrfTokenRepository.DEFAULT_CSRF_COOKIE_NAME).getValue();
+        webDriver.get(baseUrl + "/login");
+        String csrf2 = webDriver.manage().getCookieNamed(CookieBasedCsrfTokenRepository.DEFAULT_CSRF_COOKIE_NAME).getValue();
+        assertEquals(csrf1, csrf2);
+    }
+
+    @Test
     public void testRedirectAfterFailedLogin() throws Exception {
         RestTemplate template = new RestTemplate();
 
