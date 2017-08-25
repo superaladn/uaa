@@ -35,11 +35,6 @@ public class AntPathRedirectResolver extends DefaultRedirectResolver {
     @Value("${ENABLE_CLIENT_REDIRECT_URI_CHECK:true}")
     private boolean enableClientRedirectUriCheck;
 
-    public void setEnableClientRedirectUriCheck(boolean enableClientRedirectUriCheck) {
-        this.enableClientRedirectUriCheck = enableClientRedirectUriCheck;
-    }
-
-
     @Override
     protected boolean redirectMatches(String requestedRedirect, String redirectUri) {
         AntPathMatcher matcher = new AntPathMatcher("/");

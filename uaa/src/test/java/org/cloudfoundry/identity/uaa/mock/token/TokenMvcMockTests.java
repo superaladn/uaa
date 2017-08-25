@@ -21,10 +21,7 @@ import org.cloudfoundry.identity.uaa.authentication.UaaAuthenticationDetails;
 import org.cloudfoundry.identity.uaa.authentication.UaaPrincipal;
 import org.cloudfoundry.identity.uaa.constants.OriginKeys;
 import org.cloudfoundry.identity.uaa.mock.util.MockMvcUtils;
-import org.cloudfoundry.identity.uaa.oauth.DisableIdTokenResponseTypeFilter;
-import org.cloudfoundry.identity.uaa.oauth.KeyInfo;
-import org.cloudfoundry.identity.uaa.oauth.TokenRevokedException;
-import org.cloudfoundry.identity.uaa.oauth.UaaTokenServices;
+import org.cloudfoundry.identity.uaa.oauth.*;
 import org.cloudfoundry.identity.uaa.oauth.client.ClientConstants;
 import org.cloudfoundry.identity.uaa.oauth.jwt.Jwt;
 import org.cloudfoundry.identity.uaa.oauth.jwt.JwtHelper;
@@ -83,8 +80,10 @@ import org.springframework.security.oauth2.common.util.RandomValueStringGenerato
 import org.springframework.security.oauth2.provider.AuthorizationRequest;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.client.BaseClientDetails;
+import org.springframework.security.oauth2.provider.endpoint.RedirectResolver;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.savedrequest.SavedRequest;
+import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.ResultMatcher;
@@ -187,6 +186,8 @@ public class TokenMvcMockTests extends AbstractTokenMockMvcTests {
     private MockEnvironment mockEnvironment;
     private static SamlTestUtils samlTestUtils = new SamlTestUtils();
     private boolean allowQueryString;
+    private UaaAuthorizationEndpoint uaaAuthorizationEndpoint;
+    private AntPathRedirectResolver antPathRedirectResolver = new AntPathRedirectResolver();
 
     @BeforeClass
     public static void initializeSamlUtils() {
@@ -201,6 +202,9 @@ public class TokenMvcMockTests extends AbstractTokenMockMvcTests {
     public void setup () throws Exception {
         mockEnvironment = ((MockEnvironment) getWebApplicationContext().getEnvironment());
         allowQueryString = getWebApplicationContext().getBean(UaaTokenEndpoint.class).isAllowQueryString();
+        uaaAuthorizationEndpoint = (UaaAuthorizationEndpoint) getWebApplicationContext().getBean("uaaAuthorizationEndpoint");
+        ReflectionTestUtils.setField(antPathRedirectResolver, "enableClientRedirectUriCheck", true, boolean.class);
+        ReflectionTestUtils.setField(uaaAuthorizationEndpoint, "redirectResolver", antPathRedirectResolver, RedirectResolver.class);
     }
 
     @After
@@ -1873,6 +1877,30 @@ public class TokenMvcMockTests extends AbstractTokenMockMvcTests {
 
     @Test
     public void test_valid_redirect_uri() throws Exception {
+        String redirectUri = "https://example.com/**";
+        test_invalid_registered_redirect_uris(new HashSet(Arrays.asList(redirectUri)), status().isFound());
+    }
+
+    private void disableClientRegistrationRedirectUriCheck () {
+        ReflectionTestUtils.setField(antPathRedirectResolver, "enableClientRedirectUriCheck", false, boolean.class);
+        ReflectionTestUtils.setField(uaaAuthorizationEndpoint, "redirectResolver", antPathRedirectResolver, RedirectResolver.class);
+    }
+
+    @Test
+    public void test_missing_redirect_uri_when_client_registration_redirect_uri_check_disabled() throws Exception {
+        disableClientRegistrationRedirectUriCheck();
+        test_invalid_registered_redirect_uris(emptySet(), status().isFound());
+    }
+
+    @Test
+    public void test_invalid_redirect_uri_when_client_registration_redirect_uri_check_disabled() throws Exception {
+        disableClientRegistrationRedirectUriCheck();
+        test_invalid_registered_redirect_uris(new HashSet(Arrays.asList("*","https://*com/**")), status().isFound());
+    }
+
+    @Test
+    public void test_valid_redirect_uri_when_client_registration_redirect_uri_check_disabled() throws Exception {
+        disableClientRegistrationRedirectUriCheck();
         String redirectUri = "https://example.com/**";
         test_invalid_registered_redirect_uris(new HashSet(Arrays.asList(redirectUri)), status().isFound());
     }

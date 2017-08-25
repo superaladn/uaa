@@ -20,6 +20,7 @@ import org.junit.Test;
 import org.springframework.security.oauth2.common.exceptions.RedirectMismatchException;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.client.BaseClientDetails;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertFalse;
@@ -45,7 +46,7 @@ public class AntPathRedirectResolverTests {
 
     @Test
     public void testClientMissingRedirectUri() {
-        resolver.setEnableClientRedirectUriCheck(enableClientRedirectUriCheck);
+        ReflectionTestUtils.setField(resolver, "enableClientRedirectUriCheck", enableClientRedirectUriCheck, boolean.class);
 
         ClientDetails clientDetails = new BaseClientDetails("client1", "", "openid","authorization_code","");
         try {
@@ -59,7 +60,7 @@ public class AntPathRedirectResolverTests {
 
     @Test
     public void testClientWithInvalidRedirectUri() {
-        resolver.setEnableClientRedirectUriCheck(enableClientRedirectUriCheck);
+        ReflectionTestUtils.setField(resolver, "enableClientRedirectUriCheck", enableClientRedirectUriCheck , boolean.class);
 
         ClientDetails clientDetails = new BaseClientDetails("client1", "", "openid","authorization_code","", "*, */*");
         try {
@@ -74,7 +75,7 @@ public class AntPathRedirectResolverTests {
 
     @Test
     public void testClientRedirectUriCheckIsDisabledForClientMissingRedirectUri() {
-        resolver.setEnableClientRedirectUriCheck(!enableClientRedirectUriCheck);
+        ReflectionTestUtils.setField(resolver, "enableClientRedirectUriCheck", !enableClientRedirectUriCheck , boolean.class);
 
         ClientDetails clientDetails = new BaseClientDetails("client1", "", "openid", "authorization_code", "");
         try {
@@ -87,7 +88,7 @@ public class AntPathRedirectResolverTests {
 
     @Test
     public void testClientRedirectUriCheckIsDisabledForClientWithInvalidRedirectUri() {
-        resolver.setEnableClientRedirectUriCheck(!enableClientRedirectUriCheck);
+        ReflectionTestUtils.setField(resolver, "enableClientRedirectUriCheck", !enableClientRedirectUriCheck , boolean.class);
         try {
             ClientDetails clientDetails = new BaseClientDetails("client1", "", "openid","authorization_code","", "*,http://*com/**");
             String resolvedRedirectUri = resolver.resolveRedirect(requestedRedirectHttp, clientDetails);
