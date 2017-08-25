@@ -83,18 +83,6 @@ public class CookieBasedCsrfTokenRepositoryTests {
     }
 
     @Test
-    public void testLoad_Token_During_Get() {
-        MockHttpServletRequest request = new MockHttpServletRequest();
-        request.setMethod(HttpMethod.GET.name());
-        request.setCookies(new Cookie(CookieBasedCsrfTokenRepository.DEFAULT_CSRF_COOKIE_NAME, "should-be-removed"));
-
-        CookieBasedCsrfTokenRepository repo = new CookieBasedCsrfTokenRepository();
-
-        CsrfToken csrfToken = repo.loadToken(request);
-        assertThat(csrfToken, nullValue());
-    }
-
-    @Test
     public void csrfCookie_alwaysHttpOnly() throws Exception {
         Cookie cookie = getCookie(false);
         assertTrue(cookie.isHttpOnly());
