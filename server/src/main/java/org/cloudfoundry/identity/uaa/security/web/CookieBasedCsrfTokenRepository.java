@@ -16,7 +16,6 @@
 package org.cloudfoundry.identity.uaa.security.web;
 
 import org.springframework.security.oauth2.common.util.RandomValueStringGenerator;
-import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.DefaultCsrfToken;
@@ -97,15 +96,11 @@ public class CookieBasedCsrfTokenRepository implements CsrfTokenRepository {
 
     @Override
     public CsrfToken loadToken(HttpServletRequest request) {
-        boolean requiresCsrfProtection = CsrfFilter.DEFAULT_CSRF_MATCHER.matches(request);
-
-        if(requiresCsrfProtection) {
-            Cookie[] cookies = request.getCookies();
-            if (cookies != null) {
-                for (Cookie cookie : request.getCookies()) {
-                    if (getParameterName().equals(cookie.getName())) {
-                        return new DefaultCsrfToken(getHeaderName(), getParameterName(), cookie.getValue());
-                    }
+        Cookie[] cookies = request.getCookies();
+                if (cookies!=null) {
+                    for (Cookie cookie : request.getCookies()) {
+                        if (getParameterName().equals(cookie.getName())) {
+                            return new DefaultCsrfToken(getHeaderName(), getParameterName(), cookie.getValue());
                 }
             }
         }
