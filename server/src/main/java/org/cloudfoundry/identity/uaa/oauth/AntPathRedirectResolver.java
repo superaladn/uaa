@@ -16,6 +16,7 @@
 package org.cloudfoundry.identity.uaa.oauth;
 
 import org.cloudfoundry.identity.uaa.util.UaaUrlUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
 import org.springframework.security.oauth2.common.exceptions.RedirectMismatchException;
 import org.springframework.security.oauth2.provider.ClientDetails;
@@ -30,6 +31,13 @@ import static java.util.Collections.emptySet;
 import static java.util.Optional.ofNullable;
 
 public class AntPathRedirectResolver extends DefaultRedirectResolver {
+
+    @Value("${ENABLE_CLIENT_REDIRECT_URI_CHECK:true}")
+    private boolean enableClientRedirectUriCheck;
+
+    public void setEnableClientRedirectUriCheck(boolean enableClientRedirectUriCheck) {
+        this.enableClientRedirectUriCheck = enableClientRedirectUriCheck;
+    }
 
 
     @Override
@@ -46,13 +54,16 @@ public class AntPathRedirectResolver extends DefaultRedirectResolver {
 
     @Override
     public String resolveRedirect(String requestedRedirect, ClientDetails client) throws OAuth2Exception {
-        Set<String> registeredRedirectUris = ofNullable(client.getRegisteredRedirectUri()).orElse(emptySet());
-        if (registeredRedirectUris.size()==0) {
-            throw new RedirectMismatchException("Client registration is missing redirect_uri");
-        }
-        List<String> invalidUrls = registeredRedirectUris.stream().filter(url -> !UaaUrlUtils.isValidRegisteredRedirectUrl(url)).collect(Collectors.toList());
-        if (invalidUrls.size()>0) {
+        // Temporary backward compatible behavior for legacy clients (4.4.0 deployments)
+        if(enableClientRedirectUriCheck) {
+            Set<String> registeredRedirectUris = ofNullable(client.getRegisteredRedirectUri()).orElse(emptySet());
+            if (registeredRedirectUris.size() == 0) {
+                throw new RedirectMismatchException("Client registration is missing redirect_uri");
+            }
+            List<String> invalidUrls = registeredRedirectUris.stream().filter(url -> !UaaUrlUtils.isValidRegisteredRedirectUrl(url)).collect(Collectors.toList());
+            if (invalidUrls.size() > 0) {
                 throw new RedirectMismatchException("Client registration contains invalid redirect_uri: " + invalidUrls);
+            }
         }
         return super.resolveRedirect(requestedRedirect, client);
     }
